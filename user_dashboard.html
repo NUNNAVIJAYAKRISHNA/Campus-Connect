@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Stitch Design</title>
+    <title>Dashboar</title>
     <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
     <link
       as="style"
@@ -87,6 +87,12 @@
           <button class="md:hidden">
             <span class="material-symbols-outlined">menu</span>
           </button>
+          <!-- Logout / User actions -->
+          <div class="flex items-center gap-3">
+            <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+              <span class="material-symbols-outlined">logout</span>
+            </button>
+          </div>
           <div class="relative hidden sm:block">
             <span
               class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
@@ -97,22 +103,13 @@
               placeholder="Search"
             />
           </div>
-          <div
-            class="size-10 rounded-full bg-cover bg-center"
-            style="
-              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3hQa--0vPcK8DPreZhnOdOvubfPgurr0_QkHg1FEgn9I_GUkureLnTUpW-diGqSbsct8HeqJCZQYNjOR4vEqr4Joe8SMybha_qjUTbldygKmHXpmJ_frSz1v5lEmu89T82F3PoRA-g-BZSI_aix7dDMxuoOnUrza7un-s51uh1mjaqBmWvEjorg3xVwpyEPp_WRUgGK-Upmd8B6hBZhII8MR9VV5xST_zNTYLRTa5kTdjOFDrpbo2k2_XT_gX6CO-w9bl26D-2a4');
-            "
-          ></div>
+            <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3hQa--0vPcK8DPreZhnOdOvubfPgurr0_QkHg1FEgn9I_GUkureLnTUpW-diGqSbsct8HeqJCZQYNjOR4vEqr4Joe8SMybha_qjUTbldygKmHXpmJ_frSz1v5lEmu89T82F3PoRA-g-BZSI_aix7dDMxuoOnUrza7un-s51uh1mjaqBmWvEjorg3xVwpyEPp_WRUgGK-Upmd8B6hBZhII8MR9VV5xST_zNTYLRTa5kTdjOFDrpbo2k2_XT_gX6CO-w9bl26D-2a4');"></div>
         </div>
       </header>
       <main class="flex-1">
         <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
           <div class="mb-8">
-            <h1
-              class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl"
-            >
-              Welcome, Sarah
-            </h1>
+            <h1 id="welcome-heading" class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl">Welcome</h1>
           </div>
           <div class="mb-8 space-y-4">
             <div class="relative">
@@ -211,7 +208,7 @@
                     style="
                       background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBw7059gINJidoXh8n_eYlqZ-DJMDc2ZbVPYQhJUzllwGstYzMZkqgZOjiUvOoiKXNVfwyfi_HTaU0g5Ke-ALWLgFXmCpprvU-1lfWsWoQU4ks3_rMXiD18_TY2QivnWWZB1kZGZeUWwR9ViFrHw2VXmCemnSkhIV9KadX96MvGV7azf8WUGEez6gBxv_C_uqqTCP0KsHBuIcP-7kKaO4byG_60boBVoag-zzraEQczwrQfmu8LN5y3IhTrdLd0M-JpS71uSHGCYcA');
                     "
-                  ></div>
+                  ></div
                   <div class="bg-background-light p-4 dark:bg-background-dark">
                     <h3
                       class="font-semibold text-foreground-light dark:text-foreground-dark"
@@ -445,4 +442,73 @@
       </footer>
     </div>
   </body>
+  <script type="module">
+    import { auth, db } from './assets/js/firebaseOptions.js';
+    import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+
+    const welcomeHeading = document.getElementById('welcome-heading');
+    const userAvatar = document.getElementById('user-avatar');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    function setUserUI(data) {
+      if (!data) return;
+      const name = data.fullName || data.name || data.displayName || data.email || 'User';
+      welcomeHeading.textContent = `Welcome, ${name}`;
+      if (data.photoURL) {
+        userAvatar.style.backgroundImage = `url('${data.photoURL}')`;
+      }
+    }
+
+    // Try to load cached session user first
+    try {
+      const cached = sessionStorage.getItem('user');
+      if (cached) {
+        setUserUI(JSON.parse(cached));
+      }
+    } catch (e) {
+      console.warn('Could not parse session user', e);
+    }
+
+    // Auth guard: redirect to login if not authenticated
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // If we don't have extended profile in sessionStorage, fetch from Firestore
+      try {
+        const cached = sessionStorage.getItem('user');
+        if (!cached) {
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (userDoc.exists()) {
+            const data = userDoc.data();
+            sessionStorage.setItem('user', JSON.stringify(data));
+            setUserUI(data);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Error fetching user document:', err);
+      }
+
+      // Fallback to Firebase profile
+      setUserUI({ displayName: user.displayName, email: user.email, photoURL: user.photoURL });
+    });
+
+    // Logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async () => {
+        try {
+          await signOut(auth);
+          sessionStorage.removeItem('user');
+          window.location.href = 'login.html';
+        } catch (err) {
+          console.error('Sign out error', err);
+          alert('Logout failed. Please try again.');
+        }
+      });
+    }
+  </script>
 </html>

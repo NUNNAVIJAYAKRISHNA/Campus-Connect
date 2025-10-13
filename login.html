@@ -138,78 +138,162 @@
             </div>
             <button type="submit">Login</button>
         </form>
-        <div class="divider">OR</div>
-        <!-- Google Sign-in button is rendered here by Google's script -->
-        <div id="google-signin-btn"></div>
+       
+    <!-- Google Sign-in button is rendered here by Google's script -->
+   
+    <div id="error-message" style="color: red; margin-top: 8px;"></div>
     </div>
 
-    <script>
-        // Function to decode the JWT token from Google
-        function decodeJwtResponse(token) {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
+    <script type="module">
+        import { auth, db } from './assets/js/firebaseOptions.js';
+        import {
+            signInWithEmailAndPassword,
+            GoogleAuthProvider,
+            signInWithCredential,
+            onAuthStateChanged
+        } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+        import { doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
-            return JSON.parse(jsonPayload);
-        }
-
-        // Callback function to handle the credential response
-        function handleCredentialResponse(response) {
-            // The response.credential is a JSON Web Token (JWT)
-            console.log("Encoded JWT ID token: " + response.credential);
-
-            // Decode the token to see user info (for client-side debugging)
-            const responsePayload = decodeJwtResponse(response.credential);
-            console.log("Decoded Payload:", responsePayload);
-            console.log("ID: " + responsePayload.sub);
-            console.log('Full Name: ' + responsePayload.name);
-            console.log('Given Name: ' + responsePayload.given_name);
-            console.log('Family Name: ' + responsePayload.family_name);
-            console.log("Image URL: " + responsePayload.picture);
-            console.log("Email: " + responsePayload.email);
-
-            // IMPORTANT: In a real app, you would send this 'response.credential'
-            // to your backend server. The server would then verify the token with
-            // Google to securely authenticate the user.
-        }
-
-        // --- Page Specific Interactivity ---
-
-        // Handle Show/Hide Password
-        const togglePassword = document.querySelector('#toggle-password');
-        const passwordInput = document.querySelector('#password');
-
-        togglePassword.addEventListener('click', function () {
-            // Toggle the type attribute
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            // Toggle the eye icon (optional: use different icons for show/hide)
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-
-        // Handle Form Submission
+        // Elements
         const loginForm = document.getElementById('login-form');
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from reloading the page
-            const email = document.getElementById('email').value;
-            // In a real app, you would now validate and send this data to your server
-            alert(`Login attempt with email: ${email}`);
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.querySelector('#toggle-password');
+        const errorDiv = document.getElementById('error-message');
+
+        // Utility to show errors
+        function showError(message) {
+            if (errorDiv) errorDiv.textContent = message;
+            else alert(message);
+        }
+
+        // Toggle password visibility
+        if (togglePassword) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+
+        // Email/password sign-in
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.textContent = '';
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            if (!email || !password) {
+                showError('Please enter email and password.');
+                return;
+            }
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Fetch user document from Firestore (if exists)
+                try {
+                    const userDocRef = doc(db, 'users', user.uid);
+                    const snap = await getDoc(userDocRef);
+                    if (snap.exists()) {
+                        console.log('User data from Firestore:', snap.data());
+                        // Optionally save to localStorage/sessionStorage
+                        sessionStorage.setItem('user', JSON.stringify(snap.data()));
+
+                        // Role-based redirect
+                        const role = snap.data().role;
+                        if (role === 'admin') {
+                            window.location.href = 'add_event_admin.html';
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    console.warn('Could not fetch user data:', err);
+                }
+
+                // Default redirect to regular user dashboard
+                window.location.href = 'user_dashboard.html';
+            } catch (error) {
+                console.error('Login error', error);
+                showError(error.message || 'Login failed.');
+            }
         });
 
+        // Redirect already authenticated users to appropriate dashboard based on role
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const userDocRef = doc(db, 'users', user.uid);
+                    const snap = await getDoc(userDocRef);
+                    if (snap.exists()) {
+                        const role = snap.data().role;
+                        if (role === 'admin') {
+                            window.location.href = 'add_event_admin.html';
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    console.warn('Error checking user role on auth state change:', err);
+                }
+                // Default
+                window.location.href = 'user_dashboard.html';
+            }
+        });
 
-        // Initialize the Google Sign-In client
+        // Google Sign-In handling using Google's Identity Services
         window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: '1017566795753-j63trcd2t0lpfvr99ntbgba16rl6sp0l.apps.googleusercontent.com',
-                callback: handleCredentialResponse
-            });
-            google.accounts.id.renderButton(
-                document.getElementById("google-signin-btn"),
-                { theme: "outline", size: "large", width: "300" } // Customization options
-            );
-            google.accounts.id.prompt(); // Optional: display a one-tap sign-in prompt
+            if (window.google && google.accounts && google.accounts.id) {
+                google.accounts.id.initialize({
+                    client_id: '1017566795753-j63trcd2t0lpfvr99ntbgba16rl6sp0l.apps.googleusercontent.com',
+                    callback: async (response) => {
+                        try {
+                            const credential = GoogleAuthProvider.credential(response.credential);
+                            const userCredential = await signInWithCredential(auth, credential);
+                            const user = userCredential.user;
+
+                            // Add or update user record in Firestore (does not overwrite role)
+                                await setDoc(doc(db, 'users', user.uid), {
+                                    name: user.displayName || null,
+                                    email: user.email,
+                                    photoURL: user.photoURL || null,
+                                    lastLogin: new Date()
+                                }, { merge: true });
+
+                                // Try to read role from Firestore (in case user was created with a role)
+                                try {
+                                    const userDocRef = doc(db, 'users', user.uid);
+                                    const snap = await getDoc(userDocRef);
+                                    if (snap.exists()) {
+                                        const data = snap.data();
+                                        sessionStorage.setItem('user', JSON.stringify(data));
+                                        if (data.role === 'admin') {
+                                            window.location.href = 'add_event_admin.html';
+                                            return;
+                                        }
+                                    }
+                                } catch (err) {
+                                    console.warn('Could not fetch user data after Google sign-in:', err);
+                                }
+
+                                // Default redirect for Google sign-ins
+                                sessionStorage.setItem('user', JSON.stringify({ uid: user.uid, email: user.email, name: user.displayName }));
+                                window.location.href = 'user_dashboard.html';
+                        } catch (err) {
+                            console.error('Google sign-in error', err);
+                            showError('Google sign-in failed.');
+                        }
+                    }
+                });
+
+                google.accounts.id.renderButton(
+                    document.getElementById('google-signin-btn'),
+                    { theme: 'outline', size: 'large', width: '300' }
+                );
+                google.accounts.id.prompt();
+            } else {
+                console.warn('Google Identity Services not loaded yet.');
+            }
         };
     </script>
 </body>
