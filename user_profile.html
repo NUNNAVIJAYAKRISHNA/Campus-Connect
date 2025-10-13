@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="flex flex-col min-h-screen">
+      <header
+        class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10 border-b border-primary/20 dark:border-primary/30"
+      >
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center gap-4">
+              <span class="material-symbols-outlined text-primary text-3xl"
+                >school</span
+              >
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                Campus Connect
+              </h1>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+              <a
+                class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#"
+                >Home</a
+              >
+              <a
+                class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#"
+                >Events</a
+              >
+              <a
+                class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                href="#"
+                >Groups</a
+              >
+              <a
+                class="text-sm font-medium text-primary dark:text-primary"
+                href="#"
+                >Profile</a
+              >
+            </nav>
+            <div class="flex items-center gap-4">
+              <div
+                class="w-10 h-10 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBggPzxWqShFfNM-hRsu4EvdhewYrcMWVRcUkCNiGbsImkfJdri4KukqNklQiR0DUBHdddG0y3MCVpI520p55TR-6mRsV5UsUTx3d2WA8UNMyuvUwYZtLdloewGVuQi0tkOIEQjWNhegvbKrfL7aQ2hLprgpRziAb2jejfLXgFMWGYO065cJU9pAyT4rIEC9dG_PfCmhqb9S0hcp6ekIfRBYzg-9h38ieFM4I0AIi9zAjGGnGip6Y-SFlF0wSYafBU8QGsD-_X5bm4');
+                "
+              ></div>
+              <button
+                class="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-primary/10 dark:hover:bg-primary/20"
+              >
+                <span class="material-symbols-outlined">menu</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main
+        class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      >
+        <div class="w-full max-w-md space-y-8 text-center">
+          <div>
+            <div
+              class="mx-auto w-32 h-32 rounded-full bg-cover bg-center ring-4 ring-primary/30"
+              style="
+                background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9eLWJeqISGg-WAfHuc1JlJM71OSGykm1ZzO3fDnq-kUWX4wz6jCl-x8OlHoSWz3WOHrq45sqgKQwJKbrubn-Iq-Z69XEMEM5sM5xsTZ3jGZ1-WBlZ8oUE80v4uTrJgmTqA29vQouuj8UhCLjur_sh9rgt7Ff5uFz6rI4o9iaUKp5yNZf1Jv7uqFYRccNa41BPrR3gvpYyP5QE6dOf__sQdf4zejhDrSgng7CofXWLoCs-shR8s6aMyNqvtGPUQWvFL_S2TdHroJM');
+              "
+            ></div>
+            <h2
+              class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+            >
+              naga laxmi
+            </h2>
+            <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
+              nagalaxmi@email.com
+            </p>
+          </div>
+          <div class="space-y-4">
+            <button
+              class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary/10 dark:bg-primary/20 px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors"
+            >
+              <span class="material-symbols-outlined">edit</span>
+              <span>Edit Profile</span>
+            </button>
+            <button
+              class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
+            >
+              <span class="material-symbols-outlined">logout</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

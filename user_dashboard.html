@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stitch Design</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      as="style"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700;900"
+      onload="this.rel='stylesheet'"
+      rel="stylesheet"
+    />
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "foreground-light": "#111827",
+              "foreground-dark": "#f9fafb",
+              "subtle-light": "#6b7280",
+              "subtle-dark": "#9ca3af",
+              "border-light": "#e5e7eb",
+              "border-dark": "#374151",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="font-display bg-background-light text-foreground-light dark:bg-background-dark dark:text-foreground-dark"
+  >
+    <div class="relative flex min-h-screen w-full flex-col">
+      <header
+        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
+      >
+        <div class="flex items-center gap-6">
+          <a class="flex items-center gap-2" href="#">
+            <span class="material-symbols-outlined text-primary text-3xl">
+              school
+            </span>
+            <h1
+              class="text-lg font-bold text-foreground-light dark:text-foreground-dark"
+            >
+              Campus Connect
+            </h1>
+          </a>
+          <nav class="hidden items-center gap-6 md:flex">
+            <a
+              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#"
+              >Home</a
+            >
+            <a class="text-sm font-medium text-primary" href="#">Events</a>
+            <a
+              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#"
+              >Organizations</a
+            >
+            <a
+              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#"
+              >Profile</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="md:hidden">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="relative hidden sm:block">
+            <span
+              class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
+              >search</span
+            >
+            <input
+              class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+              placeholder="Search"
+            />
+          </div>
+          <div
+            class="size-10 rounded-full bg-cover bg-center"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3hQa--0vPcK8DPreZhnOdOvubfPgurr0_QkHg1FEgn9I_GUkureLnTUpW-diGqSbsct8HeqJCZQYNjOR4vEqr4Joe8SMybha_qjUTbldygKmHXpmJ_frSz1v5lEmu89T82F3PoRA-g-BZSI_aix7dDMxuoOnUrza7un-s51uh1mjaqBmWvEjorg3xVwpyEPp_WRUgGK-Upmd8B6hBZhII8MR9VV5xST_zNTYLRTa5kTdjOFDrpbo2k2_XT_gX6CO-w9bl26D-2a4');
+            "
+          ></div>
+        </div>
+      </header>
+      <main class="flex-1">
+        <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+          <div class="mb-8">
+            <h1
+              class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl"
+            >
+              Welcome, Sarah
+            </h1>
+          </div>
+          <div class="mb-8 space-y-4">
+            <div class="relative">
+              <span
+                class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
+                >search</span
+              >
+              <input
+                class="h-12 w-full rounded-lg border border-border-light bg-background-light pl-12 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+                placeholder="Search events..."
+              />
+            </div>
+            <div class="flex flex-wrap items-center gap-4">
+              <button
+                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
+              >
+                <span>Date</span>
+                <span
+                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
+                  >arrow_drop_down</span
+                >
+              </button>
+              <button
+                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
+              >
+                <span>Type</span>
+                <span
+                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
+                  >arrow_drop_down</span
+                >
+              </button>
+              <button
+                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
+              >
+                <span>Location</span>
+                <span
+                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
+                  >arrow_drop_down</span
+                >
+              </button>
+            </div>
+          </div>
+          <div class="space-y-12">
+            <section>
+              <h2
+                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
+              >
+                My Events
+              </h2>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div
+                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
+                >
+                  <div
+                    class="aspect-video w-full bg-cover bg-center"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCb_-5G52swVf7z4BamgPelZmLFv5YsGV063RSk-zoBpwSLb8O8fTXZ5i2WS1l-vdc1Be4sBhhTTfQTsGpZhzJjjl6LnO9dUG-W3x4fMJvTE0vZjVdiyg877SUgrYDP9Md_dllKAG8AW83NCIr49V81p9RHdE6SepngHYZhQptoVw_IabmDCB9F9PAxcyJqCvEcxvbE0GCQBZOvQYnCEWY-WqtsOxviphAByXm9PQDFM11yInAKxi2gJ6Ka85moFA_0MVzLfB-zKNQ');
+                    "
+                  ></div>
+                  <div class="bg-background-light p-4 dark:bg-background-dark">
+                    <h3
+                      class="font-semibold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Campus Career Fair
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      October 26, 2024
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
+                >
+                  <div
+                    class="aspect-video w-full bg-cover bg-center"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBP9F9Pkh4lYTBZ_g9bjshcA3ZfZ4Xz3gu7mLxcKqLZkKKI0ioRH1JAcPijAeTY8KOsja3Bgtxz-KSSmTM6fIhUrWCYsEil0p_gdD44rzjGw7z4bKstnaFhcD9C1K80hWFkyn_8HVvBELBZNutabwu3sCmOQGRRCvEpl3YzLyrOt1FiwkLECYZ4w6bZPYARlK_AroSgn4VGK0oo2SCH5okIiIQ45sOAwaEcehPXYdOijxjc_zqm7Sg1O_569YS9OAfiiiiHzGRVFSE');
+                    "
+                  ></div>
+                  <div class="bg-background-light p-4 dark:bg-background-dark">
+                    <h3
+                      class="font-semibold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Student Leadership Conference
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      November 12, 2024
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
+                >
+                  <div
+                    class="aspect-video w-full bg-cover bg-center"
+                    style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBw7059gINJidoXh8n_eYlqZ-DJMDc2ZbVPYQhJUzllwGstYzMZkqgZOjiUvOoiKXNVfwyfi_HTaU0g5Ke-ALWLgFXmCpprvU-1lfWsWoQU4ks3_rMXiD18_TY2QivnWWZB1kZGZeUWwR9ViFrHw2VXmCemnSkhIV9KadX96MvGV7azf8WUGEez6gBxv_C_uqqTCP0KsHBuIcP-7kKaO4byG_60boBVoag-zzraEQczwrQfmu8LN5y3IhTrdLd0M-JpS71uSHGCYcA');
+                    "
+                  ></div>
+                  <div class="bg-background-light p-4 dark:bg-background-dark">
+                    <h3
+                      class="font-semibold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Alumni Networking Mixer
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      December 5, 2024
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <h2
+                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
+              >
+                All Events
+              </h2>
+              <div class="space-y-4">
+                <div
+                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
+                >
+                  <div class="w-full flex-shrink-0 sm:w-48">
+                    <div
+                      class="aspect-video w-full rounded bg-cover bg-center"
+                      style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYxopObqcoF-z8tpqDXoqrpjPcSlDtZBbYjHi_kNDlbvVsfgMHLTes1VaUFga5aJHd_HaohBf45WMVckqanNQ2__WeY18igV8HnpnGbS9zXKOq9bhkNWRcoTXGbkc42LABhT0oBFqxU2zcuNkxh_ICXQrWfKuNCt3PrFOlrzo6ds2yxfG41LUR7m1Ahf4HyAubF0RPYUIGt7HiMVkeJPCMwSCSOxQSUJugqKwpNpegRF4TZ0Ih6pO5O5FZCtnZwhnWOFhwnpzcsxI');
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-1">
+                    <h3
+                      class="font-bold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Campus Career Fair
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      October 26, 2024
+                    </p>
+                  </div>
+                  <button
+                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  >
+                    Register
+                  </button>
+                </div>
+                <div
+                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
+                >
+                  <div class="w-full flex-shrink-0 sm:w-48">
+                    <div
+                      class="aspect-video w-full rounded bg-cover bg-center"
+                      style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_QeHFboZdKEecab5Qj0O6YKw2Zj-aS0nyDemcel1k6jcHTSobgJqmUVrrf2F8RLXUXMazas_TJIzfW37g0pUUfSNAAcM85HBfGrEgIWx9c4WYrVDnaf_3qHvVhTdT3IVIHz6X_tsgCLNqHp6QoZL3EKaXHWp1-MmxtsHzk2l3thew97GBouMqYJ6DizV9j0BX0j-bhUZ-6STVtcKV1OByB0HFKUuqGPSqe9SzPOjFUCp3O_Cfw90PuS-omgIgpAvtRalgav7a8X0');
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-1">
+                    <h3
+                      class="font-bold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Student Leadership Conference
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      November 12, 2024
+                    </p>
+                  </div>
+                  <button
+                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  >
+                    Register
+                  </button>
+                </div>
+                <div
+                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
+                >
+                  <div class="w-full flex-shrink-0 sm:w-48">
+                    <div
+                      class="aspect-video w-full rounded bg-cover bg-center"
+                      style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2xSwnU1U_2ybiEE8_hW4asTWAt1FioZq_5U2KgoXJsboJBHknzodXSGIG9pJiD3Pde5rxuvMBOOz8_ivM7cl1OxSC_-ay8IvpxshqPBMdSmY6VXn4H7xdWj3ky6FQcF_yaIU3xNo3Stq33DwfDt7viMi2EdnGnA1dkQ0NLydqTwrQliYNDZP2qlhWzx9Fd5Xj5qBJpq6lGmuziJXibvByD_i58sZbd5aOd-My2Imqt49AOyKCJ7bhg8Yx0yOZKKaoZFWENLNsH8M');
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-1">
+                    <h3
+                      class="font-bold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Alumni Networking Mixer
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      December 5, 2024
+                    </p>
+                  </div>
+                  <button
+                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section>
+              <h2
+                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
+              >
+                Recommended Events
+              </h2>
+              <div class="space-y-4">
+                <div
+                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
+                >
+                  <div class="w-full flex-shrink-0 sm:w-48">
+                    <div
+                      class="aspect-video w-full rounded bg-cover bg-center"
+                      style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAdOfGRER5Nf2SVNFX8xAGQzo-llNi6R-JZd5sqCPc8o23HlaJB7U6_7fkjM8JuvST2EiqWxnJIs4eJyr0DjTI6fM8cT2eM7W9Uk6IeNLZv00_7pwWtUUtCsVfLoDpLY2kZBdnIxCO1mIjCj7mXlRbzoCNDv02sdNX7kVxbQhlE1ZjI5-yAJdAxCOkJCAmMYmP1_BzS-9vR4Tyu0sdjCEAEJlVK9UTBB288Q7pSU5gTGxn36OCtqZTSFPHnsEmOs08ggzIEqv5_zs');
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-1">
+                    <h3
+                      class="font-bold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Tech Talk: Future of AI
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      November 20, 2024
+                    </p>
+                  </div>
+                  <button
+                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  >
+                    Register
+                  </button>
+                </div>
+                <div
+                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
+                >
+                  <div class="w-full flex-shrink-0 sm:w-48">
+                    <div
+                      class="aspect-video w-full rounded bg-cover bg-center"
+                      style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjHA0fx1j9Dk41ciNJIuUQEZXgsOswd2mHzskq5beYdhgsr3feFSAicxt_LfoqT_NNIOsIIvLysZBzWafkq5DOBZOoJsF9qFc-y2y5SM3zxIbAMmZZedogXEPGY0qj-IHdrrnGJ0pcn1Qv_cdha_tJmc2TqLQEs7WirPTCqO_Hz7ciE6Wias90eNgMzl9tB0E6p9dPrKKR1pnNg7cC4538PuJn8sLlCnXXYC0GnbNrzf2rbLpoBHRYHmYTdBIHtSRFc820FVSKzGg');
+                      "
+                    ></div>
+                  </div>
+                  <div class="flex-1">
+                    <h3
+                      class="font-bold text-foreground-light dark:text-foreground-dark"
+                    >
+                      Music Festival
+                    </h3>
+                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
+                      December 15, 2024
+                    </p>
+                  </div>
+                  <button
+                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer
+        class="border-t border-border-light bg-background-light dark:border-border-dark dark:bg-background-dark"
+      >
+        <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+          <div
+            class="flex flex-col items-center justify-between gap-6 md:flex-row"
+          >
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              <a
+                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+                >About</a
+              >
+              <a
+                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+                >Contact</a
+              >
+              <a
+                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+                >Privacy Policy</a
+              >
+            </div>
+            <div class="flex justify-center gap-6">
+              <a
+                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+              >
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M22.46,6.54a.75.75,0,0,0-.94-.2l-3.23.98A4.4,4.4,0,0,0,15.6,6,4.24,4.24,0,0,0,12.5,7.31a4.32,4.32,0,0,0-1.43,3.22V11c-3.71-.5-6.81-3.24-6.86-3.28a.75.75,0,0,0-1.27.46c-.4,4.35.88,7.26,2,9a10.14,10.14,0,0,0,2,2.2c-1.4,1.6-3.6,2.43-3.62,2.44a.75.75,0,0,0-.35,1.09c.07.1.34.46,1,1.23,1.38.83,2.5,1.1,3.94,1.1,6.43,0,11.8-4.95,12.35-11.32l2.72-2.72a.75.75,0,0,0-.15-.9Zm-4.1,2.67a.75.75,0,0,0-.21.47c-.52,5.77-5.32,10.13-10.93,10.13-.96,0-1.64-.13-2.11-.28,1-1.07,2.51-2.29,3.44-4.1a.75.75,0,0,0-.69-1.12c-.04,0-3.92-2.3-4-8.6,1.45,1.18,4.12,3,7.16,3.53a.75.75,0,0,0,.82-.7V10.51a2.79,2.79,0,0,1,.87-2.09A2.83,2.83,0,0,1,15.58,8c1.15,0,2.23.72,2.68,1.75a.75.75,0,0,0,.9.4l1.9-.58Z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+              >
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6.5A2.5,2.5,0,1,1,14.5,12,2.5,2.5,0,0,1,12,14.5ZM16.5,2.5H7.5A5,5,0,0,0,2.5,7.5v9a5,5,0,0,0,5,5h9a5,5,0,0,0,5-5v-9A5,5,0,0,0,16.5,2.5Zm3.5,14a3.5,3.5,0,0,1-3.5,3.5h-9a3.5,3.5,0,0,1-3.5-3.5v-9A3.5,3.5,0,0,1,7.5,4h9a3.5,3.5,0,0,1,3.5,3.5ZM17.5,7.8a1.2,1.2,0,1,1-1.2-1.2A1.2,1.2,0,0,1,17.5,7.8Z"
+                  ></path>
+                </svg>
+              </a>
+              <a
+                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+                href="#"
+              >
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12,2.5A9.5,9.5,0,1,0,21.5,12,9.51,9.51,0,0,0,12,2.5Zm.75,17.68V14H15a.75.75,0,0,0,0-1.5h-2.25V10a1.5,1.5,0,0,1,1.5-1.5H15.5a.75.75,0,0,0,0-1.5h-1.25A3,3,0,0,0,11.25,10v2.5H9a.75.75,0,0,0,0,1.5h2.25v6.18a8,8,0,1,1,1.5,0Z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+            <p class="text-sm text-subtle-light dark:text-subtle-dark">
+              © 2025 Campus Connect. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

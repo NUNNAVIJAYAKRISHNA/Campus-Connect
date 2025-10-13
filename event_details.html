@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Campus Connect - Event Details</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background-light dark:bg-background-dark font-display">
+    <div class="flex flex-col min-h-screen">
+      <header
+        class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10"
+      >
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <div class="flex items-center space-x-8">
+              <a class="flex items-center space-x-2" href="#">
+                <svg
+                  class="h-6 w-6 text-primary"
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_6_535)">
+                    <path
+                      clip-rule="evenodd"
+                      d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_6_535">
+                      <rect fill="white" height="48" width="48"></rect>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span
+                  class="text-lg font-bold text-background-dark dark:text-background-light"
+                  >Campus Connect</span
+                >
+              </a>
+              <nav class="hidden md:flex items-center space-x-6">
+                <a
+                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="#"
+                  >Home</a
+                >
+                <a
+                  class="text-sm font-medium text-primary dark:text-primary"
+                  href="#"
+                  >Events</a
+                >
+                <a
+                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="#"
+                  >Organizations</a
+                >
+                <a
+                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="#"
+                  >Profile</a
+                >
+              </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+              <div class="relative hidden sm:block">
+                <span
+                  class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-background-dark/50 dark:text-background-light/50"
+                  >search</span
+                >
+                <input
+                  class="w-full pl-10 pr-4 py-2 rounded-lg border-0 bg-background-light/70 dark:bg-background-dark/70 focus:ring-2 focus:ring-primary text-background-dark dark:text-background-light placeholder:text-background-dark/50 dark:placeholder:text-background-light/50"
+                  placeholder="Search events..."
+                  type="search"
+                />
+              </div>
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIEKcmdfH0K3sCIh3zlnQw9-BYUvLdx7End4r33bzWyNFYr-4HMFdlv1iJXODSCoNnCJG4Gg4YrmODDRqQZWO7kpactv8RwGRAZLk-9myix_QPooZxXFZuUvk5NfDBb1eqcupF9Cb8f71eRMGEZBfl9m-GktHzJ07RCNTJr1wCmT0VX_9WfgaMLbBRU5ktq1ZnPa2MQmhlexodbqASL_s91vJwko-G7hx4w0mH0kk5FMCjRnt-JZkoPn5YNzz7T9cbpiHDUCCOBtY');
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="w-full h-64 md:h-80 rounded-xl bg-cover bg-center relative overflow-hidden"
+            style="
+              background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCsbigzc5ebDs6n7aj0j9kUR1ZRy6SCGkkbAAdqkZ_Jzlqw83WMMAWqcdq7eQhikprZ8HJHuUl3u2ehPNDT1udw6qnRRVvYBNlMsB14buhHhwcoLK1B8_uGWn2NMb1ZO9l0QrTFYQR-7RPI-iGw2RZzUVscHTsGQI3afgdl1IocEyPcFBaTHAXb3bN_4ESrPSloBw_ZFEpo83mtAsOUzmfIFfS9l3BYgrTPZ5jQriPdEoDSgumYkp3SrqlMdvwBUOhDJZNB7ziBAFA');
+            "
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+            ></div>
+            <div class="absolute bottom-0 left-0 p-6 md:p-8">
+              <h1 class="text-3xl md:text-4xl font-bold text-white">
+                Campus Sustainability Fair
+              </h1>
+            </div>
+          </div>
+          <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+              <div
+                class="p-6 rounded-xl bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10"
+              >
+                <h2
+                  class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
+                >
+                  About this Event
+                </h2>
+                <p
+                  class="text-background-dark/80 dark:text-background-light/80 leading-relaxed"
+                >
+                  Join us for a day dedicated to sustainability on campus!
+                  Explore eco-friendly initiatives, workshops, and exhibits.
+                  Learn how to reduce your environmental footprint and
+                  contribute to a greener future. Engage with student
+                  organizations, local businesses, and experts in the field.
+                  Participate in interactive activities, win prizes, and enjoy
+                  sustainable food options. This event is a fantastic
+                  opportunity to connect with like-minded individuals and make a
+                  positive impact on our community and the planet.
+                </p>
+              </div>
+            </div>
+            <div class="lg:col-span-1 space-y-6">
+              <div
+                class="p-6 rounded-xl bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10"
+              >
+                <h2
+                  class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
+                >
+                  Details
+                </h2>
+                <ul class="space-y-4">
+                  <li class="flex items-start space-x-3">
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >calendar_month</span
+                    >
+                    <div>
+                      <h3
+                        class="font-semibold text-background-dark dark:text-background-light"
+                      >
+                        Date &amp; Time
+                      </h3>
+                      <p
+                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                      >
+                        October 26, 2024
+                      </p>
+                      <p
+                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                      >
+                        10:00 AM - 4:00 PM
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start space-x-3">
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >location_on</span
+                    >
+                    <div>
+                      <h3
+                        class="font-semibold text-background-dark dark:text-background-light"
+                      >
+                        Location
+                      </h3>
+                      <p
+                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                      >
+                        Central Campus Quad
+                      </p>
+                    </div>
+                  </li>
+                  <li class="flex items-start space-x-3">
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >groups</span
+                    >
+                    <div>
+                      <h3
+                        class="font-semibold text-background-dark dark:text-background-light"
+                      >
+                        Organizer
+                      </h3>
+                      <p
+                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                      >
+                        Student Environmental Action League
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="sticky top-24">
+                <button
+                  class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <span class="material-symbols-outlined">how_to_reg</span>
+                  <span>Register for this Event</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
