@@ -1,155 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login page</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Login Container */
-        .login-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-            max-width: 90%;
-        }
-        h1 {
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-        .input-container {
-            position: relative;
-            width: 100%;
-            margin: 10px 0;
-        }
-        input {
-            padding: 10px;
-            width: calc(100% - 24px); /* Adjust for padding and border */
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        input:focus {
-            outline: none;
-            border-color: #28a745;
-            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
-        }
-
-        /* Buttons */
-        button {
-            padding: 10px 20px;
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 15px;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-
-        /* Google Button Specifics */
-        .google-btn {
-            background-color: #ffffff;
-            color: #444;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .google-btn:hover {
-            background-color: #f7f7f7;
-        }
-        .google-btn svg {
-            margin-right: 10px;
-        }
-
-        .divider {
-            margin: 20px 0;
-            font-weight: bold;
-            color: #888;
-        }
-
-        /* Utility & Links */
-        .extra-links {
-            text-align: right;
-            margin-top: 5px;
-            font-size: 14px;
-        }
-        .extra-links a {
-            color: #28a745;
-            text-decoration: none;
-        }
-        .extra-links a:hover {
-            text-decoration: underline;
-        }
-        #toggle-password {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #888;
-            user-select: none; /* Prevent text selection */
-        }
-        .signup-link {
-            margin-top: 20px;
-            font-size: 14px;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Campus Connect - Login</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
 </head>
-<!-- Google Identity Services Library -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+    <div class="flex min-h-screen">
+        <!-- Left decorative column -->
+        <div class="hidden lg:flex lg:w-1/2 items-center justify-center bg-primary/5 dark:bg-primary/10 p-12 relative overflow-hidden">
+            <div class="absolute -top-16 -left-16 w-48 h-48 bg-primary/20 rounded-full"></div>
+            <div class="absolute -bottom-24 -right-10 w-64 h-64 bg-primary/10 rounded-full"></div>
+            <div class="text-center z-10">
+                <a class="flex items-center justify-center gap-3 text-gray-900 dark:text-white mb-6" href="index.html">
+                    <svg class="h-10 w-10 text-primary" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
+                    </svg>
+                    <span class="text-3xl font-bold">CampusConnect</span>
+                </a>
+                <p class="text-xl text-gray-700 dark:text-gray-300 max-w-sm mx-auto">
+                    Discover & Manage College and Community Events
+                </p>
+            </div>
+        </div>
 
-<body>
-    <div class="login-container">
-        <h1>Login</h1>
-        <form id="login-form">
-            <div class="input-container">
-                <input type="email" id="email" placeholder="Enter your email" required>
+        <!-- Right login form column -->
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12">
+            <div class="w-full max-w-md">
+                <div class="text-center lg:text-left mb-10">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Login</h1>
+                    <p class="mt-2 text-gray-600 dark:text-gray-400">Welcome back! Please enter your details.</p>
+                </div>
+
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <div class="flex justify-between">
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                            <a href="#" class="text-sm text-primary hover:underline">Forgot Password?</a>
+                        </div>
+                        <div class="relative">
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
+                            <span id="toggle-password" class="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500">👁️</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Login
+                    </button>
+                </form>
+
+                <div id="error-message" class="text-center text-red-500 text-sm mt-4"></div>
+
+                <p class="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+                    Don't have an account?
+                    <a href="registration.html" class="font-medium text-primary hover:underline">Sign up</a>
+                </p>
             </div>
-            <div class="input-container">
-                <input type="password" id="password" placeholder="Enter your password" required>
-                <span id="toggle-password">👁️</span>
-            </div>
-            <div class="extra-links">
-                <a href="#">Forgot Password?</a>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-       
-    <!-- Google Sign-in button is rendered here by Google's script -->
-   
-    <div id="error-message" style="color: red; margin-top: 8px;"></div>
+        </div>
     </div>
 
     <script type="module">
         import { auth, db } from './assets/js/firebaseOptions.js';
         import {
-            signInWithEmailAndPassword,
-            GoogleAuthProvider,
-            signInWithCredential,
+            signInWithEmailAndPassword,            
             onAuthStateChanged
         } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
         import { doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
@@ -240,61 +185,6 @@
                 window.location.href = 'user_dashboard.html';
             }
         });
-
-        // Google Sign-In handling using Google's Identity Services
-        window.onload = function () {
-            if (window.google && google.accounts && google.accounts.id) {
-                google.accounts.id.initialize({
-                    client_id: '1017566795753-j63trcd2t0lpfvr99ntbgba16rl6sp0l.apps.googleusercontent.com',
-                    callback: async (response) => {
-                        try {
-                            const credential = GoogleAuthProvider.credential(response.credential);
-                            const userCredential = await signInWithCredential(auth, credential);
-                            const user = userCredential.user;
-
-                            // Add or update user record in Firestore (does not overwrite role)
-                                await setDoc(doc(db, 'users', user.uid), {
-                                    name: user.displayName || null,
-                                    email: user.email,
-                                    photoURL: user.photoURL || null,
-                                    lastLogin: new Date()
-                                }, { merge: true });
-
-                                // Try to read role from Firestore (in case user was created with a role)
-                                try {
-                                    const userDocRef = doc(db, 'users', user.uid);
-                                    const snap = await getDoc(userDocRef);
-                                    if (snap.exists()) {
-                                        const data = snap.data();
-                                        sessionStorage.setItem('user', JSON.stringify(data));
-                                        if (data.role === 'admin') {
-                                            window.location.href = 'add_event_admin.html';
-                                            return;
-                                        }
-                                    }
-                                } catch (err) {
-                                    console.warn('Could not fetch user data after Google sign-in:', err);
-                                }
-
-                                // Default redirect for Google sign-ins
-                                sessionStorage.setItem('user', JSON.stringify({ uid: user.uid, email: user.email, name: user.displayName }));
-                                window.location.href = 'user_dashboard.html';
-                        } catch (err) {
-                            console.error('Google sign-in error', err);
-                            showError('Google sign-in failed.');
-                        }
-                    }
-                });
-
-                google.accounts.id.renderButton(
-                    document.getElementById('google-signin-btn'),
-                    { theme: 'outline', size: 'large', width: '300' }
-                );
-                google.accounts.id.prompt();
-            } else {
-                console.warn('Google Identity Services not loaded yet.');
-            }
-        };
     </script>
 </body>
 </html>
