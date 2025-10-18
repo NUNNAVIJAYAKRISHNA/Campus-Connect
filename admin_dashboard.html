@@ -147,6 +147,16 @@
               <p class="p-6 text-gray-500 dark:text-gray-400">Loading events...</p>
             </div>
           </div>
+
+          <!-- Recent Circulars -->
+          <div class="mt-12">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Recent Circulars
+            </h3>
+            <div id="recent-circulars-container" class="bg-white dark:bg-gray-900/50 rounded-xl shadow-sm">
+              <p class="p-6 text-gray-500 dark:text-gray-400">Loading circulars...</p>
+            </div>
+          </div>
         </div>
       </main>
     </div>
@@ -166,6 +176,7 @@
       const totalUsersEl = document.getElementById('total-users');
       const totalRegistrationsEl = document.getElementById('total-registrations');
       const upcomingEventsContainer = document.getElementById('upcoming-events-container');
+      const recentCircularsContainer = document.getElementById('recent-circulars-container');
 
       // --- Admin UI & Auth ---
       function setAdminUI(data) {
@@ -222,10 +233,11 @@
       async function loadDashboardData() {
         try {
           // Fetch stats
-          const [eventsSnap, usersSnap, registrationsSnap] = await Promise.all([
+          const [eventsSnap, usersSnap, registrationsSnap, circularsSnap] = await Promise.all([
             getDocs(collection(db, "events")),
             getDocs(collection(db, "users")),
-            getDocs(collection(db, "registrations"))
+            getDocs(collection(db, "registrations")),
+            getDocs(query(collection(db, "circulars"), orderBy("createdAt", "desc"), limit(5)))
           ]);
           totalEventsEl.textContent = eventsSnap.size;
           totalUsersEl.textContent = usersSnap.size;
@@ -265,9 +277,28 @@
           tableHtml += `</tbody></table>`;
           upcomingEventsContainer.innerHTML = tableHtml;
 
+          // Populate Recent Circulars
+          if (circularsSnap.empty) {
+            recentCircularsContainer.innerHTML = '<p class="p-6 text-gray-500 dark:text-gray-400">No recent circulars found.</p>';
+          } else {
+            let circularsHtml = '<div class="divide-y divide-gray-200 dark:divide-gray-700">';
+            circularsSnap.forEach(doc => {
+                const circular = doc.data();
+                const circularId = doc.id;
+                const createdDate = circular.createdAt?.toDate().toLocaleDateString() || 'N/A';
+                circularsHtml += `
+                    <div class="p-4">
+                        <a href="admin_add_circular.html?id=${circularId}" class="font-medium text-primary hover:underline">${circular.title || 'N/A'}</a>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Published on ${createdDate}</p>
+                    </div>`;
+            });
+            circularsHtml += '</div>';
+            recentCircularsContainer.innerHTML = circularsHtml;
+          }
         } catch (error) {
           console.error("Error loading dashboard data:", error);
           upcomingEventsContainer.innerHTML = '<p class="p-6 text-red-500">Could not load dashboard data.</p>';
+          recentCircularsContainer.innerHTML = '<p class="p-6 text-red-500">Could not load circulars.</p>';
         }
       }
     </script>

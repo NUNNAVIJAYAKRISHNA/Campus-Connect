@@ -176,8 +176,11 @@
     <script type="module">
       import { auth, db } from './assets/js/firebaseOptions.js';
       import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
-      import { doc, getDoc, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+      import { doc, getDoc, collection, addDoc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
+      const urlParams = new URLSearchParams(window.location.search);
+      const circularId = urlParams.get("id");
+ 
       // --- Admin UI & Auth ---
       const adminAvatar = document.getElementById('admin-avatar');
       const adminName = document.getElementById('admin-name');
@@ -206,6 +209,12 @@
       // --- Form Logic ---
       const circularForm = document.getElementById('circular-form');
       const statusMessage = document.getElementById('status-message');
+      const pageTitle = document.querySelector("h2");
+      const pageSubtitle = document.querySelector("h2 + p");
+      const submitButton = document.querySelector('button[type="submit"]');
+      const titleInput = document.getElementById('circular-title');
+      const contentInput = document.getElementById('circular-content');
+      const attachmentUrlInput = document.getElementById('attachment-url');
 
       circularForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -220,27 +229,70 @@
           return;
         }
 
-        statusMessage.innerHTML = `<p class="text-blue-500">Publishing circular...</p>`;
+        statusMessage.innerHTML = `<p class="text-blue-500">${circularId ? "Updating" : "Publishing"} circular...</p>`;
 
         try {
-          await addDoc(collection(db, "circulars"), {
+          const circularData = {
             title: title,
             content: content,
             attachmentUrl: attachmentUrl || null,
-            createdAt: serverTimestamp(),
-            author: auth.currentUser.displayName || auth.currentUser.email,
-            authorId: auth.currentUser.uid
-          });
+          };
 
-          statusMessage.innerHTML = `<p class="text-green-500">Circular published successfully!</p>`;
-          circularForm.reset();
+          if (circularId) {
+            // Update existing document
+            const circularDocRef = doc(db, "circulars", circularId);
+            await updateDoc(circularDocRef, {
+              ...circularData,
+              updatedAt: serverTimestamp(),
+            });
+            statusMessage.innerHTML = `<p class="text-green-500">Circular updated successfully!</p>`;
+          } else {
+            // Add a new document
+            await addDoc(collection(db, "circulars"), {
+              ...circularData,
+              createdAt: serverTimestamp(),
+              author: auth.currentUser.displayName || auth.currentUser.email,
+              authorId: auth.currentUser.uid
+            });
+            statusMessage.innerHTML = `<p class="text-green-500">Circular published successfully!</p>`;
+            circularForm.reset();
+          }
         } catch (error) {
           console.error("Error publishing circular: ", error);
           statusMessage.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
         }
       });
 
-      document.getElementById('cancel-button').addEventListener('click', () => circularForm.reset());
+      document.getElementById('cancel-button').addEventListener('click', () => {
+        if (circularId) {
+          window.location.href = 'admin_dashboard.html';
+        } else {
+          circularForm.reset();
+        }
+      });
+
+      // --- Edit Mode Logic ---
+      if (circularId) {
+        pageTitle.textContent = "Edit Circular";
+        pageSubtitle.textContent = "Update the details for this circular.";
+        submitButton.textContent = "Update Circular";
+
+        const circularDocRef = doc(db, "circulars", circularId);
+        getDoc(circularDocRef).then(docSnap => {
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            titleInput.value = data.title || '';
+            contentInput.value = data.content || '';
+            attachmentUrlInput.value = data.attachmentUrl || '';
+          } else {
+            alert("Circular not found. Redirecting to dashboard.");
+            window.location.href = 'admin_dashboard.html';
+          }
+        }).catch(error => {
+          console.error("Error fetching circular:", error);
+          alert("Could not load circular data.");
+        });
+      }
     </script>
   </body>
 </html>
