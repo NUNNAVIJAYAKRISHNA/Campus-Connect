@@ -47,83 +47,40 @@
   <body class="bg-background-light dark:bg-background-dark font-display">
     <div class="flex flex-col min-h-screen">
       <header
-        class="bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-20 border-b border-background-dark/10 dark:border-background-light/10"
+        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
       >
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-center justify-between h-16">
-            <div class="flex items-center space-x-8">
-              <a class="flex items-center space-x-2" href="#">
-                <svg
-                  class="h-6 w-6 text-primary"
-                  fill="none"
-                  viewBox="0 0 48 48"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clip-path="url(#clip0_6_535)">
-                    <path
-                      clip-rule="evenodd"
-                      d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    ></path>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_6_535">
-                      <rect fill="white" height="48" width="48"></rect>
-                    </clipPath>
-                  </defs>
-                </svg>
-                <span
-                  class="text-lg font-bold text-background-dark dark:text-background-light"
-                  >Campus Connect</span
-                >
-              </a>
-              <nav class="hidden md:flex items-center space-x-6">
-                <a
-                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
-                  href="#"
-                  >Home</a
-                >
-                <a
-                  class="text-sm font-medium text-primary dark:text-primary"
-                  href="#"
-                  >Events</a
-                >
-                <a
-                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
-                  href="#"
-                  >Organizations</a
-                >
-                <a
-                  class="text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary transition-colors"
-                  href="#"
-                  >Profile</a
-                >
-              </nav>
-            </div>
-            <div class="flex items-center space-x-4">
-              <div class="relative hidden sm:block">
-                <span
-                  class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-background-dark/50 dark:text-background-light/50"
-                  >search</span
-                >
-                <input
-                  class="w-full pl-10 pr-4 py-2 rounded-lg border-0 bg-background-light/70 dark:bg-background-dark/70 focus:ring-2 focus:ring-primary text-background-dark dark:text-background-light placeholder:text-background-dark/50 dark:placeholder:text-background-light/50"
-                  placeholder="Search events..."
-                  type="search"
-                />
-              </div>
-              <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-background-dark/70 dark:text-background-light/70 hover:text-primary dark:hover:text-primary">
-                <span class="material-symbols-outlined">logout</span>
-              </button>
-              <div
-                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10"
-                style="
-                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCIEKcmdfH0K3sCIh3zlnQw9-BYUvLdx7End4r33bzWyNFYr-4HMFdlv1iJXODSCoNnCJG4Gg4YrmODDRqQZWO7kpactv8RwGRAZLk-9myix_QPooZxXFZuUvk5NfDBb1eqcupF9Cb8f71eRMGEZBfl9m-GktHzJ07RCNTJr1wCmT0VX_9WfgaMLbBRU5ktq1ZnPa2MQmhlexodbqASL_s91vJwko-G7hx4w0mH0kk5FMCjRnt-JZkoPn5YNzz7T9cbpiHDUCCOBtY');
-                "
-              ></div>
-            </div>
+        <div class="flex items-center gap-6">
+          <a class="flex items-center gap-2" href="user_dashboard.html">
+            <span class="material-symbols-outlined text-primary text-3xl">
+              school
+            </span>
+            <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
+              Campus Connect
+            </h1>
+          </a>
+          <nav class="hidden items-center gap-6 md:flex">
+            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="user_dashboard.html">Home</a>
+            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="circular.html">Circulars</a>
+            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="organizations.html">Organizations</a>
+          </nav>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative hidden sm:block">
+            <span class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
+            <input
+              class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+              placeholder="Search"
+            />
           </div>
+          <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+            <span class="material-symbols-outlined">logout</span>
+          </button>
+          <a href="user_profile.html" id="user-avatar-link">
+            <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
+          </a>
+          <button class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
         </div>
       </header>
       <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -136,14 +93,14 @@
             ></div>
             <div class="absolute bottom-0 left-0 p-6 md:p-8">
               <h1 class="text-3xl md:text-4xl font-bold text-white">
-                Campus Sustainability Fair
+                Loading Event...
               </h1>
             </div>
           </div>
           <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
               <div
-                class="p-6 rounded-xl bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10"
+                class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700"
               >
                 <h2
                   class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
@@ -151,23 +108,15 @@
                   About this Event
                 </h2>
                 <p
-                  class="text-background-dark/80 dark:text-background-light/80 leading-relaxed"
+                  class="text-gray-700 dark:text-gray-300 leading-relaxed"
                 >
-                  Join us for a day dedicated to sustainability on campus!
-                  Explore eco-friendly initiatives, workshops, and exhibits.
-                  Learn how to reduce your environmental footprint and
-                  contribute to a greener future. Engage with student
-                  organizations, local businesses, and experts in the field.
-                  Participate in interactive activities, win prizes, and enjoy
-                  sustainable food options. This event is a fantastic
-                  opportunity to connect with like-minded individuals and make a
-                  positive impact on our community and the planet.
+                  Loading description...
                 </p>
               </div>
             </div>
             <div class="lg:col-span-1 space-y-6">
               <div
-                class="p-6 rounded-xl bg-background-light dark:bg-background-dark border border-background-dark/10 dark:border-background-light/10"
+                class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700"
               >
                 <h2
                   class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
@@ -186,15 +135,11 @@
                         Date &amp; Time
                       </h3>
                       <p
-                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                        class="text-sm text-gray-600 dark:text-gray-400"
                       >
-                        October 26, 2024
+                        ...
                       </p>
-                      <p
-                        class="text-sm text-background-dark/70 dark:text-background-light/70"
-                      >
-                        10:00 AM - 4:00 PM
-                      </p>
+                      <p class="text-sm text-gray-600 dark:text-gray-400"></p>
                     </div>
                   </li>
                   <li class="flex items-start space-x-3">
@@ -208,9 +153,9 @@
                         Location
                       </h3>
                       <p
-                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                        class="text-sm text-gray-600 dark:text-gray-400"
                       >
-                        Central Campus Quad
+                        ...
                       </p>
                     </div>
                   </li>
@@ -225,9 +170,9 @@
                         Organizer
                       </h3>
                       <p
-                        class="text-sm text-background-dark/70 dark:text-background-light/70"
+                        class="text-sm text-gray-600 dark:text-gray-400"
                       >
-                        Student Environmental Action League
+                        ...
                       </p>
                     </div>
                   </li>
@@ -270,6 +215,7 @@
      const eventLocation = document.querySelector('li:nth-child(2) p');
      const eventOrganizer = document.querySelector('li:nth-child(3) p');
      const registerButton = document.getElementById('register-btn'); // Use ID selector
+     const userAvatar = document.getElementById('user-avatar');
      const logoutBtn = document.getElementById('logout-btn');
  
      // --- State Variable ---
@@ -347,11 +293,15 @@
            registerButton.innerHTML = '<span class="material-symbols-outlined animate-spin">hourglass_empty</span><span>Registering...</span>';
            
            let username = user.displayName || user.email || 'Unknown User';
+           let studentId = null;
            try {
              const userDoc = await getDoc(doc(db, 'users', user.uid));
              if (userDoc.exists()) {
                const userData = userDoc.data();
                username = userData.fullName || userData.name || username;
+               if (userData.role === 'student') {
+                   studentId = userData.studentId || null;
+               }
              }
            } catch (e) {
              console.warn("Could not fetch user's full name:", e);
@@ -360,6 +310,8 @@
            await setDoc(doc(db, 'registrations', `${user.uid}_${eventId}`), {
              userId: user.uid,
              username: username,
+             userEmail: user.email,
+             studentId: studentId,
              eventId: eventId,
              eventName: currentEventData?.title || 'Untitled Event', // Use stored data
              registeredAt: serverTimestamp()
@@ -379,6 +331,9 @@
      onAuthStateChanged(auth, (user) => {
        if (user) {
          loadEventDetails();
+          if (user.photoURL && userAvatar) {
+            userAvatar.style.backgroundImage = `url('${user.photoURL}')`;
+          }
        } else {
          // Redirect if not logged in, except for the registration click which handles its own redirect
          if (registerButton && !registerButton.disabled) {

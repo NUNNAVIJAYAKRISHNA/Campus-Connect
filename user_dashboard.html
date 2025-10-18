@@ -66,33 +66,20 @@
           </a>
           <nav class="hidden items-center gap-6 md:flex">
             <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="#"
+              class="text-sm font-medium text-primary"
+              href="user_dashboard.html"
               >Home</a
             >
-            <a class="text-sm font-medium text-primary" href="#">Events</a>
+            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="circular.html">Circulars</a>
             <a
               class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="#"
+              href="organizations.html"
               >Organizations</a
             >
-            <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="#"
-              >Profile</a
-            >
+           
           </nav>
         </div>
         <div class="flex items-center gap-4">
-          <button class="md:hidden">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
-          <!-- Logout / User actions -->
-          <div class="flex items-center gap-3">
-            <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
-              <span class="material-symbols-outlined">logout</span>
-            </button>
-          </div>
           <div class="relative hidden sm:block">
             <span
               class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
@@ -103,7 +90,15 @@
               placeholder="Search"
             />
           </div>
-            <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3hQa--0vPcK8DPreZhnOdOvubfPgurr0_QkHg1FEgn9I_GUkureLnTUpW-diGqSbsct8HeqJCZQYNjOR4vEqr4Joe8SMybha_qjUTbldygKmHXpmJ_frSz1v5lEmu89T82F3PoRA-g-BZSI_aix7dDMxuoOnUrza7un-s51uh1mjaqBmWvEjorg3xVwpyEPp_WRUgGK-Upmd8B6hBZhII8MR9VV5xST_zNTYLRTa5kTdjOFDrpbo2k2_XT_gX6CO-w9bl26D-2a4');"></div>
+            <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+              <span class="material-symbols-outlined">logout</span>
+            </button>
+            <a href="user_profile.html" id="user-avatar-link">
+              <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
+            </a>
+            <button class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+              <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
       </header>
       <main class="flex-1">
@@ -111,45 +106,23 @@
           <div class="mb-8">
             <h1 id="welcome-heading" class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl">Welcome</h1>
           </div>
-          <div class="mb-8 space-y-4">
-            <div class="relative">
+          <div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="relative md:col-span-2">
               <span
                 class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
                 >search</span
               >
               <input
+                id="search-input"
                 class="h-12 w-full rounded-lg border border-border-light bg-background-light pl-12 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
                 placeholder="Search events..."
               />
             </div>
-            <div class="flex flex-wrap items-center gap-4">
-              <button
-                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
-              >
-                <span>Date</span>
-                <span
-                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
-                  >arrow_drop_down</span
-                >
-              </button>
-              <button
-                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
-              >
-                <span>Type</span>
-                <span
-                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
-                  >arrow_drop_down</span
-                >
-              </button>
-              <button
-                class="flex h-10 items-center gap-2 rounded-lg border border-border-light bg-background-light px-4 text-sm font-medium text-foreground-light hover:bg-primary/10 dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:hover:bg-primary/20"
-              >
-                <span>Location</span>
-                <span
-                  class="material-symbols-outlined text-subtle-light dark:text-subtle-dark"
-                  >arrow_drop_down</span
-                >
-              </button>
+            <div class="relative">
+              <select id="category-filter" class="h-12 w-full appearance-none rounded-lg border border-border-light bg-background-light pl-4 pr-10 text-foreground-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark">
+                <option value="all">All Categories</option>
+              </select>
+              <span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">arrow_drop_down</span>
             </div>
           </div>
           <div class="space-y-12">
@@ -159,69 +132,8 @@
               >
                 My Events
               </h2>
-              <div id="my-events-container" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <div
-                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
-                >
-                  <div
-                    class="aspect-video w-full bg-cover bg-center"
-                    style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCb_-5G52swVf7z4BamgPelZmLFv5YsGV063RSk-zoBpwSLb8O8fTXZ5i2WS1l-vdc1Be4sBhhTTfQTsGpZhzJjjl6LnO9dUG-W3x4fMJvTE0vZjVdiyg877SUgrYDP9Md_dllKAG8AW83NCIr49V81p9RHdE6SepngHYZhQptoVw_IabmDCB9F9PAxcyJqCvEcxvbE0GCQBZOvQYnCEWY-WqtsOxviphAByXm9PQDFM11yInAKxi2gJ6Ka85moFA_0MVzLfB-zKNQ');
-                    "
-                  ></div>
-                  <div class="bg-background-light p-4 dark:bg-background-dark">
-                    <h3
-                      class="font-semibold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Campus Career Fair
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      October 26, 2024
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
-                >
-                  <div
-                    class="aspect-video w-full bg-cover bg-center"
-                    style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBP9F9Pkh4lYTBZ_g9bjshcA3ZfZ4Xz3gu7mLxcKqLZkKKI0ioRH1JAcPijAeTY8KOsja3Bgtxz-KSSmTM6fIhUrWCYsEil0p_gdD44rzjGw7z4bKstnaFhcD9C1K80hWFkyn_8HVvBELBZNutabwu3sCmOQGRRCvEpl3YzLyrOt1FiwkLECYZ4w6bZPYARlK_AroSgn4VGK0oo2SCH5okIiIQ45sOAwaEcehPXYdOijxjc_zqm7Sg1O_569YS9OAfiiiiHzGRVFSE');
-                    "
-                  ></div>
-                  <div class="bg-background-light p-4 dark:bg-background-dark">
-                    <h3
-                      class="font-semibold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Student Leadership Conference
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      November 12, 2024
-                    </p>
-                  </div>
-                </div>
-                <div
-                  class="group overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-lg"
-                >
-                  <div
-                    class="aspect-video w-full bg-cover bg-center"
-                    style="
-                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBw7059gINJidoXh8n_eYlqZ-DJMDc2ZbVPYQhJUzllwGstYzMZkqgZOjiUvOoiKXNVfwyfi_HTaU0g5Ke-ALWLgFXmCpprvU-1lfWsWoQU4ks3_rMXiD18_TY2QivnWWZB1kZGZeUWwR9ViFrHw2VXmCemnSkhIV9KadX96MvGV7azf8WUGEez6gBxv_C_uqqTCP0KsHBuIcP-7kKaO4byG_60boBVoag-zzraEQczwrQfmu8LN5y3IhTrdLd0M-JpS71uSHGCYcA');
-                    "
-                  ></div>
-
-                  
-                  <div class="bg-background-light p-4 dark:bg-background-dark">
-                    <h3
-                      class="font-semibold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Alumni Networking Mixer
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      December 5, 2024
-                    </p>
-                  </div>
-                </div>
+              <div id="my-events-container" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                <!-- My events will be dynamically inserted here -->
               </div>
             </section>
             <section>
@@ -231,87 +143,7 @@
                 All Events
               </h2>
               <div id="all-events-container" class="space-y-4">
-                <div
-                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
-                >
-                  <div class="w-full flex-shrink-0 sm:w-48">
-                    <div
-                      class="aspect-video w-full rounded bg-cover bg-center"
-                      style="
-                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYxopObqcoF-z8tpqDXoqrpjPcSlDtZBbYjHi_kNDlbvVsfgMHLTes1VaUFga5aJHd_HaohBf45WMVckqanNQ2__WeY18igV8HnpnGbS9zXKOq9bhkNWRcoTXGbkc42LABhT0oBFqxU2zcuNkxh_ICXQrWfKuNCt3PrFOlrzo6ds2yxfG41LUR7m1Ahf4HyAubF0RPYUIGt7HiMVkeJPCMwSCSOxQSUJugqKwpNpegRF4TZ0Ih6pO5O5FZCtnZwhnWOFhwnpzcsxI');
-                      "
-                    ></div>
-                  </div>
-                  <div class="flex-1">
-                    <h3
-                      class="font-bold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Campus Career Fair
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      October 26, 2024
-                    </p>
-                  </div>
-                  <button
-                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    Register
-                  </button>
-                </div>
-                <div
-                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
-                >
-                  <div class="w-full flex-shrink-0 sm:w-48">
-                    <div
-                      class="aspect-video w-full rounded bg-cover bg-center"
-                      style="
-                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_QeHFboZdKEecab5Qj0O6YKw2Zj-aS0nyDemcel1k6jcHTSobgJqmUVrrf2F8RLXUXMazas_TJIzfW37g0pUUfSNAAcM85HBfGrEgIWx9c4WYrVDnaf_3qHvVhTdT3IVIHz6X_tsgCLNqHp6QoZL3EKaXHWp1-MmxtsHzk2l3thew97GBouMqYJ6DizV9j0BX0j-bhUZ-6STVtcKV1OByB0HFKUuqGPSqe9SzPOjFUCp3O_Cfw90PuS-omgIgpAvtRalgav7a8X0');
-                      "
-                    ></div>
-                  </div>
-                  <div class="flex-1">
-                    <h3
-                      class="font-bold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Student Leadership Conference
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      November 12, 2024
-                    </p>
-                  </div>
-                  <button
-                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    Register
-                  </button>
-                </div>
-                <div
-                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
-                >
-                  <div class="w-full flex-shrink-0 sm:w-48">
-                    <div
-                      class="aspect-video w-full rounded bg-cover bg-center"
-                      style="
-                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2xSwnU1U_2ybiEE8_hW4asTWAt1FioZq_5U2KgoXJsboJBHknzodXSGIG9pJiD3Pde5rxuvMBOOz8_ivM7cl1OxSC_-ay8IvpxshqPBMdSmY6VXn4H7xdWj3ky6FQcF_yaIU3xNo3Stq33DwfDt7viMi2EdnGnA1dkQ0NLydqTwrQliYNDZP2qlhWzx9Fd5Xj5qBJpq6lGmuziJXibvByD_i58sZbd5aOd-My2Imqt49AOyKCJ7bhg8Yx0yOZKKaoZFWENLNsH8M');
-                      "
-                    ></div>
-                  </div>
-                  <div class="flex-1">
-                    <h3
-                      class="font-bold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Alumni Networking Mixer
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      December 5, 2024
-                    </p>
-                  </div>
-                  <button
-                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    Register
-                  </button>
-                </div>
+                <!-- All events will be dynamically inserted here -->
               </div>
             </section>
             <section>
@@ -321,60 +153,7 @@
                 Recommended Events
               </h2>
               <div id="recommended-events-container" class="space-y-4">
-                <div
-                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
-                >
-                  <div class="w-full flex-shrink-0 sm:w-48">
-                    <div
-                      class="aspect-video w-full rounded bg-cover bg-center"
-                      style="
-                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAdOfGRER5Nf2SVNFX8xAGQzo-llNi6R-JZd5sqCPc8o23HlaJB7U6_7fkjM8JuvST2EiqWxnJIs4eJyr0DjTI6fM8cT2eM7W9Uk6IeNLZv00_7pwWtUUtCsVfLoDpLY2kZBdnIxCO1mIjCj7mXlRbzoCNDv02sdNX7kVxbQhlE1ZjI5-yAJdAxCOkJCAmMYmP1_BzS-9vR4Tyu0sdjCEAEJlVK9UTBB288Q7pSU5gTGxn36OCtqZTSFPHnsEmOs08ggzIEqv5_zs');
-                      "
-                    ></div>
-                  </div>
-                  <div class="flex-1">
-                    <h3
-                      class="font-bold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Tech Talk: Future of AI
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      November 20, 2024
-                    </p>
-                  </div>
-                  <button
-                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    Register
-                  </button>
-                </div>
-                <div
-                  class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center"
-                >
-                  <div class="w-full flex-shrink-0 sm:w-48">
-                    <div
-                      class="aspect-video w-full rounded bg-cover bg-center"
-                      style="
-                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjHA0fx1j9Dk41ciNJIuUQEZXgsOswd2mHzskq5beYdhgsr3feFSAicxt_LfoqT_NNIOsIIvLysZBzWafkq5DOBZOoJsF9qFc-y2y5SM3zxIbAMmZZedogXEPGY0qj-IHdrrnGJ0pcn1Qv_cdha_tJmc2TqLQEs7WirPTCqO_Hz7ciE6Wias90eNgMzl9tB0E6p9dPrKKR1pnNg7cC4538PuJn8sLlCnXXYC0GnbNrzf2rbLpoBHRYHmYTdBIHtSRFc820FVSKzGg');
-                      "
-                    ></div>
-                  </div>
-                  <div class="flex-1">
-                    <h3
-                      class="font-bold text-foreground-light dark:text-foreground-dark"
-                    >
-                      Music Festival
-                    </h3>
-                    <p class="text-sm text-subtle-light dark:text-subtle-dark">
-                      December 15, 2024
-                    </p>
-                  </div>
-                  <button
-                    class="ml-auto h-10 rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90"
-                  >
-                    Register
-                  </button>
-                </div>
+                <!-- Recommended events will be dynamically inserted here -->
               </div>
             </section>
           </div>
@@ -456,7 +235,14 @@
     const userAvatar = document.getElementById('user-avatar');
     const myEventsContainer = document.getElementById('my-events-container');
     const allEventsContainer = document.getElementById('all-events-container');
+    const recommendedEventsContainer = document.getElementById('recommended-events-container');
+    const searchInput = document.getElementById('search-input');
+    const categoryFilter = document.getElementById('category-filter');
     
+    // --- State Variables ---
+    let allEvents = [];
+    let registeredEventIds = new Set();
+
     // --- Helper Functions ---
     function getDirectGoogleDriveLink(url) {
       if (url && url.includes('drive.google.com')) {
@@ -511,6 +297,43 @@
         `;
     }
 
+    // --- Rendering Functions ---
+    function renderAllEvents(eventsToRender) {
+        allEventsContainer.innerHTML = ''; // Clear current events
+        if (eventsToRender.length > 0) {
+            eventsToRender.forEach(event => {
+                const isRegistered = registeredEventIds.has(event.id);
+                allEventsContainer.innerHTML += createAllEventCard(event, isRegistered);
+            });
+        } else {
+            allEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark">No events match your criteria.</p>';
+        }
+    }
+
+    // --- Filtering and Searching ---
+    function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+
+        const filteredEvents = allEvents.filter(event => {
+            const matchesSearch = event.title.toLowerCase().includes(searchTerm) || 
+                                  (event.description && event.description.toLowerCase().includes(searchTerm));
+            
+            const matchesCategory = selectedCategory === 'all' || event.category === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+        });
+
+        renderAllEvents(filteredEvents);
+    }
+
+    function populateCategoryFilter(events) {
+        const categories = [...new Set(events.map(event => event.category).filter(Boolean))];
+        categories.forEach(category => {
+            categoryFilter.innerHTML += `<option value="${category}">${category}</option>`;
+        });
+    }
+
     // --- Data Loading Functions ---
     async function loadDashboardData(user) {
         // 1. Update User Info
@@ -526,8 +349,8 @@
                 getDocs(query(collection(db, 'registrations'), where('userId', '==', user.uid)))
             ]);
 
-            const allEvents = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            const registeredEventIds = new Set(registrationsSnapshot.docs.map(doc => doc.data().eventId));
+            allEvents = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            registeredEventIds = new Set(registrationsSnapshot.docs.map(doc => doc.data().eventId));
 
             // 3. Populate "My Events"
             myEventsContainer.innerHTML = ''; // Clear placeholders
@@ -542,15 +365,16 @@
             }
 
             // 4. Populate "All Events"
-            allEventsContainer.innerHTML = ''; // Clear placeholders
-            if (allEvents.length > 0) {
-                allEvents.forEach(event => {
-                    const isRegistered = registeredEventIds.has(event.id);
-                    allEventsContainer.innerHTML += createAllEventCard(event, isRegistered);
-                });
-            } else {
-                allEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark">No events found.</p>';
-            }
+            renderAllEvents(allEvents);
+
+            // 5. Populate "Recommended Events" (for now, just a subset of all events)
+            recommendedEventsContainer.innerHTML = ''; // Clear placeholders
+            const recommendedEvents = allEvents.slice(0, 2); // Example: show first two
+            recommendedEvents.forEach(event => {
+                recommendedEventsContainer.innerHTML += createAllEventCard(event, registeredEventIds.has(event.id));
+            });
+
+            populateCategoryFilter(allEvents);
 
         } catch (error) {
             console.error("Error loading dashboard data:", error);
@@ -582,6 +406,9 @@
         }
       });
     }
+
+    searchInput.addEventListener('input', applyFilters);
+    categoryFilter.addEventListener('change', applyFilters);
   });
 </script>
 </html>

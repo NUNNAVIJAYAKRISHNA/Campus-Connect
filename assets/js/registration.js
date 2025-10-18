@@ -62,7 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 3. Redirect to a welcome/dashboard page
         alert("Registration successful! Welcome to Campus Connect.");
-        window.location.href = "/user_dashboard.html"; // or login page
+        
+        if (role === 'admin') {
+          window.location.href = "admin_dashboard.html";
+        } else {
+          window.location.href = "user_dashboard.html";
+        }
       } catch (error) {
         console.error("Registration Error:", error);
         errorDiv.textContent = error.message;

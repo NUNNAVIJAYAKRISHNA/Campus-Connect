@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin - Participants</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              display: ["Manrope"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200"
+  >
+    <div class="flex min-h-screen">
+      <aside
+        class="w-64 bg-background-light dark:bg-background-dark border-r border-gray-200 dark:border-gray-700 flex-col hidden md:flex"
+      >
+        <div class="p-6">
+          <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+            Event Admin
+          </h1>
+          <p class="text-sm text-gray-500 dark:text-gray-400">
+            Platform Overview
+          </p>
+        </div>
+        <div class="px-6 py-4 border-t border-gray-100 dark:border-gray-800">
+          <div class="flex items-center gap-3">
+            <div id="admin-avatar" class="w-12 h-12 rounded-full bg-gray-200 bg-center bg-cover"></div>
+            <div>
+              <div id="admin-name" class="font-semibold text-gray-900 dark:text-white">Admin</div>
+              <div id="admin-email" class="text-sm text-gray-500 dark:text-gray-400">admin@example.com</div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <button id="admin-logout" class="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Logout</button>
+          </div>
+        </div>
+        <nav class="flex-1 px-4 py-2 space-y-2">
+          <a
+            class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="admin_dashboard.html"
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="add_event_admin.html"
+          >
+            <span class="material-symbols-outlined">event</span>
+            <span>Events</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary/10 dark:bg-primary/20 text-primary"
+            href="admin_participants.html"
+          >
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">group</span>
+            <span class="font-bold">Participants</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+            href="admin_settings.html"
+          >
+            <span class="material-symbols-outlined">settings</span>
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+      <main class="flex-1 p-6 sm:p-8">
+        <div class="max-w-7xl mx-auto">
+          <header class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+              Event Participants
+            </h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">
+              Select an event to view its registered participants.
+            </p>
+          </header>
+
+          <div id="content-container" class="bg-white dark:bg-gray-900/50 rounded-xl shadow-sm">
+            <p class="p-6 text-gray-500 dark:text-gray-400">Loading...</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="module">
+      import { auth, db } from './assets/js/firebaseOptions.js';
+      import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+      import { doc, getDoc, collection, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+
+      // --- UI Elements ---
+      const adminAvatar = document.getElementById('admin-avatar');
+      const adminNameEl = document.getElementById('admin-name');
+      const adminEmailEl = document.getElementById('admin-email');
+      const logoutBtn = document.getElementById('admin-logout');
+      const contentContainer = document.getElementById('content-container');
+
+      // --- State ---
+      let currentAdminUid = null;
+
+      // --- Admin UI & Auth ---
+      function setAdminUI(data) {
+        if (!data) return;
+        const name = data.fullName || data.name || data.displayName || 'Admin';
+        adminNameEl.textContent = name;
+        adminEmailEl.textContent = data.email || '';
+        if (data.photoURL) adminAvatar.style.backgroundImage = `url('${data.photoURL}')`;
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          window.location.href = 'login.html';
+          return;
+        }
+        try {
+          const userDocRef = doc(db, 'users', user.uid);
+          const snap = await getDoc(userDocRef);
+          if (snap.exists() && snap.data().role === 'admin') {
+            currentAdminUid = user.uid;
+            sessionStorage.setItem('user', JSON.stringify({ ...snap.data(), uid: user.uid }));
+            setAdminUI(snap.data());
+            loadAdminEvents();
+          } else {
+             window.location.href = 'user_dashboard.html';
+          }
+        } catch (err) {
+          console.warn('Error fetching admin profile', err);
+          window.location.href = 'login.html';
+        }
+      });
+
+      logoutBtn?.addEventListener('click', async () => {
+        await signOut(auth);
+        sessionStorage.removeItem('user');
+        window.location.href = 'login.html';
+      });
+
+      // --- Data Loading & Rendering ---
+
+      // 1. Load events created by the current admin
+      async function loadAdminEvents() {
+        contentContainer.innerHTML = '<p class="p-6 text-gray-500 dark:text-gray-400">Loading your events...</p>';
+        try {
+          if (!currentAdminUid) return;
+          // Remove orderBy from the query to avoid needing a composite index
+          const q = query(collection(db, "events"), where("creatorUid", "==", currentAdminUid));
+          const eventsSnap = await getDocs(q);
+
+          if (eventsSnap.empty) {
+            contentContainer.innerHTML = '<p class="p-6 text-gray-500 dark:text-gray-400">You have not created any events yet.</p>';
+            return;
+          }
+          
+          // Sort the documents on the client-side
+          const eventDocs = eventsSnap.docs.sort((a, b) => {
+            const timeA = a.data().createdAt?.toMillis() || 0;
+            const timeB = b.data().createdAt?.toMillis() || 0;
+            return timeB - timeA; // Sort descending (newest first)
+          });
+
+          let eventsHtml = '<div class="divide-y divide-gray-200 dark:divide-gray-700">';
+          eventDocs.forEach(doc => {
+            const event = doc.data();
+            eventsHtml += `
+              <div class="p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 cursor-pointer event-item" data-event-id="${doc.id}" data-event-name="${event.title}">
+                <p class="font-semibold text-gray-900 dark:text-white">${event.title}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">${event.date} at ${event.time}</p>
+              </div>
+            `;
+          });
+          eventsHtml += '</div>';
+          contentContainer.innerHTML = eventsHtml;
+
+        } catch (error) {
+          console.error("Error loading admin events:", error);
+          contentContainer.innerHTML = '<p class="p-6 text-red-500">Could not load your events.</p>';
+        }
+      }
+
+      // 2. Load participants for a specific event
+      async function loadParticipantsForEvent(eventId, eventName) {
+        contentContainer.innerHTML = `
+          <div class="p-6">
+            <button id="back-to-events" class="mb-4 flex items-center gap-2 text-sm font-medium text-primary hover:underline">
+              <span class="material-symbols-outlined">arrow_back</span>
+              Back to Events
+            </button>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Participants for: ${eventName}</h3>
+            <div id="participants-table-container" class="mt-4">
+              <p class="text-gray-500 dark:text-gray-400">Loading participants...</p>
+            </div>
+          </div>
+        `;
+        
+        document.getElementById('back-to-events').addEventListener('click', loadAdminEvents);
+
+        try {
+          // Query without ordering to avoid needing a composite index
+          const q = query(collection(db, "registrations"), where("eventId", "==", eventId));
+          const registrationsSnap = await getDocs(q);
+
+          const tableContainer = document.getElementById('participants-table-container');
+          if (registrationsSnap.empty) {
+            tableContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">No participants have registered for this event yet.</p>';
+            return;
+          }
+
+          // Sort the results on the client-side
+          const registrationDocs = registrationsSnap.docs.sort((a, b) => {
+            const timeA = a.data().registeredAt?.toMillis() || 0;
+            const timeB = b.data().registeredAt?.toMillis() || 0;
+            return timeB - timeA; // Sort descending (newest first)
+          });
+
+          let tableHtml = `<div class="overflow-x-auto"><table class="w-full text-left">
+            <thead class="border-b border-gray-200 dark:border-gray-700">
+              <tr>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Name</th>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Student ID</th>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Email</th>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Registered On</th>
+              </tr>
+            </thead><tbody>`;
+
+          registrationDocs.forEach(doc => {
+            const reg = doc.data();
+            const regDate = reg.registeredAt?.toDate().toLocaleString() || 'N/A';
+            tableHtml += `<tr class="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                <td class="px-6 py-4 text-gray-900 dark:text-white">${reg.username || 'N/A'}</td>
+                <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.studentId || 'N/A'}</td>
+                <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.userEmail || 'N/A'}</td>
+                <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${regDate}</td>
+              </tr>`;
+          });
+
+          tableHtml += `</tbody></table></div>`;
+          tableContainer.innerHTML = tableHtml;
+
+        } catch (error) {
+          console.error("Error loading participants:", error);
+          document.getElementById('participants-table-container').innerHTML = '<p class="text-red-500">Could not load participant data.</p>';
+        }
+      }
+
+      // --- Event Delegation ---
+      contentContainer.addEventListener('click', (e) => {
+        const eventItem = e.target.closest('.event-item');
+        if (eventItem) {
+          const eventId = eventItem.dataset.eventId;
+          const eventName = eventItem.dataset.eventName;
+          loadParticipantsForEvent(eventId, eventName);
+        }
+      });
+    </script>
+  </body>
+</html>
