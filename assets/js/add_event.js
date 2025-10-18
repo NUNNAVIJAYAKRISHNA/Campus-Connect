@@ -22,12 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const category = document.getElementById("category").value;
       const date = document.getElementById("date").value;
       const time = document.getElementById("time").value;
-      const venue = document.getElementById("venue").value;
+      const location = document.getElementById("location").value;
+      const organizer = document.getElementById("organizer").value;
       const description = document.getElementById("description").value;
       const imageUrl = document.getElementById("image-url").value;
 
       // Basic validation
-      if (!eventTitle || !date || !time || !venue) {
+      if (!eventTitle || !date || !time || !location || !organizer) {
         statusMessage.innerHTML = `<p class="text-red-500">Please fill out all required fields.</p>`;
         return;
       }
@@ -85,7 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
           category: category,
           date: date,
           time: time,
-          venue: venue,
+          location: location,
+          organizer: organizer,
           description: description,
           imageUrl: imageUrl,
           createdAt: serverTimestamp(),

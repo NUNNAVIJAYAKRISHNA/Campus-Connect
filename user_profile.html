@@ -76,6 +76,9 @@
               >
             </nav>
             <div class="flex items-center gap-4">
+              <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary">
+                <span class="material-symbols-outlined">logout</span>
+              </button>
               <div
                 class="w-10 h-10 rounded-full bg-cover bg-center"
                 style="
@@ -105,10 +108,10 @@
             <h2
               class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
-              naga laxmi
+             james
             </h2>
             <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
-              nagalaxmi@email.com
+              james@email.com
             </p>
           </div>
           <div class="space-y-4">
@@ -118,15 +121,36 @@
               <span class="material-symbols-outlined">edit</span>
               <span>Edit Profile</span>
             </button>
-            <button
-              class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors"
-            >
-              <span class="material-symbols-outlined">logout</span>
-              <span>Logout</span>
-            </button>
           </div>
         </div>
       </main>
     </div>
+    <script type="module">
+      import { auth } from './assets/js/firebaseOptions.js';
+      import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+  
+      const logoutBtn = document.getElementById('logout-btn');
+  
+      // Auth guard
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          window.location.href = 'login.html';
+        }
+      });
+  
+      // Logout
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+          try {
+            await signOut(auth);
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+          } catch (err) {
+            console.error('Sign out error', err);
+            alert('Logout failed. Please try again.');
+          }
+        });
+      }
+    </script>
   </body>
 </html>
