@@ -96,15 +96,64 @@
             <h1 class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl">Circulars</h1>
             <p class="mt-2 text-subtle-light dark:text-subtle-dark">Latest announcements and circulars.</p>
           </div>
-          <div class="text-center py-16 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg">
-            <p class="text-subtle-light dark:text-subtle-dark">Circulars content will be displayed here.</p>
+          <div id="circulars-container" class="space-y-6">
+            <p class="text-subtle-light dark:text-subtle-dark">Loading circulars...</p>
           </div>
         </div>
       </main>
     </div>
     <script type="module">
-      import { auth } from './assets/js/firebaseOptions.js';
+      import { auth, db } from './assets/js/firebaseOptions.js';
       import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+      import { collection, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+
+      const circularsContainer = document.getElementById('circulars-container');
+
+      function createCircularCard(circular) {
+        const date = circular.createdAt?.toDate().toLocaleDateString() || 'N/A';
+        const attachmentLink = circular.attachmentUrl 
+          ? `<a href="${circular.attachmentUrl}" download class="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 mt-4">
+               <span class="material-symbols-outlined">download</span>
+               <span>Download Attachment</span>
+             </a>`
+          : '';
+
+        return `
+          <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+            <div class="flex justify-between items-start">
+              <h3 class="text-xl font-bold text-foreground-light dark:text-foreground-dark">${circular.title}</h3>
+              <p class="text-sm text-subtle-light dark:text-subtle-dark flex-shrink-0 ml-4">${date}</p>
+            </div>
+            <p class="mt-2 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">${circular.content}</p>
+            ${attachmentLink}
+          </div>
+        `;
+      }
+
+      async function loadCirculars() {
+        try {
+          const q = query(collection(db, "circulars"), orderBy("createdAt", "desc"));
+          const querySnapshot = await getDocs(q);
+
+          if (querySnapshot.empty) {
+            circularsContainer.innerHTML = `
+              <div class="text-center py-16 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg">
+                <p class="text-subtle-light dark:text-subtle-dark">No circulars have been posted yet.</p>
+              </div>
+            `;
+            return;
+          }
+
+          circularsContainer.innerHTML = ''; // Clear loading message
+          querySnapshot.forEach((doc) => {
+            circularsContainer.innerHTML += createCircularCard(doc.data());
+          });
+
+        } catch (error) {
+          console.error("Error loading circulars:", error);
+          circularsContainer.innerHTML = '<p class="text-red-500">Could not load circulars at this time.</p>';
+        }
+      }
 
       onAuthStateChanged(auth, (user) => {
         if (!user) {
@@ -113,6 +162,7 @@
             if (user.photoURL) {
                 document.getElementById('user-avatar').style.backgroundImage = `url('${user.photoURL}')`;
             }
+            loadCirculars();
         }
       });
 
