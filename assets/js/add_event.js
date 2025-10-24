@@ -7,6 +7,7 @@ import {
   doc,
   getDoc,
 } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
+import { uploadImageToImgBB } from "./imageUploader.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const locationInput = document.getElementById("location");
   const organizerInput = document.getElementById("organizer");
   const descriptionInput = document.getElementById("description");
-  const imageUrlInput = document.getElementById("image-url");
+  const imageUrlInput = document.getElementById("image-input"); // Changed ID
+  const imageFileInput = document.getElementById("image-file-input");
+  const brochureUrlInput = document.getElementById("brochure-url");
   const submitButton = document.querySelector('button[type="submit"]');
 
   // --- Edit Mode Logic ---
@@ -49,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
           organizerInput.value = eventData.organizer || "";
           descriptionInput.value = eventData.description || "";
           imageUrlInput.value = eventData.imageUrl || "";
+          brochureUrlInput.value = eventData.brochureUrl || "";
         } else {
           console.error("No such event found!");
           alert("Event not found. Redirecting to dashboard.");
@@ -78,8 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const time = timeInput.value;
       const location = locationInput.value;
       const organizer = organizerInput.value;
-      const description = descriptionInput.value;
-      const imageUrl = imageUrlInput.value;
+      const description = descriptionInput.value; 
+      const imageUrl = imageUrlInput.value; // The URL from the text box
+      const imageFile = imageFileInput.files[0]; // The file from the file input
+      const brochureUrl = brochureUrlInput.value;
 
       // Basic validation
       if (!eventTitle || !date || !time || !location || !organizer) {
@@ -87,20 +93,39 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const eventData = {
-        title: eventTitle,
-        category: category,
-        date: date,
-        time: time,
-        location: location,
-        organizer: organizer,
-        description: description,
-        imageUrl: imageUrl,
-      };
-
       try {
         // Show a loading message
-        statusMessage.innerHTML = `<p class="text-blue-500">${eventId ? "Updating" : "Saving"} event...</p>`;
+        statusMessage.innerHTML = `<p class="text-blue-500">${eventId ? "Updating" : "Saving"} event... This may take a moment if an image is being uploaded.</p>`;
+        submitButton.disabled = true;
+
+        // Determine the image source: prioritize the uploaded file, then the URL field.
+        const imageSource = imageFile || imageUrl;
+        // In edit mode, we start with the original URL from the input.
+        // If creating, we start with null.
+        let finalImageUrl = eventId ? imageUrlInput.value : null; 
+
+        if (imageSource) {
+          try {
+            finalImageUrl = await uploadImageToImgBB(imageSource);
+          } catch (uploadError) {
+            console.error("Image upload failed:", uploadError);
+            statusMessage.innerHTML = `<p class="text-red-500">Error processing image: ${uploadError.message}. Please check the file/link or try another.</p>`;
+            submitButton.disabled = false;
+            return;
+          }
+        }
+
+        const eventData = {
+          title: eventTitle,
+          category: category,
+          date: date,
+          time: time,
+          location: location,
+          organizer: organizer,
+          description: description,
+          imageUrl: finalImageUrl, // Use the processed URL
+          brochureUrl: brochureUrl,
+        };
 
         // Prepare creator metadata: prefer cached session user, otherwise try to read Firestore user doc
         let creatorUid = null;
@@ -172,11 +197,14 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("Document written with ID: ", docRef.id);
           statusMessage.innerHTML = `<p class="text-green-500">Event saved successfully!</p>`;
           eventForm.reset();
+          imageFileInput.value = ''; // Also reset the file input
         }
 
       } catch (error) {
         console.error("Error adding document: ", error);
         statusMessage.innerHTML = `<p class="text-red-500">Error saving event: ${error.message}</p>`;
+      } finally {
+        submitButton.disabled = false;
       }
     });
   }
@@ -186,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "admin_dashboard.html"; // Go back to dashboard if editing
     } else {
       eventForm.reset(); // Just clear the form if creating
+      imageFileInput.value = '';
     }
   });
 });

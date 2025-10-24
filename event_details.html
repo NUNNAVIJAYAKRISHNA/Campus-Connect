@@ -181,13 +181,15 @@
                   </li>
                 </ul>
               </div>
-              <div class="sticky top-24">
+              <div class="sticky top-24 space-y-4">
                 <button
                   type="button" id="register-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <span class="material-symbols-outlined">how_to_reg</span>
                   <span>Register for this Event</span>
                 </button>
+                <!-- Brochure button will be inserted here by JS -->
+                <div id="brochure-button-container"></div>
               </div>
             </div>
           </div>
@@ -223,19 +225,12 @@
      const eventLocation = document.querySelector('li:nth-child(2) p');
      const eventOrganizer = document.querySelector('li:nth-child(3) p');
      const registerButton = document.getElementById('register-btn'); // Use ID selector
+     const brochureContainer = document.getElementById('brochure-button-container');
      const userAvatar = document.getElementById('user-avatar');
      const logoutBtn = document.getElementById('logout-btn');
  
      // --- State Variable ---
      let currentEventData = null;
- 
-     function getDirectGoogleDriveLink(url) {
-       if (url && url.includes('drive.google.com')) {
-         const fileId = url.split('/d/')[1]?.split('/')[0];
-         return fileId ? `https://drive.google.com/uc?export=view&id=${fileId}` : url;
-       }
-       return url;
-     }
  
      async function loadEventDetails() {
        try {
@@ -249,8 +244,7 @@
          currentEventData = eventDoc.data(); // Store event data
  
          if (currentEventData.imageUrl) {
-           const directImageUrl = getDirectGoogleDriveLink(currentEventData.imageUrl);
-           eventImage.style.backgroundImage = `url('${directImageUrl}')`;
+           eventImage.style.backgroundImage = `url('${currentEventData.imageUrl}')`;
          }
          eventTitle.textContent = currentEventData.title || 'Untitled Event';
          eventDescription.textContent = currentEventData.description || 'No description available';
@@ -266,6 +260,20 @@
  
          eventLocation.textContent = currentEventData.location || 'Location not specified';
          eventOrganizer.textContent = currentEventData.organizer || 'Organizer not specified';
+
+         // Add brochure button if URL exists
+         if (currentEventData.brochureUrl) {
+            brochureContainer.innerHTML = `
+              <a href="${currentEventData.brochureUrl}" target="_blank" rel="noopener noreferrer" download class="w-full bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-900 text-primary font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
+                <span class="material-symbols-outlined">download</span>
+                <span>Download Brochure</span>
+              </a>
+            `;
+         } else {
+            brochureContainer.innerHTML = ''; // Clear it if no brochure
+         }
+
+
  
          // Check registration status
          const user = auth.currentUser;

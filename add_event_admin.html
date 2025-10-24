@@ -220,13 +220,28 @@
               <div class="md:col-span-2">
                 <label
                   class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                  for="image-url"
-                  >Image URL</label
+                  for="image-input"
+                  >Event Image</label
+                >
+                <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Upload a file or paste an image URL (e.g., from Google Drive).</p>
+                <input
+                  class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary"
+                  id="image-input"
+                  placeholder="https://example.com/image.jpg"
+                  type="text"
+                />
+                <input type="file" id="image-file-input" class="mt-2 w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20" accept="image/*" />
+              </div>
+              <div class="md:col-span-2">
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  for="brochure-url"
+                  >Brochure PDF URL (Optional)</label
                 >
                 <input
                   class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary"
-                  id="image-url"
-                  placeholder="https://example.com/image.jpg"
+                  id="brochure-url"
+                  placeholder="https://example.com/brochure.pdf"
                   type="url"
                 />
               </div>
