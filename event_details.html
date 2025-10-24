@@ -38,6 +38,9 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
       .material-symbols-outlined {
         font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
@@ -197,6 +200,11 @@
    import { doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
  
    window.addEventListener('DOMContentLoaded', () => {
+     // Initialize EmailJS with your Public Key
+     emailjs.init({
+       publicKey: 'oRiRCnnmYe9qZjY8t',
+     });
+
      const urlParams = new URLSearchParams(window.location.search);
      const eventId = urlParams.get('id');
  
@@ -317,6 +325,17 @@
              registeredAt: serverTimestamp()
            });
  
+           // --- Send EmailJS Confirmation ---
+           
+           emailjs.send("service_llklfxx","template_ey048w8",{
+            event_name: currentEventData?.title || 'Untitled Event',
+            user_name: username,
+            email: user.email,
+            });
+          
+ 
+           // Show a single success message to the user after registration is complete.
+           alert('Registration successful! A confirmation email is on its way.');
            updateButtonToRegistered(true);
  
          } catch (error) {
