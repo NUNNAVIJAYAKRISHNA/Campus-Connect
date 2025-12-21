@@ -245,7 +245,7 @@
           let tableHtml = `<div class="overflow-x-auto"><table class="w-full text-left">
             <thead class="border-b border-gray-200 dark:border-gray-700">
               <tr>
-                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Name</th>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Name / Team Name</th>
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Student ID</th>
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Email</th>
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Registered On</th>
@@ -255,8 +255,21 @@
           registrationDocs.forEach(doc => {
             const reg = doc.data();
             const regDate = reg.registeredAt?.toDate().toLocaleString() || 'N/A';
+            
+            let nameCellHtml = '';
+            if (reg.teamMembers && reg.teamMembers.length > 0) {
+              nameCellHtml += `<div class="font-bold">${reg.teamName || 'Team'}</div>`;
+              nameCellHtml += '<ul class="mt-2 text-xs text-gray-500 dark:text-gray-400 space-y-1">';
+              reg.teamMembers.forEach(member => {
+                nameCellHtml += `<li>${member.name} (${member.email})</li>`;
+              });
+              nameCellHtml += '</ul>';
+            } else {
+              nameCellHtml = reg.username || 'N/A';
+            }
+
             tableHtml += `<tr class="border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-                <td class="px-6 py-4 text-gray-900 dark:text-white">${reg.username || 'N/A'}</td>
+                <td class="px-6 py-4 text-gray-900 dark:text-white">${nameCellHtml}</td>
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.studentId || 'N/A'}</td>
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.userEmail || 'N/A'}</td>
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${regDate}</td>

@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
   const registrationDeadlineInput = document.getElementById("registration-deadline");
+  const registrationTypeInput = document.getElementById("registration-type");
+  const minTeamSizeInput = document.getElementById("min-team-size");
+  const maxTeamSizeInput = document.getElementById("max-team-size");
   const locationInput = document.getElementById("location");
   const organizerInput = document.getElementById("organizer");
   const descriptionInput = document.getElementById("description");
@@ -55,6 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
           descriptionInput.value = eventData.description || "";
           imageUrlInput.value = eventData.imageUrl || "";
           brochureUrlInput.value = eventData.brochureUrl || "";
+          registrationTypeInput.value = eventData.registrationType || "individual";
+          if (eventData.registrationType === "team") {
+            document.getElementById("team-size-fields").classList.remove("hidden");
+            minTeamSizeInput.value = eventData.minTeamSize || "";
+            maxTeamSizeInput.value = eventData.maxTeamSize || "";
+          }
         } else {
           console.error("No such event found!");
           alert("Event not found. Redirecting to dashboard.");
@@ -83,6 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const date = dateInput.value;
       const time = timeInput.value;
       const registrationDeadline = registrationDeadlineInput.value;
+      const registrationType = registrationTypeInput.value;
+      const minTeamSize = minTeamSizeInput.value;
+      const maxTeamSize = maxTeamSizeInput.value;
       const location = locationInput.value;
       const organizer = organizerInput.value;
       const description = descriptionInput.value; 
@@ -124,6 +136,9 @@ document.addEventListener("DOMContentLoaded", () => {
           date: date,
           time: time,
           registrationDeadline: registrationDeadline,
+          registrationType: registrationType,
+          minTeamSize: minTeamSize,
+          maxTeamSize: maxTeamSize,
           location: location,
           organizer: organizer,
           description: description,

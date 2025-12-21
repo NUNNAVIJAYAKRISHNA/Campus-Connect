@@ -182,6 +182,7 @@
                 </ul>
               </div>
               <div class="sticky top-24 space-y-4">
+                <div id="team-registration-fields" class="space-y-4 mb-4"></div>
                 <button
                   type="button" id="register-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
@@ -226,6 +227,7 @@
      const eventOrganizer = document.querySelector('li:nth-child(3) p');
      const registerButton = document.getElementById('register-btn'); // Use ID selector
      const brochureContainer = document.getElementById('brochure-button-container');
+     const teamRegistrationFields = document.getElementById('team-registration-fields');
      const userAvatar = document.getElementById('user-avatar');
      const logoutBtn = document.getElementById('logout-btn');
  
@@ -273,6 +275,10 @@
             brochureContainer.innerHTML = ''; // Clear it if no brochure
          }
 
+        if (currentEventData.registrationType === 'team') {
+          setupTeamRegistration(currentEventData);
+        }
+
 
  
          // Check registration status
@@ -300,6 +306,67 @@
          console.error('Error loading event details:', error);
          alert('Error loading event details. Please try again later.');
        }
+     }
+
+     function setupTeamRegistration(eventData) {
+        teamRegistrationFields.innerHTML = `
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="team-name">Team Name</label>
+                <input type="text" id="team-name" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter your team's name">
+            </div>
+        `;
+
+        const min = parseInt(eventData.minTeamSize, 10) || 1;
+        const max = parseInt(eventData.maxTeamSize, 10) || min;
+
+        for (let i = 0; i < min; i++) {
+            addTeamMemberField();
+        }
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.className = 'flex gap-2 mt-2';
+        buttonsContainer.innerHTML = `
+            <button type="button" id="add-member-btn" class="text-sm text-primary hover:underline">+ Add Member</button>
+            <button type="button" id="remove-member-btn" class="text-sm text-red-500 hover:underline">- Remove Member</button>
+        `;
+        teamRegistrationFields.appendChild(buttonsContainer);
+
+        document.getElementById('add-member-btn').addEventListener('click', () => {
+            const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2').length;
+            if (currentMembers < max) {
+                addTeamMemberField();
+            }
+        });
+
+        document.getElementById('remove-member-btn').addEventListener('click', () => {
+            const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2');
+            if (currentMembers.length > min) {
+                currentMembers[currentMembers.length - 1].remove();
+            }
+        });
+     }
+
+     function addTeamMemberField() {
+        const memberCount = teamRegistrationFields.querySelectorAll('input[name="team-member-name"]').length;
+        const newField = document.createElement('div');
+        newField.className = 'grid grid-cols-2 gap-2';
+        newField.innerHTML = `
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="team-member-name-${memberCount + 1}">Member ${memberCount + 1} Name</label>
+                <input type="text" id="team-member-name-${memberCount + 1}" name="team-member-name" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" placeholder="Name">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="team-member-email-${memberCount + 1}">Email</label>
+                <input type="email" id="team-member-email-${memberCount + 1}" name="team-member-email" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" placeholder="Email">
+            </div>
+        `;
+        // Insert before the buttons
+        const buttonsContainer = teamRegistrationFields.querySelector('.flex.gap-2.mt-2');
+        if (buttonsContainer) {
+            teamRegistrationFields.insertBefore(newField, buttonsContainer);
+        } else {
+            teamRegistrationFields.appendChild(newField);
+        }
      }
      
      function updateButtonToRegistered(success = false) {
@@ -335,8 +402,8 @@
            } catch (e) {
              console.warn("Could not fetch user's full name:", e);
            }
- 
-           await setDoc(doc(db, 'registrations', `${user.uid}_${eventId}`), {
+            
+           const registrationData = {
              userId: user.uid,
              username: username,
              userEmail: user.email,
@@ -344,7 +411,39 @@
              eventId: eventId,
              eventName: currentEventData?.title || 'Untitled Event', // Use stored data
              registeredAt: serverTimestamp()
-           });
+           };
+
+           if (currentEventData.registrationType === 'team') {
+                const teamName = document.getElementById('team-name').value;
+                if (!teamName) {
+                    alert('Please enter a team name.');
+                    registerButton.disabled = false;
+                    registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+                    return;
+                }
+                registrationData.teamName = teamName;
+                const memberNameInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-name"]');
+                const memberEmailInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-email"]');
+                const teamMembers = [];
+                for (let i = 0; i < memberNameInputs.length; i++) {
+                    const name = memberNameInputs[i].value.trim();
+                    const email = memberEmailInputs[i].value.trim();
+                    if (name || email) {
+                        teamMembers.push({ name, email });
+                    }
+                }
+                
+                const min = parseInt(currentEventData.minTeamSize, 10) || 1;
+                if (teamMembers.length < min) {
+                    alert(`You need at least ${min} team members.`);
+                    registerButton.disabled = false;
+                    registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+                    return;
+                }
+                registrationData.teamMembers = teamMembers;
+           }
+ 
+           await setDoc(doc(db, 'registrations', `${user.uid}_${eventId}`), registrationData);
  
            // --- Send EmailJS Confirmation ---
            
