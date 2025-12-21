@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const categoryInput = document.getElementById("category");
   const dateInput = document.getElementById("date");
   const timeInput = document.getElementById("time");
+  const registrationDeadlineInput = document.getElementById("registration-deadline");
   const locationInput = document.getElementById("location");
   const organizerInput = document.getElementById("organizer");
   const descriptionInput = document.getElementById("description");
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
           categoryInput.value = eventData.category || "";
           dateInput.value = eventData.date || "";
           timeInput.value = eventData.time || "";
+          registrationDeadlineInput.value = eventData.registrationDeadline || "";
           locationInput.value = eventData.location || "";
           organizerInput.value = eventData.organizer || "";
           descriptionInput.value = eventData.description || "";
@@ -80,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const category = categoryInput.value;
       const date = dateInput.value;
       const time = timeInput.value;
+      const registrationDeadline = registrationDeadlineInput.value;
       const location = locationInput.value;
       const organizer = organizerInput.value;
       const description = descriptionInput.value; 
@@ -120,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
           category: category,
           date: date,
           time: time,
+          registrationDeadline: registrationDeadline,
           location: location,
           organizer: organizer,
           description: description,

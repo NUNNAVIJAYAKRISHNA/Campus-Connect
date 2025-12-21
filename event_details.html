@@ -283,6 +283,19 @@
              updateButtonToRegistered();
            }
          }
+
+         // Check for registration deadline AFTER checking registration status
+        if (currentEventData.registrationDeadline) {
+            const deadline = new Date(currentEventData.registrationDeadline);
+            const now = new Date();
+
+            if (now > deadline) {
+                registerButton.disabled = true;
+                registerButton.innerHTML = `<span class="material-symbols-outlined">event_busy</span><span>Registration Closed</span>`;
+                registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
+                registerButton.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed', 'opacity-75');
+            }
+        }
        } catch (error) {
          console.error('Error loading event details:', error);
          alert('Error loading event details. Please try again later.');
