@@ -116,7 +116,7 @@
     <script type="module">
       import { auth, db } from './assets/js/firebaseOptions.js';
       import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
-      import { doc, getDoc, collection, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+      import { doc, getDoc, collection, getDocs, query, where, orderBy, updateDoc } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
       // --- UI Elements ---
       const adminAvatar = document.getElementById('admin-avatar');
@@ -211,10 +211,16 @@
       async function loadParticipantsForEvent(eventId, eventName) {
         contentContainer.innerHTML = `
           <div class="p-6">
-            <button id="back-to-events" class="mb-4 flex items-center gap-2 text-sm font-medium text-primary hover:underline">
-              <span class="material-symbols-outlined">arrow_back</span>
-              Back to Events
-            </button>
+            <div class="flex justify-between items-center mb-4">
+              <button id="back-to-events" class="flex items-center gap-2 text-sm font-medium text-primary hover:underline">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back to Events
+              </button>
+              <button id="download-excel-btn" class="hidden flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm">
+                <span class="material-symbols-outlined">table_view</span>
+                Download Excel
+              </button>
+            </div>
             <h3 class="text-xl font-bold text-gray-900 dark:text-white">Participants for: ${eventName}</h3>
             <div id="participants-table-container" class="mt-4">
               <p class="text-gray-500 dark:text-gray-400">Loading participants...</p>
@@ -223,6 +229,7 @@
         `;
         
         document.getElementById('back-to-events').addEventListener('click', loadAdminEvents);
+        const downloadBtn = document.getElementById('download-excel-btn');
 
         try {
           // Query without ordering to avoid needing a composite index
@@ -230,17 +237,24 @@
           const registrationsSnap = await getDocs(q);
 
           const tableContainer = document.getElementById('participants-table-container');
-          if (registrationsSnap.empty) {
+          
+          // Filter out removed participants and sort
+          const registrationDocs = registrationsSnap.docs
+            .filter(doc => doc.data().status !== 'removed')
+            .sort((a, b) => {
+              const timeA = a.data().registeredAt?.toMillis() || 0;
+              const timeB = b.data().registeredAt?.toMillis() || 0;
+              return timeB - timeA; // Sort descending (newest first)
+            });
+
+          if (registrationDocs.length === 0) {
             tableContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400">No participants have registered for this event yet.</p>';
             return;
           }
 
-          // Sort the results on the client-side
-          const registrationDocs = registrationsSnap.docs.sort((a, b) => {
-            const timeA = a.data().registeredAt?.toMillis() || 0;
-            const timeB = b.data().registeredAt?.toMillis() || 0;
-            return timeB - timeA; // Sort descending (newest first)
-          });
+          // Enable download button
+          downloadBtn.classList.remove('hidden');
+          downloadBtn.addEventListener('click', () => downloadParticipantsCSV(registrationDocs, eventName));
 
           let tableHtml = `<div class="overflow-x-auto"><table class="w-full text-left">
             <thead class="border-b border-gray-200 dark:border-gray-700">
@@ -251,6 +265,7 @@
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Registered On</th>
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Transaction ID</th>
                 <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Payment Proof</th>
+                <th class="px-6 py-4 font-semibold text-gray-700 dark:text-gray-300">Actions</th>
               </tr>
             </thead><tbody>`;
 
@@ -277,15 +292,78 @@
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${regDate}</td>
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.transactionId || 'N/A'}</td>
                 <td class="px-6 py-4 text-gray-500 dark:text-gray-400">${reg.transactionImage ? `<a href="${reg.transactionImage}" target="_blank" class="text-primary hover:underline">View Image</a>` : 'N/A'}</td>
+                <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                  <button class="remove-participant-btn text-red-500 hover:text-red-700 font-medium text-sm flex items-center gap-1" data-reg-id="${doc.id}">
+                    <span class="material-symbols-outlined text-lg">person_remove</span> Remove
+                  </button>
+                </td>
               </tr>`;
           });
 
           tableHtml += `</tbody></table></div>`;
           tableContainer.innerHTML = tableHtml;
 
+          // Attach event listeners for remove buttons
+          tableContainer.querySelectorAll('.remove-participant-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+              if (confirm('Are you sure you want to remove this participant?')) {
+                try {
+                  await updateDoc(doc(db, 'registrations', btn.dataset.regId), { status: 'removed' });
+                  loadParticipantsForEvent(eventId, eventName); // Reload list
+                } catch (err) {
+                  console.error("Error removing participant:", err);
+                  alert("Failed to remove participant.");
+                }
+              }
+            });
+          });
+
         } catch (error) {
           console.error("Error loading participants:", error);
           document.getElementById('participants-table-container').innerHTML = '<p class="text-red-500">Could not load participant data.</p>';
+        }
+      }
+
+      function downloadParticipantsCSV(docs, eventName) {
+        const headers = ["Name / Team Name", "Team Members", "Student ID", "Email", "Registered On", "Transaction ID", "Payment Proof URL"];
+        
+        const rows = docs.map(doc => {
+          const reg = doc.data();
+          const regDate = reg.registeredAt?.toDate().toLocaleString() || 'N/A';
+          
+          let nameField = reg.username || 'N/A';
+          let membersField = '';
+          
+          if (reg.teamMembers && reg.teamMembers.length > 0) {
+            nameField = reg.teamName || 'Team';
+            membersField = reg.teamMembers.map(m => `${m.name} (${m.email})`).join('; ');
+          }
+
+          // Helper to escape CSV fields
+          const escape = (text) => `"${(text || '').toString().replace(/"/g, '""')}"`;
+
+          return [
+            escape(nameField),
+            escape(membersField),
+            escape(reg.studentId || 'N/A'),
+            escape(reg.userEmail || 'N/A'),
+            escape(regDate),
+            escape(reg.transactionId || 'N/A'),
+            escape(reg.transactionImage || 'N/A')
+          ].join(",");
+        });
+
+        const csvContent = [headers.join(","), ...rows].join("\r\n");
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        if (link.download !== undefined) {
+          const url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", `${eventName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_participants.csv`);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
       }
 
