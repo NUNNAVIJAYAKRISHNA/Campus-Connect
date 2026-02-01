@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const registrationTypeInput = document.getElementById("registration-type");
   const minTeamSizeInput = document.getElementById("min-team-size");
   const maxTeamSizeInput = document.getElementById("max-team-size");
+  const paymentTypeInput = document.getElementById("payment-type");
+  const feeAmountInput = document.getElementById("fee-amount");
+  const upiIdInput = document.getElementById("upi-id");
   const locationInput = document.getElementById("location");
   const organizerInput = document.getElementById("organizer");
   const descriptionInput = document.getElementById("description");
@@ -64,6 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
             minTeamSizeInput.value = eventData.minTeamSize || "";
             maxTeamSizeInput.value = eventData.maxTeamSize || "";
           }
+          paymentTypeInput.value = eventData.paymentType || "free";
+          if (eventData.paymentType === "paid") {
+            document.getElementById("payment-fields").classList.remove("hidden");
+            feeAmountInput.value = eventData.feeAmount || "";
+            upiIdInput.value = eventData.upiId || "";
+          }
         } else {
           console.error("No such event found!");
           alert("Event not found. Redirecting to dashboard.");
@@ -95,6 +104,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const registrationType = registrationTypeInput.value;
       const minTeamSize = minTeamSizeInput.value;
       const maxTeamSize = maxTeamSizeInput.value;
+      const paymentType = paymentTypeInput.value;
+      const feeAmount = feeAmountInput.value;
+      const upiId = upiIdInput.value;
       const location = locationInput.value;
       const organizer = organizerInput.value;
       const description = descriptionInput.value; 
@@ -105,6 +117,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Basic validation
       if (!eventTitle || !date || !time || !location || !organizer) {
         statusMessage.innerHTML = `<p class="text-red-500">Please fill out all required fields.</p>`;
+        return;
+      }
+
+      if (paymentType === 'paid' && (!feeAmount || !upiId)) {
+        statusMessage.innerHTML = `<p class="text-red-500">Please enter fee amount and UPI ID for paid events.</p>`;
         return;
       }
 
@@ -139,6 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
           registrationType: registrationType,
           minTeamSize: minTeamSize,
           maxTeamSize: maxTeamSize,
+          paymentType: paymentType,
+          feeAmount: paymentType === 'paid' ? feeAmount : null,
+          upiId: paymentType === 'paid' ? upiId : null,
           location: location,
           organizer: organizer,
           description: description,

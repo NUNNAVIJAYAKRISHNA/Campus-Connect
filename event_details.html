@@ -179,10 +179,24 @@
                       </p>
                     </div>
                   </li>
+                  <li class="flex items-start space-x-3">
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >payments</span
+                    >
+                    <div>
+                      <h3
+                        class="font-semibold text-background-dark dark:text-background-light"
+                      >
+                        Entry Fee
+                      </h3>
+                      <p id="event-fee-display" class="text-sm text-gray-600 dark:text-gray-400">...</p>
+                    </div>
+                  </li>
                 </ul>
               </div>
               <div class="sticky top-24 space-y-4">
                 <div id="team-registration-fields" class="space-y-4 mb-4"></div>
+                <div id="payment-verification-fields" class="space-y-4 mb-4"></div>
                 <button
                   type="button" id="register-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
@@ -201,6 +215,7 @@
    import { auth, db } from './assets/js/firebaseOptions.js';
    import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
    import { doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+   import { uploadImageToImgBB } from './assets/js/imageUploader.js';
  
    window.addEventListener('DOMContentLoaded', () => {
      // Initialize EmailJS with your Public Key
@@ -225,9 +240,11 @@
      const eventTime = document.querySelector('li:nth-child(1) p:nth-child(3)');
      const eventLocation = document.querySelector('li:nth-child(2) p');
      const eventOrganizer = document.querySelector('li:nth-child(3) p');
+     const eventFeeDisplay = document.getElementById('event-fee-display');
      const registerButton = document.getElementById('register-btn'); // Use ID selector
      const brochureContainer = document.getElementById('brochure-button-container');
      const teamRegistrationFields = document.getElementById('team-registration-fields');
+     const paymentVerificationFields = document.getElementById('payment-verification-fields');
      const userAvatar = document.getElementById('user-avatar');
      const logoutBtn = document.getElementById('logout-btn');
  
@@ -262,6 +279,28 @@
  
          eventLocation.textContent = currentEventData.location || 'Location not specified';
          eventOrganizer.textContent = currentEventData.organizer || 'Organizer not specified';
+
+         if (currentEventData.paymentType === 'paid') {
+            eventFeeDisplay.innerHTML = `
+              <span class="font-bold text-green-600 dark:text-green-400">₹${currentEventData.feeAmount} Per Head</span>
+              <br>
+              <span class="text-xs">UPI: ${currentEventData.upiId}</span>
+            `;
+            
+            paymentVerificationFields.innerHTML = `
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="transaction-id">Transaction ID</label>
+                <input type="text" id="transaction-id" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" placeholder="Enter Transaction ID">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="transaction-image">Payment Screenshot</label>
+                <input type="file" id="transaction-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
+              </div>
+            `;
+         } else {
+            eventFeeDisplay.textContent = 'Free';
+            paymentVerificationFields.innerHTML = '';
+         }
 
          // Add brochure button if URL exists
          if (currentEventData.brochureUrl) {
@@ -412,6 +451,22 @@
              eventName: currentEventData?.title || 'Untitled Event', // Use stored data
              registeredAt: serverTimestamp()
            };
+
+           if (currentEventData.paymentType === 'paid') {
+              const txIdInput = document.getElementById('transaction-id');
+              const txImageInput = document.getElementById('transaction-image');
+              
+              if (!txIdInput.value || !txImageInput.files[0]) {
+                alert("Please provide Transaction ID and Payment Screenshot for paid events.");
+                registerButton.disabled = false;
+                registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+                return;
+              }
+              
+              registrationData.transactionId = txIdInput.value;
+              // Upload image
+              registrationData.transactionImage = await uploadImageToImgBB(txImageInput.files[0]);
+           }
 
            if (currentEventData.registrationType === 'team') {
                 const teamName = document.getElementById('team-name').value;

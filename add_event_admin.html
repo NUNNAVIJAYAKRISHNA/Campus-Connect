@@ -210,6 +210,23 @@
                   <option value="team">Team</option>
                 </select>
               </div>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="payment-type">Payment Type</label>
+                <select id="payment-type" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
+                  <option value="free">Free</option>
+                  <option value="paid">Paid</option>
+                </select>
+              </div>
+              <div id="payment-fields" class="hidden md:col-span-2 grid grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="fee-amount">Fee (Per Head) (₹)</label>
+                  <input type="number" id="fee-amount" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" min="0" placeholder="0">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="upi-id">UPI ID</label>
+                  <input type="text" id="upi-id" class="w-full bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary" placeholder="username@upi">
+                </div>
+              </div>
               <div id="team-size-fields" class="hidden md:col-span-2 grid grid-cols-2 gap-6">
                 <div>
                   <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="min-team-size">Minimum Team Members</label>
@@ -370,6 +387,15 @@
           teamSizeFields.classList.remove('hidden');
         } else {
           teamSizeFields.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('payment-type').addEventListener('change', function () {
+        const paymentFields = document.getElementById('payment-fields');
+        if (this.value === 'paid') {
+          paymentFields.classList.remove('hidden');
+        } else {
+          paymentFields.classList.add('hidden');
         }
       });
     </script>
