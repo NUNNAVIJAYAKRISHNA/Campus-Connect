@@ -1,0 +1,32 @@
+:root {
+  /* Professional Dark Theme (Slate Palette) */
+  --bg-main: #0f172a;
+  /* Slate 900 - Main background */
+  --bg-surface: #1e293b;
+  /* Slate 800 - Secondary background/Sidebar */
+  --bg-card: #334155;
+  /* Slate 700 - Cards/Inputs */
+
+  --text-primary: #f8fafc;
+  /* Slate 50 - Headings/Main text (High Contrast) */
+  --text-secondary: #cbd5e1;
+  /* Slate 300 - Body text */
+  --text-muted: #94a3b8;
+  /* Slate 400 - Placeholders/Meta text */
+
+  --primary: #3b82f6;
+  /* Blue 500 - Primary Action */
+  --primary-hover: #2563eb;
+  /* Blue 600 - Hover State */
+  --accent: #06b6d4;
+  /* Cyan 500 - Highlights */
+
+  --border: #475569;
+  /* Slate 600 - Borders/Dividers */
+  --success: #22c55e;
+  /* Green 500 */
+  --warning: #f59e0b;
+  /* Amber 500 */
+  --error: #ef4444;
+  /* Red 500 */
+}

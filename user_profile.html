@@ -1,295 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>User Profile</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              display: ["Manrope"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>User Profile</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/colors.css">
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+              "background-light": "var(--bg-main)",
+            "background-dark": "var(--bg-main)",
+              "foreground-light": "var(--text-primary)",
+              "foreground-dark": "var(--text-primary)",
+              "subtle-light": "var(--text-secondary)",
+              "subtle-dark": "var(--text-secondary)",
+              "border-light": "var(--border)",
+              "border-dark": "var(--border)",
+          },
+          fontFamily: {
+            display: ["Manrope"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-  </head>
-  <body class="bg-background-light dark:bg-background-dark font-display">
-    <div class="flex flex-col min-h-screen">
-      <header
-        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
-      >
-        <div class="flex items-center gap-6">
-          <a class="flex items-center gap-2" href="user_dashboard.html">
-            <span class="material-symbols-outlined text-primary text-3xl">
-              school
-            </span>
-            <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
-              Campus Connect
-            </h1>
-          </a>
-          <nav class="hidden items-center gap-6 md:flex">
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="user_dashboard.html">Home</a>
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="circular.html">Circulars</a>
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="organizations.html">Organizations</a>
-          </nav>
+      },
+    };
+  </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+  <div class="flex flex-col min-h-screen">
+    <header
+      class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-6">
+        <a class="flex items-center gap-2" href="user_dashboard.html">
+          <span class="material-symbols-outlined text-primary text-3xl">
+            school
+          </span>
+          <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
+            Campus Connect
+          </h1>
+        </a>
+        <nav class="hidden items-center gap-6 md:flex">
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="user_dashboard.html">Home</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="circular.html">Circulars</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="organizations.html">Organizations</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative hidden sm:block">
+          <span
+            class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
+          <input
+            class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+            placeholder="Search" />
         </div>
-        <div class="flex items-center gap-4">
-          <div class="relative hidden sm:block">
-            <span class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
-            <input
-              class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
-              placeholder="Search"
-            />
+        <button id="logout-btn" title="Logout"
+          class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+        <a href="user_profile.html" id="user-avatar-link">
+          <div id="header-avatar" class="size-10 rounded-full bg-cover bg-center ring-2 ring-primary"></div>
+        </a>
+        <button
+          class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </header>
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="w-full max-w-md space-y-6">
+        <!-- Display View -->
+        <div id="display-view" class="text-center space-y-6">
+          <div>
+            <div id="profile-avatar" class="mx-auto w-32 h-32 rounded-full bg-cover bg-center ring-4 ring-primary/30"
+              style="background-image: url('https://placehold.co/128x128/e2e8f0/e2e8f0');"></div>
+            <h2 id="profile-name" class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              Loading...</h2>
+            <p id="profile-email" class="mt-2 text-base text-gray-600 dark:text-gray-400">&nbsp;</p>
           </div>
-          <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
-            <span class="material-symbols-outlined">logout</span>
-          </button>
-          <a href="user_profile.html" id="user-avatar-link">
-            <div id="header-avatar" class="size-10 rounded-full bg-cover bg-center ring-2 ring-primary"></div>
-          </a>
-          <button class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
+          <div>
+            <button id="edit-profile-btn"
+              class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary/10 dark:bg-primary/20 px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
+              <span class="material-symbols-outlined">edit</span>
+              <span>Edit Profile</span>
+            </button>
+          </div>
         </div>
-      </header>
-      <main
-        class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-      >
-        <div class="w-full max-w-md space-y-6">
-          <!-- Display View -->
-          <div id="display-view" class="text-center space-y-6">
+
+        <!-- Edit View (Initially Hidden) -->
+        <div id="edit-view" class="hidden">
+          <form id="profile-form" class="space-y-6 bg-white dark:bg-gray-900/50 p-8 rounded-xl shadow-md">
+            <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">Edit Your Profile</h2>
             <div>
-              <div id="profile-avatar" class="mx-auto w-32 h-32 rounded-full bg-cover bg-center ring-4 ring-primary/30" style="background-image: url('https://placehold.co/128x128/e2e8f0/e2e8f0');"></div>
-              <h2 id="profile-name" class="mt-6 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Loading...</h2>
-              <p id="profile-email" class="mt-2 text-base text-gray-600 dark:text-gray-400">&nbsp;</p>
+              <label for="fullName-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full
+                Name</label>
+              <input type="text" id="fullName-input"
+                class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
             </div>
             <div>
-              <button id="edit-profile-btn" class="w-full flex items-center justify-center gap-2 rounded-lg bg-primary/10 dark:bg-primary/20 px-4 py-3 text-sm font-semibold text-primary hover:bg-primary/20 dark:hover:bg-primary/30 transition-colors">
-                <span class="material-symbols-outlined">edit</span>
-                <span>Edit Profile</span>
-              </button>
+              <label for="photoURL-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Photo
+                URL</label>
+              <input type="url" id="photoURL-input"
+                class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
             </div>
-          </div>
-
-          <!-- Edit View (Initially Hidden) -->
-          <div id="edit-view" class="hidden">
-            <form id="profile-form" class="space-y-6 bg-white dark:bg-gray-900/50 p-8 rounded-xl shadow-md">
-              <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">Edit Your Profile</h2>
-              <div>
-                <label for="fullName-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
-                <input type="text" id="fullName-input" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
-              </div>
-              <div>
-                <label for="photoURL-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Photo URL</label>
-                <input type="url" id="photoURL-input" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
-              </div>
-              <div>
-                <label for="email-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
-                <input type="email" id="email-input" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
-              </div>
-              <div id="student-id-wrapper" class="hidden">
-                <label for="studentId-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Student ID</label>
-                <input type="text" id="studentId-input" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
-              </div>
-              <div id="form-status" class="text-center text-sm"></div>
-              <div class="flex justify-end gap-4">
-                <button type="button" id="cancel-edit-btn" class="px-6 py-2 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-200/60 dark:bg-gray-700/60 hover:bg-gray-200 dark:hover:bg-gray-700 font-semibold">Cancel</button>
-                <button type="submit" class="px-6 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90">Save Changes</button>
-              </div>
-            </form>
-          </div>
+            <div>
+              <label for="email-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+              <input type="email" id="email-input"
+                class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+            <div id="student-id-wrapper" class="hidden">
+              <label for="studentId-input" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Student
+                ID</label>
+              <input type="text" id="studentId-input"
+                class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-primary focus:border-primary">
+            </div>
+            <div id="form-status" class="text-center text-sm"></div>
+            <div class="flex justify-end gap-4">
+              <button type="button" id="cancel-edit-btn"
+                class="px-6 py-2 rounded-lg text-gray-700 dark:text-gray-300 bg-gray-200/60 dark:bg-gray-700/60 hover:bg-gray-200 dark:hover:bg-gray-700 font-semibold">Cancel</button>
+              <button type="submit"
+                class="px-6 py-2 rounded-lg bg-primary text-white font-semibold hover:opacity-90">Save Changes</button>
+            </div>
+          </form>
         </div>
-      </main>
-    </div>
-    <script type="module">
-      import { auth, db } from './assets/js/firebaseOptions.js';
-      import { onAuthStateChanged, signOut, updateProfile, updateEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
-      import { doc, getDoc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
-  
-      const logoutBtn = document.getElementById('logout-btn');
-      
-      // View containers
-      const displayView = document.getElementById('display-view');
-      const editView = document.getElementById('edit-view');
+      </div>
+    </main>
+  </div>
+  <script type="module">
+    import { auth, db } from './assets/js/firebaseOptions.js';
+    import { onAuthStateChanged, signOut, updateProfile, updateEmail, sendEmailVerification } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { doc, getDoc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
-      // Display elements
-      const profileAvatar = document.getElementById('profile-avatar');
-      const headerAvatar = document.getElementById('header-avatar');
-      const profileName = document.getElementById('profile-name');
-      const profileEmail = document.getElementById('profile-email');
+    const logoutBtn = document.getElementById('logout-btn');
 
-      // Edit form elements
-      const editProfileBtn = document.getElementById('edit-profile-btn');
-      const cancelEditBtn = document.getElementById('cancel-edit-btn');
-      const profileForm = document.getElementById('profile-form');
-      const fullNameInput = document.getElementById('fullName-input');
-      const photoURLInput = document.getElementById('photoURL-input');
-      const emailInput = document.getElementById('email-input');
-      const studentIdInput = document.getElementById('studentId-input');
-      const studentIdWrapper = document.getElementById('student-id-wrapper');
-      const formStatus = document.getElementById('form-status');
+    // View containers
+    const displayView = document.getElementById('display-view');
+    const editView = document.getElementById('edit-view');
 
-      let currentUser = null;
-      let currentUserData = {};
-  
-      // --- Auth guard and data loading ---
-      onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-          window.location.href = 'login.html';
-        } else {
-          currentUser = user;
-          try {
-            const userDocRef = doc(db, 'users', user.uid);
-            const userDoc = await getDoc(userDocRef);
-            if (userDoc.exists()) {
-              currentUserData = userDoc.data();
-            }
-          } catch (error) {
-            console.warn("Could not fetch user document from Firestore.", error);
-          }
+    // Display elements
+    const profileAvatar = document.getElementById('profile-avatar');
+    const headerAvatar = document.getElementById('header-avatar');
+    const profileName = document.getElementById('profile-name');
+    const profileEmail = document.getElementById('profile-email');
 
-          // Populate UI with the best available data
-          const nameToDisplay = currentUserData.fullName || user.displayName || 'User';
-          const photoToDisplay = currentUserData.photoURL || user.photoURL;
+    // Edit form elements
+    const editProfileBtn = document.getElementById('edit-profile-btn');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    const profileForm = document.getElementById('profile-form');
+    const fullNameInput = document.getElementById('fullName-input');
+    const photoURLInput = document.getElementById('photoURL-input');
+    const emailInput = document.getElementById('email-input');
+    const studentIdInput = document.getElementById('studentId-input');
+    const studentIdWrapper = document.getElementById('student-id-wrapper');
+    const formStatus = document.getElementById('form-status');
 
-          profileName.textContent = nameToDisplay;
-          profileEmail.textContent = user.email;
-          if (photoToDisplay) {
-            profileAvatar.style.backgroundImage = `url('${photoToDisplay}')`;
-            headerAvatar.style.backgroundImage = `url('${photoToDisplay}')`;
-          }
-        }
-      });
-  
-      // --- Event Listeners ---
-      editProfileBtn.addEventListener('click', () => {
-        // Populate form with current data
-        fullNameInput.value = currentUserData.fullName || currentUser.displayName || '';
-        photoURLInput.value = currentUserData.photoURL || currentUser.photoURL || '';
-        emailInput.value = currentUser.email || '';
-        if (currentUserData.role === 'student') {
-          studentIdInput.value = currentUserData.studentId || '';
-          studentIdWrapper.classList.remove('hidden');
-        }
-        formStatus.innerHTML = '';
+    let currentUser = null;
+    let currentUserData = {};
 
-        // Switch views
-        displayView.classList.add('hidden');
-        editView.classList.remove('hidden');
-      });
-
-      cancelEditBtn.addEventListener('click', () => {
-        // Switch views back
-        editView.classList.add('hidden');
-        displayView.classList.remove('hidden');
-      });
-
-      profileForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        formStatus.innerHTML = `<p class="text-blue-500">Saving...</p>`;
-
-        const newFullName = fullNameInput.value.trim();
-        const newPhotoURL = photoURLInput.value.trim();
-        const newEmail = emailInput.value.trim();
-        const newStudentId = studentIdInput.value.trim();
-
+    // --- Auth guard and data loading ---
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = 'login.html';
+      } else {
+        currentUser = user;
         try {
-          const updates = [];
-          const firestoreUpdates = {
-            fullName: newFullName,
-            photoURL: newPhotoURL,
-            updatedAt: serverTimestamp()
-          };
-
-          // 1. Handle Email Update (if changed)
-          if (newEmail !== currentUser.email) {
-            updates.push(updateEmail(currentUser, newEmail).then(() => {
-              // If email is updated, it becomes unverified.
-              sendEmailVerification(currentUser);
-              firestoreUpdates.email = newEmail;
-              formStatus.innerHTML += `<p class="text-yellow-500">Verification email sent to ${newEmail}.</p>`;
-            }));
+          const userDocRef = doc(db, 'users', user.uid);
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            currentUserData = userDoc.data();
           }
-
-          // 2. Handle Profile Update (Name/Photo)
-          updates.push(updateProfile(currentUser, {
-            displayName: newFullName,
-            photoURL: newPhotoURL,
-          }));
-
-          // 3. Handle Firestore-specific updates
-          if (currentUserData.role === 'student' && newStudentId !== currentUserData.studentId) {
-            firestoreUpdates.studentId = newStudentId;
-          }
-
-          // Update Firestore document
-          const userDocRef = doc(db, 'users', currentUser.uid);
-          updates.push(updateDoc(userDocRef, firestoreUpdates));
-
-          await Promise.all(updates);
-
-          formStatus.innerHTML = `<p class="text-green-500">Profile updated successfully!</p>`;
-
-          // Update UI immediately after all promises resolve
-          profileName.textContent = newFullName;
-          if (newPhotoURL) {
-            profileAvatar.style.backgroundImage = `url('${newPhotoURL}')`;
-            headerAvatar.style.backgroundImage = `url('${newPhotoURL}')`;
-          }
-
-          // Switch back to display view after a short delay
-          setTimeout(() => {
-            editView.classList.add('hidden');
-            displayView.classList.remove('hidden');
-          }, 1500);
-
         } catch (error) {
-          console.error("Error updating profile:", error);
-          if (error.code === 'auth/requires-recent-login') {
-            formStatus.innerHTML = `<p class="text-red-500">Updating email requires a recent login. Please log out and log back in to change your email.</p>`;
-          } else {
-            formStatus.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
-          }
+          console.warn("Could not fetch user document from Firestore.", error);
+        }
+
+        // Populate UI with the best available data
+        const nameToDisplay = currentUserData.fullName || user.displayName || 'User';
+        const photoToDisplay = currentUserData.photoURL || user.photoURL;
+
+        profileName.textContent = nameToDisplay;
+        profileEmail.textContent = user.email;
+        if (photoToDisplay) {
+          profileAvatar.style.backgroundImage = `url('${photoToDisplay}')`;
+          headerAvatar.style.backgroundImage = `url('${photoToDisplay}')`;
+        }
+      }
+    });
+
+    // --- Event Listeners ---
+    editProfileBtn.addEventListener('click', () => {
+      // Populate form with current data
+      fullNameInput.value = currentUserData.fullName || currentUser.displayName || '';
+      photoURLInput.value = currentUserData.photoURL || currentUser.photoURL || '';
+      emailInput.value = currentUser.email || '';
+      if (currentUserData.role === 'student') {
+        studentIdInput.value = currentUserData.studentId || '';
+        studentIdWrapper.classList.remove('hidden');
+      }
+      formStatus.innerHTML = '';
+
+      // Switch views
+      displayView.classList.add('hidden');
+      editView.classList.remove('hidden');
+    });
+
+    cancelEditBtn.addEventListener('click', () => {
+      // Switch views back
+      editView.classList.add('hidden');
+      displayView.classList.remove('hidden');
+    });
+
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formStatus.innerHTML = `<p class="text-blue-500">Saving...</p>`;
+
+      const newFullName = fullNameInput.value.trim();
+      const newPhotoURL = photoURLInput.value.trim();
+      const newEmail = emailInput.value.trim();
+      const newStudentId = studentIdInput.value.trim();
+
+      try {
+        const updates = [];
+        const firestoreUpdates = {
+          fullName: newFullName,
+          photoURL: newPhotoURL,
+          updatedAt: serverTimestamp()
+        };
+
+        // 1. Handle Email Update (if changed)
+        if (newEmail !== currentUser.email) {
+          updates.push(updateEmail(currentUser, newEmail).then(() => {
+            // If email is updated, it becomes unverified.
+            sendEmailVerification(currentUser);
+            firestoreUpdates.email = newEmail;
+            formStatus.innerHTML += `<p class="text-yellow-500">Verification email sent to ${newEmail}.</p>`;
+          }));
+        }
+
+        // 2. Handle Profile Update (Name/Photo)
+        updates.push(updateProfile(currentUser, {
+          displayName: newFullName,
+          photoURL: newPhotoURL,
+        }));
+
+        // 3. Handle Firestore-specific updates
+        if (currentUserData.role === 'student' && newStudentId !== currentUserData.studentId) {
+          firestoreUpdates.studentId = newStudentId;
+        }
+
+        // Update Firestore document
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        updates.push(updateDoc(userDocRef, firestoreUpdates));
+
+        await Promise.all(updates);
+
+        formStatus.innerHTML = `<p class="text-green-500">Profile updated successfully!</p>`;
+
+        // Update UI immediately after all promises resolve
+        profileName.textContent = newFullName;
+        if (newPhotoURL) {
+          profileAvatar.style.backgroundImage = `url('${newPhotoURL}')`;
+          headerAvatar.style.backgroundImage = `url('${newPhotoURL}')`;
+        }
+
+        // Switch back to display view after a short delay
+        setTimeout(() => {
+          editView.classList.add('hidden');
+          displayView.classList.remove('hidden');
+        }, 1500);
+
+      } catch (error) {
+        console.error("Error updating profile:", error);
+        if (error.code === 'auth/requires-recent-login') {
+          formStatus.innerHTML = `<p class="text-red-500">Updating email requires a recent login. Please log out and log back in to change your email.</p>`;
+        } else {
+          formStatus.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+        }
+      }
+    });
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async () => {
+        try {
+          await signOut(auth);
+          sessionStorage.removeItem('user');
+          window.location.href = 'login.html';
+        } catch (err) {
+          console.error('Sign out error', err);
+          alert('Logout failed. Please try again.');
         }
       });
+    }
+  </script>
+</body>
 
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', async () => {
-          try {
-            await signOut(auth);
-            sessionStorage.removeItem('user');
-            window.location.href = 'login.html';
-          } catch (err) {
-            console.error('Sign out error', err);
-            alert('Logout failed. Please try again.');
-          }
-        });
-      }
-    </script>
-  </body>
 </html>

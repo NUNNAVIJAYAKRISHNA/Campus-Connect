@@ -1,228 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Dashboard</title>
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
-    <link
-      as="style"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700;900"
-      onload="this.rel='stylesheet'"
-      rel="stylesheet"
-    />
-    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script>
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-              "foreground-light": "#111827",
-              "foreground-dark": "#f9fafb",
-              "subtle-light": "#6b7280",
-              "subtle-dark": "#9ca3af",
-              "border-light": "#e5e7eb",
-              "border-dark": "#374151",
-            },
-            fontFamily: {
-              display: ["Manrope"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <title>Dashboard</title>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+  <link as="style"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700;900"
+    onload="this.rel='stylesheet'" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/colors.css">
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            "background-light": "var(--bg-main)",
+            "background-dark": "var(--bg-main)",
+            "foreground-light": "var(--text-primary)",
+            "foreground-dark": "var(--text-primary)",
+            "subtle-light": "var(--text-secondary)",
+            "subtle-dark": "var(--text-secondary)",
+            "border-light": "var(--border)",
+            "border-dark": "var(--border)",
+          },
+          fontFamily: {
+            display: ["Manrope"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
-  </head>
-  <body
-    class="font-display bg-background-light text-foreground-light dark:bg-background-dark dark:text-foreground-dark"
-  >
-    <div class="relative flex min-h-screen w-full flex-col">
-      <header
-        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
-      >
-        <div class="flex items-center gap-6">
-          <a class="flex items-center gap-2" href="#">
-            <span class="material-symbols-outlined text-primary text-3xl">
-              school
-            </span>
-            <h1
-              class="text-lg font-bold text-foreground-light dark:text-foreground-dark"
-            >
-              Campus Connect
-            </h1>
-          </a>
-          <nav class="hidden items-center gap-6 md:flex">
-            <a
-              class="text-sm font-medium text-primary"
-              href="user_dashboard.html"
-              >Home</a
-            >
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="circular.html">Circulars</a>
-            <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="organizations.html"
-              >Organizations</a
-            >
-           
-          </nav>
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body class="font-display bg-background-light text-foreground-light dark:bg-background-dark dark:text-foreground-dark">
+  <div class="relative flex min-h-screen w-full flex-col">
+    <header
+      class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-6">
+        <a class="flex items-center gap-2" href="#">
+          <span class="material-symbols-outlined text-primary text-3xl">
+            school
+          </span>
+          <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
+            Campus Connect
+          </h1>
+        </a>
+        <nav class="hidden items-center gap-6 md:flex">
+          <a class="text-sm font-medium text-primary" href="user_dashboard.html">Home</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="circular.html">Circulars</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="organizations.html">Organizations</a>
+
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative hidden sm:block">
+          <span
+            class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
+          <input
+            class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+            placeholder="Search" />
         </div>
-        <div class="flex items-center gap-4">
-          <div class="relative hidden sm:block">
+        <button id="logout-btn" title="Logout"
+          class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+        <a href="user_profile.html" id="user-avatar-link">
+          <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center"
+            style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
+        </a>
+        <button
+          class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </header>
+    <main class="flex-1">
+      <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h1 id="welcome-heading"
+            class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl">
+            Welcome</h1>
+        </div>
+        <div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="relative md:col-span-2">
             <span
-              class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
-              >search</span
-            >
-            <input
-              class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
-              placeholder="Search"
-            />
+              class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
+            <input id="search-input"
+              class="h-12 w-full rounded-lg border border-border-light bg-background-light pl-12 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+              placeholder="Search events..." />
           </div>
-            <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
-              <span class="material-symbols-outlined">logout</span>
-            </button>
-            <a href="user_profile.html" id="user-avatar-link">
-              <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
+          <div class="relative">
+            <select id="category-filter"
+              class="h-12 w-full appearance-none rounded-lg border border-border-light bg-background-light pl-4 pr-10 text-foreground-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark">
+              <option value="all">All Categories</option>
+            </select>
+            <span
+              class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">arrow_drop_down</span>
+          </div>
+        </div>
+        <div class="space-y-12">
+          <section>
+            <h2 class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark">
+              My Events
+            </h2>
+            <div id="my-events-container" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <!-- My events will be dynamically inserted here -->
+            </div>
+          </section>
+          <section>
+            <h2 class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark">
+              All Events
+            </h2>
+            <div id="all-events-container" class="space-y-4">
+              <!-- All events will be dynamically inserted here -->
+            </div>
+          </section>
+          <section>
+            <h2 class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark">
+              Recommended Events
+            </h2>
+            <div id="recommended-events-container" class="space-y-4">
+              <!-- Recommended events will be dynamically inserted here -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="border-t border-border-light bg-background-light dark:border-border-dark dark:bg-background-dark">
+      <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#">About</a>
+            <a class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#">Contact</a>
+            <a class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+              href="#">Privacy Policy</a>
+          </div>
+          <div class="flex justify-center gap-6">
+            <a class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="#">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M22.46,6.54a.75.75,0,0,0-.94-.2l-3.23.98A4.4,4.4,0,0,0,15.6,6,4.24,4.24,0,0,0,12.5,7.31a4.32,4.32,0,0,0-1.43,3.22V11c-3.71-.5-6.81-3.24-6.86-3.28a.75.75,0,0,0-1.27.46c-.4,4.35.88,7.26,2,9a10.14,10.14,0,0,0,2,2.2c-1.4,1.6-3.6,2.43-3.62,2.44a.75.75,0,0,0-.35,1.09c.07.1.34.46,1,1.23,1.38.83,2.5,1.1,3.94,1.1,6.43,0,11.8-4.95,12.35-11.32l2.72-2.72a.75.75,0,0,0-.15-.9Zm-4.1,2.67a.75.75,0,0,0-.21.47c-.52,5.77-5.32,10.13-10.93,10.13-.96,0-1.64-.13-2.11-.28,1-1.07,2.51-2.29,3.44-4.1a.75.75,0,0,0-.69-1.12c-.04,0-3.92-2.3-4-8.6,1.45,1.18,4.12,3,7.16,3.53a.75.75,0,0,0,.82-.7V10.51a2.79,2.79,0,0,1,.87-2.09A2.83,2.83,0,0,1,15.58,8c1.15,0,2.23.72,2.68,1.75a.75.75,0,0,0,.9.4l1.9-.58Z">
+                </path>
+              </svg>
             </a>
-            <button class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
-              <span class="material-symbols-outlined">menu</span>
-            </button>
+            <a class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="#">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6.5A2.5,2.5,0,1,1,14.5,12,2.5,2.5,0,0,1,12,14.5ZM16.5,2.5H7.5A5,5,0,0,0,2.5,7.5v9a5,5,0,0,0,5,5h9a5,5,0,0,0,5-5v-9A5,5,0,0,0,16.5,2.5Zm3.5,14a3.5,3.5,0,0,1-3.5,3.5h-9a3.5,3.5,0,0,1-3.5-3.5v-9A3.5,3.5,0,0,1,7.5,4h9a3.5,3.5,0,0,1,3.5,3.5ZM17.5,7.8a1.2,1.2,0,1,1-1.2-1.2A1.2,1.2,0,0,1,17.5,7.8Z">
+                </path>
+              </svg>
+            </a>
+            <a class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="#">
+              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M12,2.5A9.5,9.5,0,1,0,21.5,12,9.51,9.51,0,0,0,12,2.5Zm.75,17.68V14H15a.75.75,0,0,0,0-1.5h-2.25V10a1.5,1.5,0,0,1,1.5-1.5H15.5a.75.75,0,0,0,0-1.5h-1.25A3,3,0,0,0,11.25,10v2.5H9a.75.75,0,0,0,0,1.5h2.25v6.18a8,8,0,1,1,1.5,0Z">
+                </path>
+              </svg>
+            </a>
+          </div>
+          <p class="text-sm text-subtle-light dark:text-subtle-dark">
+            © 2025 Campus Connect. All rights reserved.
+          </p>
         </div>
-      </header>
-      <main class="flex-1">
-        <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-          <div class="mb-8">
-            <h1 id="welcome-heading" class="text-3xl font-bold tracking-tight text-foreground-light dark:text-foreground-dark sm:text-4xl">Welcome</h1>
-          </div>
-          <div class="mb-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="relative md:col-span-2">
-              <span
-                class="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark"
-                >search</span
-              >
-              <input
-                id="search-input"
-                class="h-12 w-full rounded-lg border border-border-light bg-background-light pl-12 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
-                placeholder="Search events..."
-              />
-            </div>
-            <div class="relative">
-              <select id="category-filter" class="h-12 w-full appearance-none rounded-lg border border-border-light bg-background-light pl-4 pr-10 text-foreground-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-foreground-dark">
-                <option value="all">All Categories</option>
-              </select>
-              <span class="material-symbols-outlined pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">arrow_drop_down</span>
-            </div>
-          </div>
-          <div class="space-y-12">
-            <section>
-              <h2
-                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
-              >
-                My Events
-              </h2>
-              <div id="my-events-container" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <!-- My events will be dynamically inserted here -->
-              </div>
-            </section>
-            <section>
-              <h2
-                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
-              >
-                All Events
-              </h2>
-              <div id="all-events-container" class="space-y-4">
-                <!-- All events will be dynamically inserted here -->
-              </div>
-            </section>
-            <section>
-              <h2
-                class="mb-4 text-2xl font-bold text-foreground-light dark:text-foreground-dark"
-              >
-                Recommended Events
-              </h2>
-              <div id="recommended-events-container" class="space-y-4">
-                <!-- Recommended events will be dynamically inserted here -->
-              </div>
-            </section>
-          </div>
-        </div>
-      </main>
-      <footer
-        class="border-t border-border-light bg-background-light dark:border-border-dark dark:bg-background-dark"
-      >
-        <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-          <div
-            class="flex flex-col items-center justify-between gap-6 md:flex-row"
-          >
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <a
-                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-                >About</a
-              >
-              <a
-                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-                >Contact</a
-              >
-              <a
-                class="text-sm text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-                >Privacy Policy</a
-              >
-            </div>
-            <div class="flex justify-center gap-6">
-              <a
-                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-              >
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M22.46,6.54a.75.75,0,0,0-.94-.2l-3.23.98A4.4,4.4,0,0,0,15.6,6,4.24,4.24,0,0,0,12.5,7.31a4.32,4.32,0,0,0-1.43,3.22V11c-3.71-.5-6.81-3.24-6.86-3.28a.75.75,0,0,0-1.27.46c-.4,4.35.88,7.26,2,9a10.14,10.14,0,0,0,2,2.2c-1.4,1.6-3.6,2.43-3.62,2.44a.75.75,0,0,0-.35,1.09c.07.1.34.46,1,1.23,1.38.83,2.5,1.1,3.94,1.1,6.43,0,11.8-4.95,12.35-11.32l2.72-2.72a.75.75,0,0,0-.15-.9Zm-4.1,2.67a.75.75,0,0,0-.21.47c-.52,5.77-5.32,10.13-10.93,10.13-.96,0-1.64-.13-2.11-.28,1-1.07,2.51-2.29,3.44-4.1a.75.75,0,0,0-.69-1.12c-.04,0-3.92-2.3-4-8.6,1.45,1.18,4.12,3,7.16,3.53a.75.75,0,0,0,.82-.7V10.51a2.79,2.79,0,0,1,.87-2.09A2.83,2.83,0,0,1,15.58,8c1.15,0,2.23.72,2.68,1.75a.75.75,0,0,0,.9.4l1.9-.58Z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-              >
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6.5A2.5,2.5,0,1,1,14.5,12,2.5,2.5,0,0,1,12,14.5ZM16.5,2.5H7.5A5,5,0,0,0,2.5,7.5v9a5,5,0,0,0,5,5h9a5,5,0,0,0,5-5v-9A5,5,0,0,0,16.5,2.5Zm3.5,14a3.5,3.5,0,0,1-3.5,3.5h-9a3.5,3.5,0,0,1-3.5-3.5v-9A3.5,3.5,0,0,1,7.5,4h9a3.5,3.5,0,0,1,3.5,3.5ZM17.5,7.8a1.2,1.2,0,1,1-1.2-1.2A1.2,1.2,0,0,1,17.5,7.8Z"
-                  ></path>
-                </svg>
-              </a>
-              <a
-                class="text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-                href="#"
-              >
-                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M12,2.5A9.5,9.5,0,1,0,21.5,12,9.51,9.51,0,0,0,12,2.5Zm.75,17.68V14H15a.75.75,0,0,0,0-1.5h-2.25V10a1.5,1.5,0,0,1,1.5-1.5H15.5a.75.75,0,0,0,0-1.5h-1.25A3,3,0,0,0,11.25,10v2.5H9a.75.75,0,0,0,0,1.5h2.25v6.18a8,8,0,1,1,1.5,0Z"
-                  ></path>
-                </svg>
-              </a>
-            </div>
-            <p class="text-sm text-subtle-light dark:text-subtle-dark">
-              © 2025 Campus Connect. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </body>
+      </div>
+    </footer>
+  </div>
+</body>
 <script type="module">
   import { auth, db } from './assets/js/firebaseOptions.js';
   import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
@@ -238,7 +196,7 @@
     const recommendedEventsContainer = document.getElementById('recommended-events-container');
     const searchInput = document.getElementById('search-input');
     const categoryFilter = document.getElementById('category-filter');
-    
+
     // --- State Variables ---
     let allEvents = [];
     let registeredEventIds = new Set();
@@ -253,18 +211,18 @@
     }
 
     function formatDate(dateString) {
-        if (!dateString) return 'Date TBD';
-        return new Date(dateString).toLocaleDateString(undefined, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+      if (!dateString) return 'Date TBD';
+      return new Date(dateString).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
     }
 
     // --- Card Creation Functions ---
     function createMyEventCard(event) {
-        const imageUrl = getDirectGoogleDriveLink(event.imageUrl) || 'https://placehold.co/600x400/e2e8f0/e2e8f0';
-        return `
+      const imageUrl = getDirectGoogleDriveLink(event.imageUrl) || 'https://placehold.co/600x400/e2e8f0/e2e8f0';
+      return `
             <a href="event_details.html?id=${event.id}" class="group block overflow-hidden rounded-lg border border-border-light dark:border-border-dark shadow-sm transition-shadow hover:shadow-lg">
                 <div class="aspect-video w-full bg-cover bg-center" style="background-image: url('${imageUrl}')"></div>
                 <div class="bg-background-light p-4 dark:bg-background-dark">
@@ -276,12 +234,12 @@
     }
 
     function createAllEventCard(event, isRegistered) {
-        const imageUrl = getDirectGoogleDriveLink(event.imageUrl) || 'https://placehold.co/400x300/e2e8f0/e2e8f0';
-        const buttonHtml = isRegistered
-            ? `<button disabled class="ml-auto h-10 rounded-lg bg-green-600 px-4 text-sm font-medium text-white opacity-75 cursor-not-allowed">Registered</button>`
-            : `<a href="event_details.html?id=${event.id}" class="ml-auto h-10 flex items-center rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90">Register</a>`;
+      const imageUrl = getDirectGoogleDriveLink(event.imageUrl) || 'https://placehold.co/400x300/e2e8f0/e2e8f0';
+      const buttonHtml = isRegistered
+        ? `<button disabled class="ml-auto h-10 rounded-lg bg-green-600 px-4 text-sm font-medium text-white opacity-75 cursor-not-allowed">Registered</button>`
+        : `<a href="event_details.html?id=${event.id}" class="ml-auto h-10 flex items-center rounded-lg bg-primary px-4 text-sm font-medium text-white transition-colors hover:bg-primary/90">Register</a>`;
 
-        return `
+      return `
             <div class="flex flex-col items-start gap-4 rounded-lg border border-border-light bg-background-light p-4 transition-shadow hover:shadow-md dark:border-border-dark dark:bg-background-dark sm:flex-row sm:items-center">
                 <div class="w-full flex-shrink-0 sm:w-48">
                     <div class="aspect-video w-full rounded bg-cover bg-center" style="background-image: url('${imageUrl}')"></div>
@@ -299,88 +257,88 @@
 
     // --- Rendering Functions ---
     function renderAllEvents(eventsToRender) {
-        allEventsContainer.innerHTML = ''; // Clear current events
-        if (eventsToRender.length > 0) {
-            eventsToRender.forEach(event => {
-                const isRegistered = registeredEventIds.has(event.id);
-                allEventsContainer.innerHTML += createAllEventCard(event, isRegistered);
-            });
-        } else {
-            allEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark">No events match your criteria.</p>';
-        }
+      allEventsContainer.innerHTML = ''; // Clear current events
+      if (eventsToRender.length > 0) {
+        eventsToRender.forEach(event => {
+          const isRegistered = registeredEventIds.has(event.id);
+          allEventsContainer.innerHTML += createAllEventCard(event, isRegistered);
+        });
+      } else {
+        allEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark">No events match your criteria.</p>';
+      }
     }
 
     // --- Filtering and Searching ---
     function applyFilters() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedCategory = categoryFilter.value;
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedCategory = categoryFilter.value;
 
-        const filteredEvents = allEvents.filter(event => {
-            const matchesSearch = event.title.toLowerCase().includes(searchTerm) || 
-                                  (event.description && event.description.toLowerCase().includes(searchTerm));
-            
-            const matchesCategory = selectedCategory === 'all' || event.category === selectedCategory;
+      const filteredEvents = allEvents.filter(event => {
+        const matchesSearch = event.title.toLowerCase().includes(searchTerm) ||
+          (event.description && event.description.toLowerCase().includes(searchTerm));
 
-            return matchesSearch && matchesCategory;
-        });
+        const matchesCategory = selectedCategory === 'all' || event.category === selectedCategory;
 
-        renderAllEvents(filteredEvents);
+        return matchesSearch && matchesCategory;
+      });
+
+      renderAllEvents(filteredEvents);
     }
 
     function populateCategoryFilter(events) {
-        const categories = [...new Set(events.map(event => event.category).filter(Boolean))];
-        categories.forEach(category => {
-            categoryFilter.innerHTML += `<option value="${category}">${category}</option>`;
-        });
+      const categories = [...new Set(events.map(event => event.category).filter(Boolean))];
+      categories.forEach(category => {
+        categoryFilter.innerHTML += `<option value="${category}">${category}</option>`;
+      });
     }
 
     // --- Data Loading Functions ---
     async function loadDashboardData(user) {
-        // 1. Update User Info
-        welcomeHeading.textContent = `Welcome, ${user.displayName || 'User'}`;
-        if (user.photoURL) {
-            userAvatar.style.backgroundImage = `url('${user.photoURL}')`;
+      // 1. Update User Info
+      welcomeHeading.textContent = `Welcome, ${user.displayName || 'User'}`;
+      if (user.photoURL) {
+        userAvatar.style.backgroundImage = `url('${user.photoURL}')`;
+      }
+
+      // 2. Fetch all events and user's registrations simultaneously
+      try {
+        const [eventsSnapshot, registrationsSnapshot] = await Promise.all([
+          getDocs(collection(db, 'events')),
+          getDocs(query(collection(db, 'registrations'), where('userId', '==', user.uid)))
+        ]);
+
+        allEvents = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        registeredEventIds = new Set(registrationsSnapshot.docs.map(doc => doc.data().eventId));
+
+        // 3. Populate "My Events"
+        myEventsContainer.innerHTML = ''; // Clear placeholders
+        const myEvents = allEvents.filter(event => registeredEventIds.has(event.id));
+
+        if (myEvents.length > 0) {
+          myEvents.forEach(event => {
+            myEventsContainer.innerHTML += createMyEventCard(event);
+          });
+        } else {
+          myEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark col-span-full">You haven\'t registered for any events yet.</p>';
         }
 
-        // 2. Fetch all events and user's registrations simultaneously
-        try {
-            const [eventsSnapshot, registrationsSnapshot] = await Promise.all([
-                getDocs(collection(db, 'events')),
-                getDocs(query(collection(db, 'registrations'), where('userId', '==', user.uid)))
-            ]);
+        // 4. Populate "All Events"
+        renderAllEvents(allEvents);
 
-            allEvents = eventsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            registeredEventIds = new Set(registrationsSnapshot.docs.map(doc => doc.data().eventId));
+        // 5. Populate "Recommended Events" (for now, just a subset of all events)
+        recommendedEventsContainer.innerHTML = ''; // Clear placeholders
+        const recommendedEvents = allEvents.slice(0, 2); // Example: show first two
+        recommendedEvents.forEach(event => {
+          recommendedEventsContainer.innerHTML += createAllEventCard(event, registeredEventIds.has(event.id));
+        });
 
-            // 3. Populate "My Events"
-            myEventsContainer.innerHTML = ''; // Clear placeholders
-            const myEvents = allEvents.filter(event => registeredEventIds.has(event.id));
-            
-            if (myEvents.length > 0) {
-                myEvents.forEach(event => {
-                    myEventsContainer.innerHTML += createMyEventCard(event);
-                });
-            } else {
-                myEventsContainer.innerHTML = '<p class="text-subtle-light dark:text-subtle-dark col-span-full">You haven\'t registered for any events yet.</p>';
-            }
+        populateCategoryFilter(allEvents);
 
-            // 4. Populate "All Events"
-            renderAllEvents(allEvents);
-
-            // 5. Populate "Recommended Events" (for now, just a subset of all events)
-            recommendedEventsContainer.innerHTML = ''; // Clear placeholders
-            const recommendedEvents = allEvents.slice(0, 2); // Example: show first two
-            recommendedEvents.forEach(event => {
-                recommendedEventsContainer.innerHTML += createAllEventCard(event, registeredEventIds.has(event.id));
-            });
-
-            populateCategoryFilter(allEvents);
-
-        } catch (error) {
-            console.error("Error loading dashboard data:", error);
-            myEventsContainer.innerHTML = '<p class="text-red-500 col-span-full">Could not load your events.</p>';
-            allEventsContainer.innerHTML = '<p class="text-red-500">Could not load events.</p>';
-        }
+      } catch (error) {
+        console.error("Error loading dashboard data:", error);
+        myEventsContainer.innerHTML = '<p class="text-red-500 col-span-full">Could not load your events.</p>';
+        allEventsContainer.innerHTML = '<p class="text-red-500">Could not load events.</p>';
+      }
     }
 
     // --- Authentication ---
@@ -411,4 +369,5 @@
     categoryFilter.addEventListener('change', applyFilters);
   });
 </script>
+
 </html>

@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="assets/css/colors.css">
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
@@ -20,9 +21,15 @@
         theme: {
           extend: {
             colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
+              primary: "var(--primary)",
+              "background-light": "var(--bg-main)",
+              "background-dark": "var(--bg-main)",
+              "foreground-light": "var(--text-primary)",
+              "foreground-dark": "var(--text-primary)",
+              "subtle-light": "var(--text-secondary)",
+              "subtle-dark": "var(--text-secondary)",
+              "border-light": "var(--border)",
+              "border-dark": "var(--border)",
             },
             fontFamily: {
               display: ["Manrope"],

@@ -1,7 +1,23 @@
+:root {
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-card: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --accent: #06b6d4;
+    --border: #475569;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+}
+
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--bg-main);
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,17 +28,17 @@ body {
 
 /* Container */
 .container {
-    background-color: white;
+    background-color: var(--bg-card);
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px var(--bg-main);
     text-align: center;
     width: 300px;
     max-width: 90%;
 }
 
 h1 {
-    color: #333;
+    color: var(--text-primary);
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -37,13 +53,16 @@ h1 {
 label {
     display: block;
     margin-bottom: 5px;
-    color: #555;
+    color: var(--text-secondary);
 }
 
 input {
     padding: 10px;
-    width: calc(100% - 24px); /* Adjust for padding and border */
-    border: 1px solid #ccc;
+    width: calc(100% - 24px);
+    /* Adjust for padding and border */
+    border: 1px solid var(--border);
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
@@ -51,16 +70,16 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #28a745;
-    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 /* Buttons */
 button {
     padding: 10px 20px;
     width: 100%;
-    background-color: #28a745;
-    color: white;
+    background-color: var(--primary);
+    color: var(--text-primary);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -71,21 +90,21 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: var(--primary-hover);
 }
 
 /* Google Button Specifics */
 .google-btn {
-    background-color: #ffffff;
-    color: #444;
-    border: 1px solid #ddd;
+    background-color: var(--bg-surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .google-btn:hover {
-    background-color: #f7f7f7;
+    background-color: var(--bg-card);
 }
 
 .google-btn svg {
@@ -95,7 +114,7 @@ button:hover {
 .divider {
     margin: 20px 0;
     font-weight: bold;
-    color: #888;
+    color: var(--text-muted);
 }
 
 /* Utility & Links */
@@ -106,7 +125,7 @@ button:hover {
 }
 
 .extra-links a {
-    color: #28a745;
+    color: var(--primary);
     text-decoration: none;
 }
 
@@ -120,8 +139,9 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    color: #888;
-    user-select: none; /* Prevent text selection */
+    color: var(--text-muted);
+    user-select: none;
+    /* Prevent text selection */
 }
 
 .signup-link {

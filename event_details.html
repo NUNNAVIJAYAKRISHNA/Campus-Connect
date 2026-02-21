@@ -1,292 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Campus Connect - Event Details</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              display: ["Manrope"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Campus Connect - Event Details</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/colors.css">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            "background-light": "var(--bg-main)",
+            "background-dark": "var(--bg-main)",
+            "foreground-light": "var(--text-primary)",
+            "foreground-dark": "var(--text-primary)",
+            "subtle-light": "var(--text-secondary)",
+            "subtle-dark": "var(--text-secondary)",
+            "border-light": "var(--border)",
+            "border-dark": "var(--border)",
+          },
+          fontFamily: {
+            display: ["Manrope"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <style>
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-      }
-    </style>
-  </head>
-  <body class="bg-background-light dark:bg-background-dark font-display">
-    <div class="flex flex-col min-h-screen">
-      <header
-        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
-      >
-        <div class="flex items-center gap-6">
-          <a class="flex items-center gap-2" href="user_dashboard.html">
-            <span class="material-symbols-outlined text-primary text-3xl">
-              school
-            </span>
-            <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
-              Campus Connect
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+  <div class="flex flex-col min-h-screen">
+    <header
+      class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-6">
+        <a class="flex items-center gap-2" href="user_dashboard.html">
+          <span class="material-symbols-outlined text-primary text-3xl">
+            school
+          </span>
+          <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
+            Campus Connect
+          </h1>
+        </a>
+        <nav class="hidden items-center gap-6 md:flex">
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="user_dashboard.html">Home</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="circular.html">Circulars</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
+            href="organizations.html">Organizations</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="relative hidden sm:block">
+          <span
+            class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
+          <input
+            class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
+            placeholder="Search" />
+        </div>
+        <button id="logout-btn" title="Logout"
+          class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+        <a href="user_profile.html" id="user-avatar-link">
+          <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center"
+            style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
+        </a>
+        <button
+          class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </header>
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="max-w-4xl mx-auto">
+        <div
+          class="w-full h-64 md:h-80 rounded-xl bg-cover bg-center relative overflow-hidden bg-gray-200 dark:bg-gray-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">
+              Loading Event...
             </h1>
-          </a>
-          <nav class="hidden items-center gap-6 md:flex">
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="user_dashboard.html">Home</a>
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="circular.html">Circulars</a>
-            <a class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary" href="organizations.html">Organizations</a>
-          </nav>
-        </div>
-        <div class="flex items-center gap-4">
-          <div class="relative hidden sm:block">
-            <span class="material-symbols-outlined pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-subtle-light dark:text-subtle-dark">search</span>
-            <input
-              class="h-10 w-full min-w-40 rounded-lg border border-border-light bg-transparent pl-10 pr-4 text-foreground-light placeholder:text-subtle-light focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary dark:border-border-dark dark:text-foreground-dark dark:placeholder:text-subtle-dark"
-              placeholder="Search"
-            />
           </div>
-          <button id="logout-btn" title="Logout" class="hidden md:inline-flex items-center gap-2 rounded px-3 py-2 text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark">
-            <span class="material-symbols-outlined">logout</span>
-          </button>
-          <a href="user_profile.html" id="user-avatar-link">
-            <div id="user-avatar" class="size-10 rounded-full bg-cover bg-center" style="background-image: url('https://placehold.co/100x100/e2e8f0/e2e8f0');"></div>
-          </a>
-          <button class="md:hidden p-2 rounded-md text-foreground-light dark:text-foreground-dark hover:bg-primary/10 dark:hover:bg-primary/20">
-            <span class="material-symbols-outlined">menu</span>
-          </button>
         </div>
-      </header>
-      <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="max-w-4xl mx-auto">
-          <div
-            class="w-full h-64 md:h-80 rounded-xl bg-cover bg-center relative overflow-hidden bg-gray-200 dark:bg-gray-700"
-          >
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
-            ></div>
-            <div class="absolute bottom-0 left-0 p-6 md:p-8">
-              <h1 class="text-3xl md:text-4xl font-bold text-white">
-                Loading Event...
-              </h1>
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700">
+              <h2 class="text-xl font-bold text-background-dark dark:text-background-light mb-4">
+                About this Event
+              </h2>
+              <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Loading description...
+              </p>
             </div>
           </div>
-          <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
-              <div
-                class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700"
-              >
-                <h2
-                  class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
-                >
-                  About this Event
-                </h2>
-                <p
-                  class="text-gray-700 dark:text-gray-300 leading-relaxed"
-                >
-                  Loading description...
-                </p>
-              </div>
+          <div class="lg:col-span-1 space-y-6">
+            <div class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700">
+              <h2 class="text-xl font-bold text-background-dark dark:text-background-light mb-4">
+                Details
+              </h2>
+              <ul class="space-y-4">
+                <li class="flex items-start space-x-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5">calendar_month</span>
+                  <div>
+                    <h3 class="font-semibold text-background-dark dark:text-background-light">
+                      Date &amp; Time
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      ...
+                    </p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400"></p>
+                  </div>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5">location_on</span>
+                  <div>
+                    <h3 class="font-semibold text-background-dark dark:text-background-light">
+                      Location
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      ...
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5">groups</span>
+                  <div>
+                    <h3 class="font-semibold text-background-dark dark:text-background-light">
+                      Organizer
+                    </h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                      ...
+                    </p>
+                  </div>
+                </li>
+                <li class="flex items-start space-x-3">
+                  <span class="material-symbols-outlined text-primary mt-0.5">payments</span>
+                  <div>
+                    <h3 class="font-semibold text-background-dark dark:text-background-light">
+                      Entry Fee
+                    </h3>
+                    <p id="event-fee-display" class="text-sm text-gray-600 dark:text-gray-400">...</p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <div class="lg:col-span-1 space-y-6">
-              <div
-                class="p-6 rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700"
-              >
-                <h2
-                  class="text-xl font-bold text-background-dark dark:text-background-light mb-4"
-                >
-                  Details
-                </h2>
-                <ul class="space-y-4">
-                  <li class="flex items-start space-x-3">
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >calendar_month</span
-                    >
-                    <div>
-                      <h3
-                        class="font-semibold text-background-dark dark:text-background-light"
-                      >
-                        Date &amp; Time
-                      </h3>
-                      <p
-                        class="text-sm text-gray-600 dark:text-gray-400"
-                      >
-                        ...
-                      </p>
-                      <p class="text-sm text-gray-600 dark:text-gray-400"></p>
-                    </div>
-                  </li>
-                  <li class="flex items-start space-x-3">
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >location_on</span
-                    >
-                    <div>
-                      <h3
-                        class="font-semibold text-background-dark dark:text-background-light"
-                      >
-                        Location
-                      </h3>
-                      <p
-                        class="text-sm text-gray-600 dark:text-gray-400"
-                      >
-                        ...
-                      </p>
-                    </div>
-                  </li>
-                  <li class="flex items-start space-x-3">
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >groups</span
-                    >
-                    <div>
-                      <h3
-                        class="font-semibold text-background-dark dark:text-background-light"
-                      >
-                        Organizer
-                      </h3>
-                      <p
-                        class="text-sm text-gray-600 dark:text-gray-400"
-                      >
-                        ...
-                      </p>
-                    </div>
-                  </li>
-                  <li class="flex items-start space-x-3">
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >payments</span
-                    >
-                    <div>
-                      <h3
-                        class="font-semibold text-background-dark dark:text-background-light"
-                      >
-                        Entry Fee
-                      </h3>
-                      <p id="event-fee-display" class="text-sm text-gray-600 dark:text-gray-400">...</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="sticky top-24 space-y-4">
-                <div id="team-registration-fields" class="space-y-4 mb-4"></div>
-                <div id="payment-verification-fields" class="space-y-4 mb-4"></div>
-                <button
-                  type="button" id="register-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2"
-                >
-                  <span class="material-symbols-outlined">how_to_reg</span>
-                  <span>Register for this Event</span>
-                </button>
-                <!-- Brochure button will be inserted here by JS -->
-                <div id="brochure-button-container"></div>
-              </div>
+            <div class="sticky top-24 space-y-4">
+              <div id="team-registration-fields" class="space-y-4 mb-4"></div>
+              <div id="payment-verification-fields" class="space-y-4 mb-4"></div>
+              <button type="button" id="register-btn"
+                class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300 flex items-center justify-center space-x-2">
+                <span class="material-symbols-outlined">how_to_reg</span>
+                <span>Register for this Event</span>
+              </button>
+              <!-- Brochure button will be inserted here by JS -->
+              <div id="brochure-button-container"></div>
             </div>
           </div>
         </div>
-      </main>
-    </div>
- <script type="module">
-   import { auth, db } from './assets/js/firebaseOptions.js';
-   import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
-   import { doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
-   import { uploadImageToImgBB } from './assets/js/imageUploader.js';
- 
-   window.addEventListener('DOMContentLoaded', () => {
-     // Initialize EmailJS with your Public Key
-     emailjs.init({
-       publicKey: 'oRiRCnnmYe9qZjY8t',
-     });
+      </div>
+    </main>
+  </div>
+  <script type="module">
+    import { auth, db } from './assets/js/firebaseOptions.js';
+    import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { doc, getDoc, setDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+    import { uploadImageToImgBB } from './assets/js/imageUploader.js';
 
-     const urlParams = new URLSearchParams(window.location.search);
-     const eventId = urlParams.get('id');
- 
-     if (!eventId) {
-       console.error("No event ID found in URL.");
-       window.location.href = 'user_dashboard.html';
-       return;
-     }
- 
-     // --- Elements ---
-     const eventImage = document.querySelector('.bg-cover.h-64');
-     const eventTitle = document.querySelector('h1.text-3xl');
-     const eventDescription = document.querySelector('.leading-relaxed');
-     const eventDate = document.querySelector('li:nth-child(1) p:nth-child(2)');
-     const eventTime = document.querySelector('li:nth-child(1) p:nth-child(3)');
-     const eventLocation = document.querySelector('li:nth-child(2) p');
-     const eventOrganizer = document.querySelector('li:nth-child(3) p');
-     const eventFeeDisplay = document.getElementById('event-fee-display');
-     const registerButton = document.getElementById('register-btn'); // Use ID selector
-     const brochureContainer = document.getElementById('brochure-button-container');
-     const teamRegistrationFields = document.getElementById('team-registration-fields');
-     const paymentVerificationFields = document.getElementById('payment-verification-fields');
-     const userAvatar = document.getElementById('user-avatar');
-     const logoutBtn = document.getElementById('logout-btn');
- 
-     // --- State Variable ---
-     let currentEventData = null;
- 
-     async function loadEventDetails() {
-       try {
-         const eventDoc = await getDoc(doc(db, 'events', eventId));
-         if (!eventDoc.exists()) {
-           alert('Event not found');
-           window.location.href = 'user_dashboard.html';
-           return;
-         }
-         
-         currentEventData = eventDoc.data(); // Store event data
- 
-         if (currentEventData.imageUrl) {
-           eventImage.style.backgroundImage = `url('${currentEventData.imageUrl}')`;
-         }
-         eventTitle.textContent = currentEventData.title || 'Untitled Event';
-         eventDescription.textContent = currentEventData.description || 'No description available';
-         
-         if (currentEventData.date) {
-           const eventDateTime = new Date(currentEventData.date);
-           eventDate.textContent = eventDateTime.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-           eventTime.textContent = currentEventData.time || '(Time not specified)';
-         } else {
-             eventDate.textContent = 'Date not specified';
-             eventTime.textContent = '';
-         }
- 
-         eventLocation.textContent = currentEventData.location || 'Location not specified';
-         eventOrganizer.textContent = currentEventData.organizer || 'Organizer not specified';
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize EmailJS with your Public Key
+      emailjs.init({
+        publicKey: 'oRiRCnnmYe9qZjY8t',
+      });
 
-         if (currentEventData.paymentType === 'paid') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const eventId = urlParams.get('id');
+
+      if (!eventId) {
+        console.error("No event ID found in URL.");
+        window.location.href = 'user_dashboard.html';
+        return;
+      }
+
+      // --- Elements ---
+      const eventImage = document.querySelector('.bg-cover.h-64');
+      const eventTitle = document.querySelector('h1.text-3xl');
+      const eventDescription = document.querySelector('.leading-relaxed');
+      const eventDate = document.querySelector('li:nth-child(1) p:nth-child(2)');
+      const eventTime = document.querySelector('li:nth-child(1) p:nth-child(3)');
+      const eventLocation = document.querySelector('li:nth-child(2) p');
+      const eventOrganizer = document.querySelector('li:nth-child(3) p');
+      const eventFeeDisplay = document.getElementById('event-fee-display');
+      const registerButton = document.getElementById('register-btn'); // Use ID selector
+      const brochureContainer = document.getElementById('brochure-button-container');
+      const teamRegistrationFields = document.getElementById('team-registration-fields');
+      const paymentVerificationFields = document.getElementById('payment-verification-fields');
+      const userAvatar = document.getElementById('user-avatar');
+      const logoutBtn = document.getElementById('logout-btn');
+
+      // --- State Variable ---
+      let currentEventData = null;
+
+      async function loadEventDetails() {
+        try {
+          const eventDoc = await getDoc(doc(db, 'events', eventId));
+          if (!eventDoc.exists()) {
+            alert('Event not found');
+            window.location.href = 'user_dashboard.html';
+            return;
+          }
+
+          currentEventData = eventDoc.data(); // Store event data
+
+          if (currentEventData.imageUrl) {
+            eventImage.style.backgroundImage = `url('${currentEventData.imageUrl}')`;
+          }
+          eventTitle.textContent = currentEventData.title || 'Untitled Event';
+          eventDescription.textContent = currentEventData.description || 'No description available';
+
+          if (currentEventData.date) {
+            const eventDateTime = new Date(currentEventData.date);
+            eventDate.textContent = eventDateTime.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+            eventTime.textContent = currentEventData.time || '(Time not specified)';
+          } else {
+            eventDate.textContent = 'Date not specified';
+            eventTime.textContent = '';
+          }
+
+          eventLocation.textContent = currentEventData.location || 'Location not specified';
+          eventOrganizer.textContent = currentEventData.organizer || 'Organizer not specified';
+
+          if (currentEventData.paymentType === 'paid') {
             eventFeeDisplay.innerHTML = `
               <span class="font-bold text-green-600 dark:text-green-400">₹${currentEventData.feeAmount} Per Head</span>
               <br>
               <span class="text-xs">UPI: ${currentEventData.upiId}</span>
             `;
-            
+
             paymentVerificationFields.innerHTML = `
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="transaction-id">Transaction ID</label>
@@ -297,70 +268,70 @@
                 <input type="file" id="transaction-image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20">
               </div>
             `;
-         } else {
+          } else {
             eventFeeDisplay.textContent = 'Free';
             paymentVerificationFields.innerHTML = '';
-         }
+          }
 
-         // Add brochure button if URL exists
-         if (currentEventData.brochureUrl) {
+          // Add brochure button if URL exists
+          if (currentEventData.brochureUrl) {
             brochureContainer.innerHTML = `
               <a href="${currentEventData.brochureUrl}" target="_blank" rel="noopener noreferrer" download class="w-full bg-blue-100 dark:bg-blue-900/50 hover:bg-blue-200 dark:hover:bg-blue-900 text-primary font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center space-x-2">
                 <span class="material-symbols-outlined">download</span>
                 <span>Download Brochure</span>
               </a>
             `;
-         } else {
+          } else {
             brochureContainer.innerHTML = ''; // Clear it if no brochure
-         }
+          }
 
-        if (currentEventData.registrationType === 'team') {
-          setupTeamRegistration(currentEventData);
-        }
+          if (currentEventData.registrationType === 'team') {
+            setupTeamRegistration(currentEventData);
+          }
 
 
- 
-         // Check registration status
-         const user = auth.currentUser;
-         if (user) {
-           const registrationDoc = await getDoc(doc(db, 'registrations', `${user.uid}_${eventId}`));
-           if (registrationDoc.exists()) {
-             const regData = registrationDoc.data();
-             if (regData.status === 'removed') {
-               registerButton.disabled = true;
-               registerButton.innerHTML = `<span class="material-symbols-outlined">block</span><span>Removed</span>`;
-               registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
-               registerButton.classList.add('bg-red-600', 'cursor-not-allowed', 'opacity-75');
-               
-               const removedMsg = document.createElement('p');
-               removedMsg.className = "mt-2 text-sm text-red-600 font-medium text-center";
-               removedMsg.textContent = "You have been removed from the participants list by the admin. Contact your admin for further actions.";
-               registerButton.parentNode.insertBefore(removedMsg, registerButton.nextSibling);
-             } else {
-               updateButtonToRegistered();
-             }
-           }
-         }
 
-         // Check for registration deadline AFTER checking registration status
-        if (currentEventData.registrationDeadline) {
+          // Check registration status
+          const user = auth.currentUser;
+          if (user) {
+            const registrationDoc = await getDoc(doc(db, 'registrations', `${user.uid}_${eventId}`));
+            if (registrationDoc.exists()) {
+              const regData = registrationDoc.data();
+              if (regData.status === 'removed') {
+                registerButton.disabled = true;
+                registerButton.innerHTML = `<span class="material-symbols-outlined">block</span><span>Removed</span>`;
+                registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
+                registerButton.classList.add('bg-red-600', 'cursor-not-allowed', 'opacity-75');
+
+                const removedMsg = document.createElement('p');
+                removedMsg.className = "mt-2 text-sm text-red-600 font-medium text-center";
+                removedMsg.textContent = "You have been removed from the participants list by the admin. Contact your admin for further actions.";
+                registerButton.parentNode.insertBefore(removedMsg, registerButton.nextSibling);
+              } else {
+                updateButtonToRegistered();
+              }
+            }
+          }
+
+          // Check for registration deadline AFTER checking registration status
+          if (currentEventData.registrationDeadline) {
             const deadline = new Date(currentEventData.registrationDeadline);
             const now = new Date();
 
             if (now > deadline) {
-                registerButton.disabled = true;
-                registerButton.innerHTML = `<span class="material-symbols-outlined">event_busy</span><span>Registration Closed</span>`;
-                registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
-                registerButton.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed', 'opacity-75');
+              registerButton.disabled = true;
+              registerButton.innerHTML = `<span class="material-symbols-outlined">event_busy</span><span>Registration Closed</span>`;
+              registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
+              registerButton.classList.add('bg-gray-400', 'dark:bg-gray-600', 'cursor-not-allowed', 'opacity-75');
             }
+          }
+        } catch (error) {
+          console.error('Error loading event details:', error);
+          alert('Error loading event details. Please try again later.');
         }
-       } catch (error) {
-         console.error('Error loading event details:', error);
-         alert('Error loading event details. Please try again later.');
-       }
-     }
+      }
 
-     function setupTeamRegistration(eventData) {
+      function setupTeamRegistration(eventData) {
         teamRegistrationFields.innerHTML = `
             <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="team-name">Team Name</label>
@@ -372,7 +343,7 @@
         const max = parseInt(eventData.maxTeamSize, 10) || min;
 
         for (let i = 0; i < min; i++) {
-            addTeamMemberField();
+          addTeamMemberField();
         }
 
         const buttonsContainer = document.createElement('div');
@@ -384,21 +355,21 @@
         teamRegistrationFields.appendChild(buttonsContainer);
 
         document.getElementById('add-member-btn').addEventListener('click', () => {
-            const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2').length;
-            if (currentMembers < max) {
-                addTeamMemberField();
-            }
+          const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2').length;
+          if (currentMembers < max) {
+            addTeamMemberField();
+          }
         });
 
         document.getElementById('remove-member-btn').addEventListener('click', () => {
-            const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2');
-            if (currentMembers.length > min) {
-                currentMembers[currentMembers.length - 1].remove();
-            }
+          const currentMembers = teamRegistrationFields.querySelectorAll('.grid.grid-cols-2.gap-2');
+          if (currentMembers.length > min) {
+            currentMembers[currentMembers.length - 1].remove();
+          }
         });
-     }
+      }
 
-     function addTeamMemberField() {
+      function addTeamMemberField() {
         const memberCount = teamRegistrationFields.querySelectorAll('input[name="team-member-name"]').length;
         const newField = document.createElement('div');
         newField.className = 'grid grid-cols-2 gap-2';
@@ -415,154 +386,155 @@
         // Insert before the buttons
         const buttonsContainer = teamRegistrationFields.querySelector('.flex.gap-2.mt-2');
         if (buttonsContainer) {
-            teamRegistrationFields.insertBefore(newField, buttonsContainer);
+          teamRegistrationFields.insertBefore(newField, buttonsContainer);
         } else {
-            teamRegistrationFields.appendChild(newField);
+          teamRegistrationFields.appendChild(newField);
         }
-     }
-     
-     function updateButtonToRegistered(success = false) {
-         registerButton.disabled = true;
-         registerButton.innerHTML = `<span class="material-symbols-outlined">check_circle</span><span>${success ? 'Registered Successfully' : 'Already Registered'}</span>`;
-         registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
-         registerButton.classList.add('bg-green-600', 'cursor-not-allowed', 'opacity-75');
-     }
- 
-     if (registerButton) {
-       registerButton.addEventListener('click', async () => {
-         const user = auth.currentUser;
-         if (!user) {
-           window.location.href = 'login.html';
-           return;
-         }
- 
-         try {
-           registerButton.disabled = true;
-           registerButton.innerHTML = '<span class="material-symbols-outlined animate-spin">hourglass_empty</span><span>Registering...</span>';
-           
-           let username = user.displayName || user.email || 'Unknown User';
-           let studentId = null;
-           try {
-             const userDoc = await getDoc(doc(db, 'users', user.uid));
-             if (userDoc.exists()) {
-               const userData = userDoc.data();
-               username = userData.fullName || userData.name || username;
-               if (userData.role === 'student') {
-                   studentId = userData.studentId || null;
-               }
-             }
-           } catch (e) {
-             console.warn("Could not fetch user's full name:", e);
-           }
-            
-           const registrationData = {
-             userId: user.uid,
-             username: username,
-             userEmail: user.email,
-             studentId: studentId,
-             eventId: eventId,
-             eventName: currentEventData?.title || 'Untitled Event', // Use stored data
-             registeredAt: serverTimestamp()
-           };
+      }
 
-           if (currentEventData.paymentType === 'paid') {
+      function updateButtonToRegistered(success = false) {
+        registerButton.disabled = true;
+        registerButton.innerHTML = `<span class="material-symbols-outlined">check_circle</span><span>${success ? 'Registered Successfully' : 'Already Registered'}</span>`;
+        registerButton.classList.remove('bg-primary', 'hover:bg-primary/90');
+        registerButton.classList.add('bg-green-600', 'cursor-not-allowed', 'opacity-75');
+      }
+
+      if (registerButton) {
+        registerButton.addEventListener('click', async () => {
+          const user = auth.currentUser;
+          if (!user) {
+            window.location.href = 'login.html';
+            return;
+          }
+
+          try {
+            registerButton.disabled = true;
+            registerButton.innerHTML = '<span class="material-symbols-outlined animate-spin">hourglass_empty</span><span>Registering...</span>';
+
+            let username = user.displayName || user.email || 'Unknown User';
+            let studentId = null;
+            try {
+              const userDoc = await getDoc(doc(db, 'users', user.uid));
+              if (userDoc.exists()) {
+                const userData = userDoc.data();
+                username = userData.fullName || userData.name || username;
+                if (userData.role === 'student') {
+                  studentId = userData.studentId || null;
+                }
+              }
+            } catch (e) {
+              console.warn("Could not fetch user's full name:", e);
+            }
+
+            const registrationData = {
+              userId: user.uid,
+              username: username,
+              userEmail: user.email,
+              studentId: studentId,
+              eventId: eventId,
+              eventName: currentEventData?.title || 'Untitled Event', // Use stored data
+              registeredAt: serverTimestamp()
+            };
+
+            if (currentEventData.paymentType === 'paid') {
               const txIdInput = document.getElementById('transaction-id');
               const txImageInput = document.getElementById('transaction-image');
-              
+
               if (!txIdInput.value || !txImageInput.files[0]) {
                 alert("Please provide Transaction ID and Payment Screenshot for paid events.");
                 registerButton.disabled = false;
                 registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
                 return;
               }
-              
+
               registrationData.transactionId = txIdInput.value;
               // Upload image
               registrationData.transactionImage = await uploadImageToImgBB(txImageInput.files[0]);
-           }
+            }
 
-           if (currentEventData.registrationType === 'team') {
-                const teamName = document.getElementById('team-name').value;
-                if (!teamName) {
-                    alert('Please enter a team name.');
-                    registerButton.disabled = false;
-                    registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
-                    return;
+            if (currentEventData.registrationType === 'team') {
+              const teamName = document.getElementById('team-name').value;
+              if (!teamName) {
+                alert('Please enter a team name.');
+                registerButton.disabled = false;
+                registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+                return;
+              }
+              registrationData.teamName = teamName;
+              const memberNameInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-name"]');
+              const memberEmailInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-email"]');
+              const teamMembers = [];
+              for (let i = 0; i < memberNameInputs.length; i++) {
+                const name = memberNameInputs[i].value.trim();
+                const email = memberEmailInputs[i].value.trim();
+                if (name || email) {
+                  teamMembers.push({ name, email });
                 }
-                registrationData.teamName = teamName;
-                const memberNameInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-name"]');
-                const memberEmailInputs = teamRegistrationFields.querySelectorAll('input[name="team-member-email"]');
-                const teamMembers = [];
-                for (let i = 0; i < memberNameInputs.length; i++) {
-                    const name = memberNameInputs[i].value.trim();
-                    const email = memberEmailInputs[i].value.trim();
-                    if (name || email) {
-                        teamMembers.push({ name, email });
-                    }
-                }
-                
-                const min = parseInt(currentEventData.minTeamSize, 10) || 1;
-                if (teamMembers.length < min) {
-                    alert(`You need at least ${min} team members.`);
-                    registerButton.disabled = false;
-                    registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
-                    return;
-                }
-                registrationData.teamMembers = teamMembers;
-           }
- 
-           await setDoc(doc(db, 'registrations', `${user.uid}_${eventId}`), registrationData);
- 
-           // --- Send EmailJS Confirmation ---
-           
-           emailjs.send("service_llklfxx","template_ey048w8",{
-            event_name: currentEventData?.title || 'Untitled Event',
-            user_name: username,
-            email: user.email,
+              }
+
+              const min = parseInt(currentEventData.minTeamSize, 10) || 1;
+              if (teamMembers.length < min) {
+                alert(`You need at least ${min} team members.`);
+                registerButton.disabled = false;
+                registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+                return;
+              }
+              registrationData.teamMembers = teamMembers;
+            }
+
+            await setDoc(doc(db, 'registrations', `${user.uid}_${eventId}`), registrationData);
+
+            // --- Send EmailJS Confirmation ---
+
+            emailjs.send("service_llklfxx", "template_ey048w8", {
+              event_name: currentEventData?.title || 'Untitled Event',
+              user_name: username,
+              email: user.email,
             });
-          
- 
-           // Show a single success message to the user after registration is complete.
-           alert('Registration successful! A confirmation email is on its way.');
-           updateButtonToRegistered(true);
- 
-         } catch (error) {
-           console.error('Registration error:', error);
-           alert('Registration failed. Please try again.');
-           registerButton.disabled = false;
-           registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
-         }
-       });
-     }
- 
-     onAuthStateChanged(auth, (user) => {
-       if (user) {
-         loadEventDetails();
+
+
+            // Show a single success message to the user after registration is complete.
+            alert('Registration successful! A confirmation email is on its way.');
+            updateButtonToRegistered(true);
+
+          } catch (error) {
+            console.error('Registration error:', error);
+            alert('Registration failed. Please try again.');
+            registerButton.disabled = false;
+            registerButton.innerHTML = '<span class="material-symbols-outlined">how_to_reg</span><span>Register for this Event</span>';
+          }
+        });
+      }
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          loadEventDetails();
           if (user.photoURL && userAvatar) {
             userAvatar.style.backgroundImage = `url('${user.photoURL}')`;
           }
-       } else {
-         // Redirect if not logged in, except for the registration click which handles its own redirect
-         if (registerButton && !registerButton.disabled) {
-             window.location.href = 'login.html';
-         }
-       }
-     });
- 
-     if (logoutBtn) {
-       logoutBtn.addEventListener('click', async () => {
-         try {
-           await signOut(auth);
-           sessionStorage.removeItem('user');
-           window.location.href = 'login.html';
-         } catch (err) {
-           console.error('Sign out error', err);
-           alert('Logout failed. Please try again.');
-         }
-       });
-     }
-   });
- </script>
- 
-  </body>
+        } else {
+          // Redirect if not logged in, except for the registration click which handles its own redirect
+          if (registerButton && !registerButton.disabled) {
+            window.location.href = 'login.html';
+          }
+        }
+      });
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+          try {
+            await signOut(auth);
+            sessionStorage.removeItem('user');
+            window.location.href = 'login.html';
+          } catch (err) {
+            console.error('Sign out error', err);
+            alert('Logout failed. Please try again.');
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+
 </html>

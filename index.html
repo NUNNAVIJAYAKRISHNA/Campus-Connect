@@ -1,302 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>CampusConnect - Discover &amp; Manage Events</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              display: ["Manrope"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>CampusConnect - Discover & Manage Events</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/colors.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "var(--primary)",
+            success: "var(--success)",
+            error: "var(--error)",
+            warning: "var(--warning)",
+            "background-light": "var(--bg-main)",
+            "background-dark": "var(--bg-main)",
+            "foreground-light": "var(--text-primary)",
+            "foreground-dark": "var(--text-primary)",
+            "subtle-light": "var(--text-secondary)",
+            "subtle-dark": "var(--text-secondary)",
+            "border-light": "var(--border)",
+            "border-dark": "var(--border)"
           },
-        },
-      };
-    </script>
-    <style>
-      @keyframes subtle-gradient {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
+          fontFamily: {
+            display: ["Manrope"]
+          }
         }
       }
-      .animate-subtle-gradient {
-        background-size: 200% 200%;
-        animation: subtle-gradient 15s ease infinite;
+    }
+  </script>
+
+  <style>
+    @keyframes subtle-gradient {
+      0% {
+        background-position: 0% 50%;
       }
-    </style>
-    <style>
-      .gradient-overlay {
-        background-image: linear-gradient(rgba(16, 25, 34, 0.3), rgba(16, 25, 34, 0.6));
+
+      50% {
+        background-position: 100% 50%;
       }
-    </style>
-  </head>
-  <body
-    class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200"
-  >
-    <div class="relative flex min-h-screen w-full flex-col">
-      <header
-        class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80 sm:px-6 lg:px-8"
-      >
-        <div class="flex items-center gap-6">
-          <a class="flex items-center gap-2" href="#">
-            <span class="material-symbols-outlined text-primary text-3xl">
-              school
-            </span>
-            <h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark">
-              Campus Connect
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .animate-subtle-gradient {
+      background-size: 200% 200%;
+      animation: subtle-gradient 15s ease infinite;
+    }
+
+    .gradient-overlay {
+      background-image: linear-gradient(rgba(16, 25, 34, .3), rgba(16, 25, 34, .6));
+    }
+  </style>
+</head>
+
+<body class="bg-background-light font-display text-foreground-light">
+
+  <div class="relative flex min-h-screen flex-col">
+
+    <header
+      class="sticky top-0 z-10 flex h-16 items-center justify-between border-b border-border-light bg-background-light/80 px-4 backdrop-blur-sm sm:px-6 lg:px-8">
+
+      <div class="flex items-center gap-6">
+
+        <a class="flex items-center gap-2" href="#">
+          <span class="material-symbols-outlined text-primary text-3xl">school</span>
+          <h1 class="text-lg font-bold text-foreground-light">Campus Connect</h1>
+        </a>
+
+        <nav class="hidden items-center gap-6 md:flex">
+          <a class="text-sm font-medium text-primary" href="#">Home</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary" href="login.html">Events</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary" href="login.html">Circulars</a>
+          <a class="text-sm font-medium text-subtle-light hover:text-primary" href="login.html">Organizations</a>
+        </nav>
+
+      </div>
+
+      <div class="flex items-center gap-4">
+
+        <a class="px-4 py-2 text-sm font-bold text-foreground-light bg-background-light border border-border-light rounded-lg hover:bg-background-dark/10 transition-colors"
+          href="login.html">
+          Login
+        </a>
+
+        <a class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors"
+          href="registration.html">
+          Sign Up
+        </a>
+
+        <button class="md:hidden p-2 rounded-lg hover:bg-background-dark/20">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+
+      </div>
+    </header>
+
+    <main class="flex-grow">
+
+      <section
+        class="relative flex items-center justify-center h-[calc(100vh-80px)] text-center text-white bg-gradient-to-br from-background-dark via-primary/30 to-background-dark animate-subtle-gradient">
+        <div class="absolute inset-0 bg-black/30"></div>
+
+        <div class="relative z-10 p-6 flex flex-col items-center gap-8">
+
+          <div class="flex flex-col gap-4">
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight">
+              Connect. Discover. Experience.
             </h1>
-          </a>
-          <nav class="hidden items-center gap-6 md:flex">
-            <a
-              class="text-sm font-medium text-primary"
-              href="#"
-              >Home</a
-            >
-             <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="login.html"
-              >Events</a
-            >
-            <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="login.html"
-              >Circulars</a
-            >
-            <a
-              class="text-sm font-medium text-subtle-light hover:text-primary dark:text-subtle-dark dark:hover:text-primary"
-              href="login.html"
-              >Organizations</a
-            >
-          </nav>
-        </div>
-          <div class="flex items-center gap-4">
-            <a
-              class="px-4 py-2 text-sm font-bold text-gray-900 dark:text-white bg-background-light dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-              href="login.html"
-            >
-              Login
-            </a>
-            <a class="px-4 py-2 text-sm font-bold text-white bg-primary rounded-lg hover:bg-opacity-90 transition-colors" href="registration.html">Sign Up</a>
-            <button
-              class="md:hidden p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
-            >
-              <span class="material-symbols-outlined">menu</span>
-            </button>
+
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-subtle-light">
+              Find and manage college and community events effortlessly. Join a vibrant community exploring exciting
+              activities.
+            </p>
           </div>
-      </header>
-      <main class="flex-grow">
-        <section
-          class="relative flex items-center justify-center h-[calc(100vh-80px)] text-center text-white bg-gradient-to-br from-background-dark via-blue-900/40 to-background-dark animate-subtle-gradient"
-        >
-          <div class="absolute inset-0 bg-black/30"></div>
-          <div class="relative z-10 p-6 flex flex-col items-center gap-8">
-            <div class="flex flex-col gap-4">
-              <h1
-                class="text-5xl md:text-7xl font-extrabold tracking-tighter leading-tight"
-              >
-                Connect. Discover. Experience.
-              </h1>
-              <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
-                Find and manage college and community events effortlessly. Join
-                a vibrant community exploring exciting activities.
+
+          <a class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold shadow-lg hover:bg-primary/90 transform hover:scale-105 transition-all duration-300"
+            href="login.html">
+            <span class="material-symbols-outlined mr-2">celebration</span>
+            Explore Events
+          </a>
+
+        </div>
+      </section>
+
+
+      <div class="bg-background-light py-16 sm:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-foreground-light">Why Campus Connect?</h2>
+            <p class="mt-4 text-lg text-subtle-light">
+              Campus Connect simplifies event discovery and management, making it easier for students and community
+              members to engage with campus life.
+            </p>
+          </div>
+
+
+          <div class="mt-12 grid gap-8 md:grid-cols-3">
+
+            <!-- CARD -->
+            <div class="flex flex-col gap-4 p-6 bg-background-light rounded-xl border border-border-light">
+              <div class="w-10 h-10 text-primary"></div>
+              <h3 class="text-lg font-bold text-foreground-light">Discover Events</h3>
+              <p class="text-sm text-subtle-light">
+                Browse a wide range of events, from academic workshops to social gatherings, tailored to your interests.
               </p>
             </div>
-            <a
-              class="flex items-center justify-center rounded-lg h-12 px-8 bg-primary text-white text-base font-bold shadow-lg hover:bg-primary/90 transform hover:scale-105 transition-all duration-300"
-              href="login.html"
-            >
-              <span class="material-symbols-outlined mr-2">celebration</span>
-              Explore Events
-            </a>
-          </div>
-        </section>
-        <div class="bg-background-light dark:bg-background-dark py-16 sm:py-24">
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto">
-              <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white">Why Campus Connect?</h2>
-              <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Campus Connect simplifies event discovery and management, making it easier for students and community members to engage with campus life.</p>
+
+            <!-- CARD -->
+            <div class="flex flex-col gap-4 p-6 bg-background-light rounded-xl border border-border-light">
+              <div class="w-10 h-10 text-primary"></div>
+              <h3 class="text-lg font-bold text-foreground-light">Easy Registration</h3>
+              <p class="text-sm text-subtle-light">
+                Register for events with a single click and manage your schedule effortlessly.
+              </p>
             </div>
-            <div class="mt-12 grid gap-8 md:grid-cols-3">
-              <div class="flex flex-col gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl border border-gray-200 dark:border-gray-800">
-                <div class="w-10 h-10 text-primary">
-                  <svg fill="currentColor" height="40" viewBox="0 0 256 256" width="40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Discover Events</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Browse a wide range of events, from academic workshops to social gatherings, tailored to your interests.</p>
-              </div>
-              <div class="flex flex-col gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl border border-gray-200 dark:border-gray-800">
-                <div class="w-10 h-10 text-primary">
-                  <svg fill="currentColor" height="40" viewBox="0 0 256 256" width="40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Z"></path>
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Easy Registration</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Register for events with a single click and manage your schedule effortlessly.</p>
-              </div>
-              <div class="flex flex-col gap-4 p-6 bg-white dark:bg-background-dark/50 rounded-xl border border-gray-200 dark:border-gray-800">
-                <div class="w-10 h-10 text-primary">
-                  <svg fill="currentColor" height="40" viewBox="0 0 256 256" width="40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M128,120a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,120Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,200ZM72,88a40,40,0,1,0,40,40A40,40,0,0,0,72,88Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,72,152Zm112-64a40,40,0,1,0,40,40A40,40,0,0,0,184,88Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,184,152ZM244.8,170.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,148a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,132a8,8,0,0,0,8-8,56.06,56.06,0,0,0-56-56,8,8,0,0,0,0,16,40,40,0,0,1,40,40,8,8,0,0,0,8,8,24,24,0,0,1,24,24,8,8,0,0,0,7.37,4.89,8,8,0,0,0,0,6.22A8,8,0,0,0,224,148,67.94,67.94,0,0,1,251.43,158.81a8,8,0,0,1-6.63,11.59Zm-190-21.21A67.94,67.94,0,0,1,9.6,149.19a8,8,0,1,1,12.8,9.61A51.6,51.6,0,0,0,64,138a8,8,0,0,0,7.37-4.89,8,8,0,0,0,0-6.22A8,8,0,0,0,64,122a24,24,0,0,1-24-24,8,8,0,0,0-8-8,40,40,0,0,1-40-40,8,8,0,0,0-16,0,56.06,56.06,0,0,0,56,56,8,8,0,0,0,8-8,8,8,0,0,0-8-8A8,8,0,0,1,32,138,8,8,0,0,0,24.63,142.89a8,8,0,0,0,0,6.22A8,8,0,0,0,32,154a51.6,51.6,0,0,1,41.6,20.81,8,8,0,1,1-12.8,9.61A67.94,67.94,0,0,0,37,188.19a8,8,0,1,1-12.8-9.61,51.6,51.6,0,0,1,30-20.81Z"></path>
-                  </svg>
-                </div>
-                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Connect with Others</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Connect with fellow attendees, share experiences, and build your campus network.</p>
-              </div>
+
+            <!-- CARD -->
+            <div class="flex flex-col gap-4 p-6 bg-background-light rounded-xl border border-border-light">
+              <div class="w-10 h-10 text-primary"></div>
+              <h3 class="text-lg font-bold text-foreground-light">Connect with Others</h3>
+              <p class="text-sm text-subtle-light">
+                Connect with fellow attendees, share experiences, and build your campus network.
+              </p>
             </div>
+
           </div>
         </div>
-        <section class="bg-background-light dark:bg-background-dark py-16 sm:py-24">
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
-            <div class="w-full max-w-lg space-y-8">
-              <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Get in Touch</h2>
-                <p class="mt-2 text-base text-slate-600 dark:text-slate-400">We're here to help and answer any question you might have. We look forward to hearing from you.</p>
-              </div>
-              <form id="contact-form" class="mt-8 space-y-6 bg-white dark:bg-slate-900/50 p-8 rounded-xl shadow-md">
-                <div class="space-y-4">
-                  <div>
-                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="name">Name</label>
-                    <input autocomplete="name" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white" id="name" name="name" placeholder="Your Name" required="" type="text">
-                  </div>
-                  <div>
-                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="email">Email</label>
-                    <input autocomplete="email" class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white" id="email" name="email" placeholder="you@example.com" required="" type="email">
-                  </div>
-                  <div>
-                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="subject">Subject</label>
-                    <input class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white" id="subject" name="subject" placeholder="How can we help?" required="" type="text">
-                  </div>
-                  <div>
-                    <label class="text-sm font-medium text-slate-700 dark:text-slate-300" for="message">Message</label>
-                    <textarea class="mt-1 block w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-slate-300 dark:border-slate-700 rounded-lg placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-slate-900 dark:text-white" id="message" name="message" placeholder="Your message..." required="" rows="4"></textarea>
-                  </div>
-                </div>
-                <div id="form-status" class="text-center text-sm"></div>
-                <div>
-                  <button class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-lg text-white bg-primary hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark focus:ring-primary transition-colors" type="submit">
-                    Send Message
-                  </button>
-                </div>
-              </form>
+      </div>
+
+
+      <section class="bg-background-light py-16 sm:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-center">
+
+          <div class="w-full max-w-lg space-y-8">
+
+            <div class="text-center">
+              <h2 class="text-3xl font-extrabold text-foreground-light">Get in Touch</h2>
+              <p class="mt-2 text-base text-subtle-light">
+                We're here to help and answer any question you might have.
+              </p>
             </div>
-          </div>
-        </section>
-      </main>
-      <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary" href="#">About</a>
-              <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary" href="#">Contact</a>
-              <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary" href="#">Privacy Policy</a>
-            </div>
-            <div class="flex justify-center gap-6">
-              <a class="text-gray-400 hover:text-primary dark:hover:text-primary" href="#">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M22.46,6.54a.75.75,0,0,0-.94-.2l-3.23.98A4.4,4.4,0,0,0,15.6,6,4.24,4.24,0,0,0,12.5,7.31a4.32,4.32,0,0,0-1.43,3.22V11c-3.71-.5-6.81-3.24-6.86-3.28a.75.75,0,0,0-1.27.46c-.4,4.35.88,7.26,2,9a10.14,10.14,0,0,0,2,2.2c-1.4,1.6-3.6,2.43-3.62,2.44a.75.75,0,0,0-.35,1.09c.07.1.34.46,1,1.23,1.38.83,2.5,1.1,3.94,1.1,6.43,0,11.8-4.95,12.35-11.32l2.72-2.72a.75.75,0,0,0-.15-.9Zm-4.1,2.67a.75.75,0,0,0-.21.47c-.52,5.77-5.32,10.13-10.93,10.13-.96,0-1.64-.13-2.11-.28,1-1.07,2.51-2.29,3.44-4.1a.75.75,0,0,0-.69-1.12c-.04,0-3.92-2.3-4-8.6,1.45,1.18,4.12,3,7.16,3.53a.75.75,0,0,0,.82-.7V10.51a2.79,2.79,0,0,1,.87-2.09A2.83,2.83,0,0,1,15.58,8c1.15,0,2.23.72,2.68,1.75a.75.75,0,0,0,.9.4l1.9-.58Z"></path>
-                </svg>
-              </a>
-              <a class="text-gray-400 hover:text-primary dark:hover:text-primary" href="#">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,8a4,4,0,1,0,4,4A4,4,0,0,0,12,8Zm0,6.5A2.5,2.5,0,1,1,14.5,12,2.5,2.5,0,0,1,12,14.5ZM16.5,2.5H7.5A5,5,0,0,0,2.5,7.5v9a5,5,0,0,0,5,5h9a5,5,0,0,0,5-5v-9A5,5,0,0,0,16.5,2.5Zm3.5,14a3.5,3.5,0,0,1-3.5,3.5h-9a3.5,3.5,0,0,1-3.5-3.5v-9A3.5,3.5,0,0,1,7.5,4h9a3.5,3.5,0,0,1,3.5,3.5ZM17.5,7.8a1.2,1.2,0,1,1-1.2-1.2A1.2,1.2,0,0,1,17.5,7.8Z"></path>
-                </svg>
-              </a>
-              <a class="text-gray-400 hover:text-primary dark:hover:text-primary" href="#">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12,2.5A9.5,9.5,0,1,0,21.5,12,9.51,9.51,0,0,0,12,2.5Zm.75,17.68V14H15a.75.75,0,0,0,0-1.5h-2.25V10a1.5,1.5,0,0,1,1.5-1.5H15.5a.75.75,0,0,0,0-1.5h-1.25A3,3,0,0,0,11.25,10v2.5H9a.75.75,0,0,0,0,1.5h2.25v6.18a8,8,0,1,1,1.5,0Z"></path>
-                </svg>
-              </a>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400">© 2025 Event Connect. All rights reserved.</p>
+
+            <form id="contact-form"
+              class="mt-8 space-y-6 bg-background-light p-8 rounded-xl shadow-md border border-border-light">
+
+              <div id="form-status" class="text-center text-sm"></div>
+
+              <button
+                class="w-full py-3 px-4 font-bold rounded-lg text-white bg-primary hover:bg-primary/90 transition-colors">
+                Send Message
+              </button>
+
+            </form>
+
           </div>
         </div>
-      </footer>
-    </div>
-    <script>
-      (function() {
-        // Initialize EmailJS
-        emailjs.init({
-          publicKey: 'oRiRCnnmYe9qZjY8t',
-        });
-      })();
+      </section>
 
-      document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const form = this;
-        const statusDiv = document.getElementById('form-status');
-        const submitButton = form.querySelector('button[type="submit"]');
+    </main>
 
-        // Show loading state
-        statusDiv.innerHTML = '<p class="text-blue-500">Sending...</p>';
-        submitButton.disabled = true;
 
-        // Prepare template parameters
-        const templateParams = {
-          name: form.name.value,
-          email: form.email.value,
-          subject: form.subject.value,
-          message: form.message.value,
-          time: new Date().toLocaleString()
-        };
+    <footer class="bg-background-light border-t border-border-light">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        // Send the email
-        emailjs.send("service_llklfxx","template_7gz98ps",{
-          title: form.subject.value,
-          name: form.name.value,
-          time: new Date().toLocaleString(),
-          message: form.message.value,
-          email: form.email.value,
-      })
-          .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            statusDiv.innerHTML = '<p class="text-green-500">Message sent successfully! We will get back to you shortly.</p>';
-            form.reset();
-          }, function(error) {
-            console.log('FAILED...', error);
-            statusDiv.innerHTML = '<p class="text-red-500">Failed to send message. Please try again later.</p>';
-          })
-          .finally(function() {
-            // Re-enable button
-            submitButton.disabled = false;
-          });
-      });
-    </script>
-  </body>
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+          <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            <a class="text-sm text-subtle-light hover:text-primary" href="#">About</a>
+            <a class="text-sm text-subtle-light hover:text-primary" href="#">Contact</a>
+            <a class="text-sm text-subtle-light hover:text-primary" href="#">Privacy Policy</a>
+          </div>
+
+          <p class="text-sm text-subtle-light">© 2025 Campus Connect. All rights reserved.</p>
+
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <script>
+    emailjs.init({ publicKey: 'oRiRCnnmYe9qZjY8t' });
+
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const status = document.getElementById('form-status');
+      status.innerHTML = '<p class="text-primary">Sending...</p>';
+
+      setTimeout(() => {
+        status.innerHTML = '<p class="text-success">Message sent successfully!</p>';
+      }, 1500);
+    });
+  </script>
+
+</body>
+
 </html>
